@@ -2,6 +2,8 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
+import ReactMarkdown from "react-markdown";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, MessageCircleHeart, X, Send, Bot, User } from "lucide-react";
 
@@ -162,16 +164,60 @@ export default function BubbleMentor() {
                     {msg.role === "user" ? <User className="w-3.5 h-3.5" /> : <Bot className="w-3.5 h-3.5" />}
                   </div>
                   <div
-                    className={`max-w-[78%] px-4 py-3 rounded-2xl leading-relaxed whitespace-pre-wrap ${
+                    className={`max-w-[78%] px-4 py-3 rounded-2xl leading-relaxed ${
                       msg.role === "user"
-                        ? "bg-terracotta text-white rounded-tr-none shadow-sm"
-                        : "bg-white/80 border border-sand/40 text-text-main rounded-tl-none shadow-sm"
+                        ? "bg-terracotta text-white rounded-tr-none shadow-sm whitespace-pre-wrap"
+                        : "bg-white/90 border border-sand/40 text-text-main rounded-tl-none shadow-sm"
                     }`}
                   >
-                    {msg.content}
+                    {msg.role === "user" ? (
+                      msg.content
+                    ) : (
+                      <ReactMarkdown
+                        components={{
+                          a: ({ href, children }) => {
+                            const isInternal = href && (href.startsWith("/") || href.startsWith("#"));
+                            if (isInternal) {
+                              return (
+                                <Link
+                                  href={href}
+                                  className="font-medium text-sage-dark underline decoration-sage/60 underline-offset-4 hover:decoration-sage hover:text-sage transition-colors inline-flex items-center gap-0.5"
+                                >
+                                  {children}
+                                </Link>
+                              );
+                            }
+                            return (
+                              <a
+                                href={href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="font-medium text-sage-dark underline decoration-sage/60 underline-offset-4 hover:decoration-sage hover:text-sage transition-colors inline-flex items-center gap-0.5"
+                              >
+                                {children}
+                              </a>
+                            );
+                          },
+                          p: ({ children }) => <p className="mb-2 last:mb-0 leading-relaxed">{children}</p>,
+                          strong: ({ children }) => <strong className="font-semibold text-text-main">{children}</strong>,
+                          em: ({ children }) => <em className="italic">{children}</em>,
+                          blockquote: ({ children }) => (
+                            <blockquote className="border-l-2 border-sage bg-sage/5 my-2 pl-3 py-1.5 rounded-r-lg italic text-text-main/90 font-serif text-xs">
+                              {children}
+                            </blockquote>
+                          ),
+                          ul: ({ children }) => <ul className="list-disc pl-4 my-1.5 space-y-1">{children}</ul>,
+                          ol: ({ children }) => <ol className="list-decimal pl-4 my-1.5 space-y-1">{children}</ol>,
+                          li: ({ children }) => <li className="leading-snug">{children}</li>,
+                        }}
+                      >
+                        {msg.content}
+                      </ReactMarkdown>
+                    )}
                   </div>
                 </motion.div>
               ))}
+
 
               {isLoading && (
                 <motion.div

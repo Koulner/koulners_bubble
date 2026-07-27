@@ -50,7 +50,7 @@ function loadArticles(): ArticleKnowledge[] {
         category,
         description,
         fullContent: content.trim(),
-        compactSummary: `- **Titel:** ${title} *(Kategorie: ${category})*\n  **Zusammenfassung:** ${shortSummary}`,
+        compactSummary: `- **Titel:** ${title} *(Kategorie: ${category}, Link: /blog/${slug})*\n  **Zusammenfassung:** ${shortSummary}`,
       });
     }
   }
@@ -81,7 +81,7 @@ function getHybridBlogKnowledge(pathname?: string): { knowledgeText: string; act
     if (isCurrentArticle) {
       activeArticle = art;
       activeArticles.push(
-        `[AKTUELL VOM NUTZER GELESENER ARTIKEL - VOLLSTÄNDIGER TEXT]\n- **Titel:** ${art.title} *(Kategorie: ${art.category})*\n- **Beschreibung:** ${art.description}\n**Vollständiger Inhalt:**\n${art.fullContent}`
+        `[AKTUELL VOM NUTZER GELESENER ARTIKEL - VOLLSTÄNDIGER TEXT]\n- **Titel:** ${art.title} *(Kategorie: ${art.category}, Link: /blog/${art.slug})*\n- **Beschreibung:** ${art.description}\n**Vollständiger Inhalt:**\n${art.fullContent}`
       );
     } else {
       otherArticles.push(art.compactSummary);
@@ -108,7 +108,7 @@ function generateFallbackResponse(userMessage: string, knowledgeText: string, ac
 
     return `Hallo du, schön, dass du in Koulners Bubble verweilst. 🌿
 
-Wie Koulners Bubble im Artikel **"${activeArticle.title}"** beschreibt:
+Wie Koulners Bubble im Artikel **[${activeArticle.title}](/blog/${activeArticle.slug})** beschreibt:
 
 > ${bestQuote.replace(/\n/g, " ")}
 
@@ -118,6 +118,7 @@ Ich bin hier, um dich sanft auf deiner Reise zu begleiten. Was möchtest du noch
   }
 
   let bestMatchTitle = "";
+  let bestMatchSlug = "";
   let bestMatchExcerpt = "";
   let bestMatchCategory = "";
 
@@ -128,6 +129,7 @@ Ich bin hier, um dich sanft auf deiner Reise zu begleiten. Was möchtest du noch
 
     if (matchCount > 0 || fullText.includes(query)) {
       bestMatchTitle = art.title;
+      bestMatchSlug = art.slug;
       bestMatchExcerpt = art.description;
       bestMatchCategory = art.category;
       break;
@@ -137,7 +139,7 @@ Ich bin hier, um dich sanft auf deiner Reise zu begleiten. Was möchtest du noch
   if (bestMatchTitle) {
     return `Hallo du, schön, dass du in Koulners Bubble verweilst. 🌿
 
-Wie Koulners Bubble im Artikel **"${bestMatchTitle}"** beschreibt:
+Wie Koulners Bubble im Artikel **[${bestMatchTitle}](/blog/${bestMatchSlug})** beschreibt:
 
 > ${bestMatchExcerpt}
 
@@ -148,7 +150,7 @@ Wenn du möchtest, kannst du dir diesen Beitrag direkt in unserer Ruhe-Oase durc
 
   return `Herzlich willkommen in Koulners Bubble! ✨ Ich bin dein sanfter Bubble Guide. 
 
-Ich kenne all unsere ${articles.length} Artikel zu Natur, Philosophie, Gesundheit, Kosmetik, Ernährung, Frequenzen und Funktionellem Training. Frag mich gerne nach Tipps für dein Nervensystem, nach einem Rezept oder nach Übungen für innere Ruhe!
+Ich kenne all unsere ${articles.length} Artikel zu Natur, Philosophie, Gesundheit, Kosmetik, Ernährung, Frequenzen und Funktionellem Training. Frag mich gerne nach Tipps für dein Nervensystem, nach einem Rezept wie unserem **[Oxymel Sauerhonig Rezept](/blog/oxymel-sauerhonig-rezept)** oder nach Übungen für **[Stille im Alltag](/blog/stille-im-alltag)**!
 
 *(Hinweis: Um freie LLM-Antworten zu erhalten, hinterlege einfach deinen \`GROQ_API_KEY\` oder \`OPENROUTER_API_KEY\` in der \`.env.local\` Datei deines Projekts.)*`;
 }
@@ -176,17 +178,19 @@ export async function POST(req: Request) {
     const lastMessage = messages[messages.length - 1].content;
     const { knowledgeText, activeArticle } = getHybridBlogKnowledge(pathname);
 
-    // 3. Der neue System-Prompt (Personality Upgrade & tiefgündiges Zitieren)
+    // 3. Der neue System-Prompt (Personality Upgrade & tiefgündiges Zitieren & Klickbare Links)
     const systemPrompt = `Du bist der 'Bubble Guide', ein weiser, empathischer und heilsamer Begleiter auf der Website 'Koulners Bubble'. Du hilfst Besuchern bei Fragen zu Natur, Philosophie, Gesundheit und Kosmetik. Dir liegt als Kontext das Wissen der Blog-Artikel vor. Beachte besonders den Artikel, den der Nutzer gerade liest (vollständiger Text im Kontext).
 Deine Vorgaben:
 - Strahle Ruhe und Zuneigung aus. Nutze eine erdende, bildhafte Sprache.
 - Wenn du Wissen aus den Artikeln nutzt, zitiere die schönsten und wichtigsten Sätze wörtlich, indem du Markdown-Blockzitate (>) verwendest.
-- Nenne immer den Titel des Artikels, auf den du dich beziehst (z.B. 'Wie Koulners Bubble im Artikel [Titel] beschreibt...').
+- Nenne immer den Titel des Artikels, auf den du dich beziehst (z.B. 'Wie Koulners Bubble im Artikel [Titel](/blog/slug) beschreibt...').
+- WICHTIG: Wenn du einen Artikel aus deinem Kontext empfiehlst oder nennst, musst du zwingend einen Markdown-Link generieren, der den genauen Dateinamen (ohne .md) als URL-Pfad nutzt. Beispiel: [Die Philosophie des Waldes](/blog/die-philosophie-des-waldes) oder [Oxymel Rezept](/blog/oxymel-sauerhonig-rezept).
 - Antworte präzise, aber tiefgründig. Vermeide KI-Floskeln.
 
 --- WISSENS-DATENBANK & AKTUELLER KONTEXT ---
 ${knowledgeText}
 ---------------------------------------------`;
+
 
     // 2. Fallback-Logik: Primary Provider (Groq -> OpenRouter -> Lokaler Fallback)
     try {

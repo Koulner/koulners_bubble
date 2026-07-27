@@ -3,14 +3,16 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { BlogPostFull } from "@/lib/content";
+import { BlogPostFull, BlogPostMeta } from "@/lib/content";
 import { ArrowLeft, Clock, Calendar, User, Sparkles, Share2, Heart } from "lucide-react";
+import RelatedArticles from "./RelatedArticles";
 
 interface BlogPostClientProps {
   post: BlogPostFull;
+  relatedPosts?: BlogPostMeta[];
 }
 
-export default function BlogPostClient({ post }: BlogPostClientProps) {
+export default function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
   return (
     <div className="min-h-screen bg-bg-cream text-text-dark pb-24 selection:bg-sage-light">
       {/* 1. Softe Navigation oben */}
@@ -121,8 +123,14 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
           dangerouslySetInnerHTML={{ __html: post.contentHtml }}
         />
 
+        {/* 4.5 Verwandte Artikel (Related Articles) */}
+        {relatedPosts && relatedPosts.length > 0 && (
+          <RelatedArticles posts={relatedPosts} />
+        )}
+
         {/* 5. Fußbereich des Artikels */}
         <div className="mt-16 pt-12 border-t border-border-warm flex flex-col items-center text-center gap-6">
+
           <div className="w-12 h-12 rounded-full bg-sage-light flex items-center justify-center text-sage-dark shadow-sm">
             <Sparkles className="w-5 h-5 animate-spin-slow" />
           </div>

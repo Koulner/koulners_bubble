@@ -95,3 +95,21 @@ export function getAllCategories(): string[] {
   });
   return Array.from(categories);
 }
+
+/**
+ * Holt verwandte Artikel derselben Kategorie, schließt den aktuellen Artikel aus.
+ */
+export function getRelatedPosts(currentSlug: string, category: string, limit = 3): BlogPostMeta[] {
+  const allPosts = getAllPosts();
+  const related = allPosts.filter(
+    (post) => post.category === category && post.slug !== currentSlug
+  );
+  if (related.length < limit) {
+    const others = allPosts.filter(
+      (post) => post.slug !== currentSlug && !related.some((r) => r.slug === post.slug)
+    );
+    return [...related, ...others].slice(0, limit);
+  }
+  return related.slice(0, limit);
+}
+

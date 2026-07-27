@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getPostBySlug, getAllPosts } from "@/lib/content";
+import { getPostBySlug, getAllPosts, getRelatedPosts } from "@/lib/content";
 import BlogPostClient from "@/components/BlogPostClient";
 import type { Metadata } from "next";
 
@@ -42,5 +42,8 @@ export default async function BlogPostPage({ params }: Props) {
     notFound();
   }
 
-  return <BlogPostClient post={post} />;
+  const relatedPosts = getRelatedPosts(post.slug, post.category, 3);
+
+  return <BlogPostClient post={post} relatedPosts={relatedPosts} />;
 }
+
