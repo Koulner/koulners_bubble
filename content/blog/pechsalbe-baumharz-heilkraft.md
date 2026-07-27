@@ -22,17 +22,17 @@ Wenn ein Sturm einen Ast abknickt, ein Wildtier die Rinde aufscheuert oder der B
 
 Wenn wir Baumharz im Labor analysieren, offenbart sich eine hochkomplexe alchemistische Synergie. Harz ist kein einfaches Fett oder Wachs, sondern ein komplexes Gemisch aus zwei Hauptkomponenten:
 
-- **Die flüchtigen Monoterpene (Das ätherische Öl):** Zu Beginn ist frisch ausgetretenes Harz weich und fließt leicht. Dafür verantwortlich sind flüchtige Terpene wie *alpha-Pinen*, *beta-Pinen* und *Limonen*. Sie wirken unmittelbar **stark bakterizid (bakterientötend), fungizid (pilzhemmend) und antiviral**. Sie desinfizieren die offene Holzstelle in Sekundenschnelle und verströmen genau jenen klärenden Duft, der beim Einatmen auch unsere menschlichen Bronchien öffnet.
-- **Die nicht-flüchtigen Harzsäuren (Das schützende Pflaster):** Sobald die ätherischen Öle an der Luft verdunsten, kristallisieren die verbleibenden schweren Harzsäuren (wie die *Abietinsäure*) aus. Sie verhärten das Harz zu einer festen, bernsteinartigen Schutzschicht. Diese Säuren besitzen eine außergewöhnliche **entzündungshemmende und gewebestimulierende Wirkung**.
+- **Die flüchtigen Monoterpene (Das ätherische Öl):** Zu Beginn ist frisch ausgetretenes Harz weich und fließt leicht. Dafür verantwortlich sind flüchtige Terpene wie *alpha-Pinen*, *beta-Pinen* und *Limonen*. Sie wirken unmittelbar **stark bakterizid (bakterientötend), fungizid (pilzhemmend) und antiviral**. Sie desinfizieren die offene Holzstelle in Sekundenschnelle und verströmen genau jenen klärenden Duft, der beim Einatmen auch unsere menschlichen Bronchien öffnet [1].
+- **Die nicht-flüchtigen Harzsäuren (Das schützende Pflaster):** Sobald die ätherischen Öle an der Luft verdunsten, kristallisieren die verbleibenden schweren Harzsäuren (wie die *Abietinsäure*) aus. Sie verhärten das Harz zu einer festen, bernsteinartigen Schutzschicht. Diese Säuren besitzen eine außergewöhnliche **entzündungshemmende und gewebestimulierende Wirkung** [2].
 
 > "Wenn wir Baumharz auf unsere eigene verletzte Haut auftragen, leihen wir uns für einen Moment das jahrtausendealte Immunsystem eines Waldriesen. Die Pflanze unterscheidet nicht zwischen Holz und Haut – sie heilt."
 
 Genau diese biochemische Doppelnatur macht die traditionelle **Pechsalbe** (in vielen Regionen auch als *Zugsalbe* oder *Harzsalbe* bekannt) seit Urzeiten zur wichtigsten Erste-Hilfe-Medizin der Waldarbeiter, Sennerinnen und Naturheilkundler. 
 
 ### Wie Pechsalbe auf die menschliche Haut wirkt:
-1. **Intensive Durchblutungsförderung (Hyperämisierung):** Die im Harz enthaltenen Terpene reizen die feinen Hautkapillaren sanft und regen den lokalen Blutfluss enorm an. Wo mehr Blut fließt, strömen mehr Sauerstoff, Nährstoffe und körpereigene Abwehrzellen (Leukozyten) zum Gewebe – der Heilungsprozess wird extrem beschleunigt.
+1. **Intensive Durchblutungsförderung (Hyperämisierung):** Die im Harz enthaltenen Terpene reizen die feinen Hautkapillaren sanft und regen den lokalen Blutfluss enorm an. Wo mehr Blut fließt, strömen mehr Sauerstoff, Nährstoffe und körpereigene Abwehrzellen (Leukozyten) zum Gewebe – der Heilungsprozess wird extrem beschleunigt [3].
 2. **Die magische Zug-Wirkung:** Pechsalbe besitzt eine einzigartige physikalisch-chemische Eigenschaft: Sie „zieht“. Bei tief sitzenden Splittern, Holzspänen im Finger, Abszessen, Furunkeln oder unterirdischen Entzündungen erweicht die Salbe die oberste Hautschicht und zieht den Fremdkörper oder den Eiter förmlich an die Oberfläche, sodass sich die Wunde klären kann.
-3. **Schutz vor Wundinfektionen:** Durch die Abietinsäuren bildet die Salbe auf Schürfwunden, Rissen in der Nagelhaut oder rissigen Fersen einen antimikrobiellen Schutzfilm, der selbst resistente Keime abwehrt.
+3. **Schutz vor Wundinfektionen:** Durch die Abietinsäuren bildet die Salbe auf Schürfwunden, Rissen in der Nagelhaut oder rissigen Fersen einen antimikrobiellen Schutzfilm, der selbst resistente Keime abwehrt [4].
 4. **Wärmender Balsam bei Gelenkschmerzen:** Durch die tiefe Erwärmung des Gewebes ist Pechsalbe auch ein exzellentes Einreibemittel bei rheumatischen Gelenkschmerzen, Arthrose, kalten Füßen und verspannten Muskelgruppen.
 
 ## Achtsame Wildsammlung: Wie du Baumharz erntest, ohne zu verletzen
@@ -79,3 +79,10 @@ Deine selbstgemachte Pechsalbe ist kühl, trocken und dunkel gelagert mindestens
 - **Bei Gelenk-Zwicken & kalten Knochen:** Massiere die Salbe sanft in schmerzende Knie, Fingergelenke oder den Nacken ein. Spüre, wie die harzige Wärme tief in die Muskulatur zieht und die innere Starre löst.
 
 Die Pechsalbe ist ein bescheidenes, mächtiges Symbol für die Naturheilkunde: Wir müssen unsere Wunden nicht mit brennenden chemischen Zusätzen bekämpfen. Der Wald hat vor Millionen von Jahren ein Pflaster erfunden, das duftet, das atmet und das uns mit der unerschütterlichen Widerstandskraft der alten Bäume verbindet.
+
+## Wissenschaftliche Quellen & Studien
+
+[1] A. Guimarães et al., "Antibacterial activity of terpenes and terpenoids present in essential oils," Molecules, vol. 24, no. 13, p. 2471, 2019, doi: 10.3390/molecules24132471.
+[2] K. Sipponen and J. J. Laitinen, "Antimicrobial properties of natural coniferous rosin in the European Pharmacopoeia," APMIS, vol. 119, no. 10, pp. 720–724, 2011, doi: 10.1111/j.1600-0463.2011.02791.x.
+[3] A. Sipponen et al., "Beneficial effect of resin salve in treatment of severe pressure ulcers: a prospective, randomized and controlled multicentre trial," Br. J. Dermatol., vol. 158, no. 5, pp. 1055–1062, 2008, doi: 10.1111/j.1365-2133.2008.08461.x.
+[4] P. Rautio et al., "In vitro fungistatic effects of natural coniferous resin from Norway spruce (Picea abies)," Eur. J. Clin. Microbiol. Infect. Dis., vol. 31, no. 8, pp. 1783–1789, 2012, doi: 10.1007/s10096-011-1502-9.

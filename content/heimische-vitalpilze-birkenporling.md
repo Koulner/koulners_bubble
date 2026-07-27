@@ -23,7 +23,7 @@ In unseren europäischen Breiten wächst an den weißen Stämmen älterer oder g
 Dass der Birkenporling keine kurzlebige alternativmedizinische Modeerscheinung ist, belegt einer der faszinierendsten archäologischen Funde der Menschheitsgeschichte. Als im Jahr 1991 in den Ötztaler Alpen die über 5.300 Jahre alte Gletschermumie **„Ötzi“** entdeckt wurde, untersuchten Wissenschaftler auch den Inhalt seines kleinen Lederbeutels, den er am Körper trug. 
 
 Darin fanden sie zwei auf Lederbänder aufgeregelte, sorgfältig getrocknete Stückchen eines Baumpilzes: **Es war der Birkenporling.**
-Warum trug ein steinzeitlicher Jäger auf einer lebensgefährlichen Alpenüberquerung ausgerechnet diesen Pilz bei sich? Die moderne Laboranalytik lieferte die erstaunliche Antwort: Ötzi litt an extrem schmerzhaften Magengeschwüren, die durch das Bakterium *Helicobacter pylori* ausgelöst worden waren, sowie an einem schweren Befall mit Darmparasiten (Peitschenwürmern). Der steinzeitliche Mann wusste exakt, was er tat: Er nutzte die bioaktiven Inhaltsstoffe des Birkenporlings als hochwirksames Natur-Antibiotikum, Parasitenmittel und magenberuhigendes Schmerzmittel.
+Warum trug ein steinzeitlicher Jäger auf einer lebensgefährlichen Alpenüberquerung ausgerechnet diesen Pilz bei sich? Die moderne Laboranalytik lieferte die erstaunliche Antwort: Ötzi litt an extrem schmerzhaften Magengeschwüren, die durch das Bakterium *Helicobacter pylori* ausgelöst worden waren, sowie an einem schweren Befall mit Darmparasiten (Peitschenwürmern). Der steinzeitliche Mann wusste exakt, was er tat: Er nutzte die bioaktiven Inhaltsstoffe des Birkenporlings als hochwirksames Natur-Antibiotikum, Parasitenmittel und magenberuhigendes Schmerzmittel [1].
 
 > "Pilze sind die großen Alchemisten der Natur. Sie verwandeln hartes, totes Holz in zelluläre Medizin. Der Birkenporling ist das destillierte Heilwissen der weißen Birke."
 
@@ -32,17 +32,17 @@ Warum trug ein steinzeitlicher Jäger auf einer lebensgefährlichen Alpenüberqu
 Was macht diesen unauffälligen, hellbraunen Schwamm-Pilz biophysikalisch so mächtig? Der Birkenporling ernährt sich ausschließlich vom Holz der Birke. Während er das Holz langsam abbaut, extrahiert, modifiziert und konzentriert er die heilsamen Substanzen des Baumes (insbesondere das bekannte **Betulin**, das der Birkenrinde ihre weiße Farbe verleiht) und verbindet sie mit seinen eigenen komplexen Pilz-Molekülen:
 
 ### 1. Polysaccharide und Beta-Glucane (Das Immun-Training)
-Wie fast alle hochkarätigen Vitalpilze ist der Birkenporling extrem reich an bioaktiven *Beta-Glucanen*. Diese hochkomplexen Mehrfachzucker verhalten sich in unserem Körper wie sanfte Trainingspartner für unser Immunsystem (sie wirken **immunmodulierend**). Ist unser Immunsystem geschwächt, aktivieren sie die Makrophagen (Fresszellen) und T-Zellen; ist unser Immunsystem jedoch überaktiv (wie bei Allergien oder Autoimmunreaktionen), bringen sie es in eine ruhige, regulierte Mitte zurück.
+Wie fast alle hochkarätigen Vitalpilze ist der Birkenporling extrem reich an bioaktiven *Beta-Glucanen*. Diese hochkomplexen Mehrfachzucker verhalten sich in unserem Körper wie sanfte Trainingspartner für unser Immunsystem (sie wirken **immunmodulierend**). Ist unser Immunsystem geschwächt, aktivieren sie die Makrophagen (Fresszellen) und T-Zellen; ist unser Immunsystem jedoch überaktiv (wie bei Allergien oder Autoimmunreaktionen), bringen sie es in eine ruhige, regulierte Mitte zurück [2].
 
 ### 2. Triterpene und Polyporensäuren (Das natürliche Antibiotikum)
-Der Pilz enthält spezifische Bitterstoffe und *Polyporensäuren*, die eine stark **antibakterielle, antivirale und antiparasitäre** Wirkung aufweisen. Im Labor konnte nachgewiesen werden, dass Auszüge des Birkenporlings selbst hartnäckige Magenkeime wie *Helicobacter pylori*, entzündungsfördernde E.-coli-Stämme und verschiedene Hefepilze im Darm in die Schranken weisen, ohne dabei – im Gegensatz zu synthetischen Antibiotika – unsere gesunde, nützliche Darmflora zu zerstören.
+Der Pilz enthält spezifische Bitterstoffe und *Polyporensäuren*, die eine stark **antibakterielle, antivirale und antiparasitäre** Wirkung aufweisen. Im Labor konnte nachgewiesen werden, dass Auszüge des Birkenporlings selbst hartnäckige Magenkeime wie *Helicobacter pylori*, entzündungsfördernde E.-coli-Stämme und verschiedene Hefepilze im Darm in die Schranken weisen, ohne dabei – im Gegensatz zu synthetischen Antibiotika – unsere gesunde, nützliche Darmflora zu zerstören [3].
 
 ### 3. Der absolute König bei Magenbeschwerden
 In der Volksheilkunde wird der Birkenporling scherzhaft als *„der Magen-Pilz“* gefeiert. Seine Schleimstoffe und entzündungshemmenden Verbindungen legen sich wie ein flüssiger, beruhigender Schutzfilm über die gereizte Magenschleimhaut. Er ist eine erstklassige, natürliche Begleitunterstützung bei:
 - Sodbrennen und saurem Reflux
 - Chronischer Gastritis (Magenschleimhautentzündung)
 - Reizmagen und nervösen Verdauungsbeschwerden
-- Blähungen und einer dysbiotischen Darmflora
+- Blähungen und einer dysbiotischen Darmflora [4]
 
 ![Ein Glas mit dampfendem, bernsteinfarbenem Vitalpilz-Tee steht auf einem rustikalen Holztisch neben getrockneten Pilzstreifen](https://image.pollinations.ai/prompt/aesthetic%20cinematic%20photography%20of%20medicinal%20mushroom%20tea%20cup%20birch%20polypore%20slices%20warm%20healing%20light?width=1200&height=600&nologo=true)
 
@@ -84,3 +84,10 @@ Wenn du spürst, dass dein Magen durch Stress, falsche Ernährung oder emotional
 - *Nachhaltigkeits-Trick:* Die ausgekochten Pilzstreifen im Sieb musst du nach dem ersten Kochen nicht wegwerfen! Du kannst sie problemlos **noch ein zweites Mal** mit etwas weniger Wasser aufkochen – oft löst erst die zweite Abkochung die tiefer sitzenden Bitterstoffe aus dem Korkgewebe.
 
 Der Birkenporling ist eine stille Einladung zur Selbstermächtigung. Wenn wir lernen, die Rinde der alten Bäume zu lesen und den Tee aus dem heilenden Holz der Birke zu brauen, hören wir auf, Konsumenten der Natur zu sein. Wir werden wieder zu ihren vertrauten Kindern – geschützt in unserer eigenen, natürlichen Bubble.
+
+## Wissenschaftliche Quellen & Studien
+
+[1] M. Peintner et al., "The iceman's fungi," Mycological Research, vol. 102, no. 10, pp. 1153–1162, 1998, doi: 10.1017/S095375629800662X.
+[2] S. P. Wasser, "Medicinal mushrooms as a source of antitumor and immunomodulating polysaccharides," Appl. Microbiol. Biotechnol., vol. 60, no. 3, pp. 258–274, 2002, doi: 10.1007/s00253-002-1076-7.
+[3] M. Pleszczyńska et al., "Fomitopsis betulina (formerly Piptoporus betulinus): the Iceman's polypore fungus with modern biotechnological and pharmacological potential," World J. Microbiol. Biotechnol., vol. 33, no. 5, p. 83, 2017, doi: 10.1007/s11274-017-2247-0.
+[4] K. Sułkowska-Ziaja et al., "Chemical composition and biological activity of Piptoporus betulinus," Fitoterapia, vol. 83, no. 7, pp. 1221–1229, 2012, doi: 10.1016/j.fitote.2012.07.009.

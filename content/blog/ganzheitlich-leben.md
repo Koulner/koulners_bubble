@@ -22,10 +22,10 @@ Ganzheitliches Leben – im ursprünglichen Sinne der alten Stoiker um Marcus Au
 
 Die moderne Psychoneuroimmunologie hat in den vergangenen Jahrzehnten auf eindrucksvolle Weise bewiesen, dass die alten Philosophen recht hatten: Es existiert keine Schranke zwischen dem, was du denkst, und dem, was in deinen Zellen geschieht. Jede einzelne gedankliche Regung übersetzt sich innerhalb von Millisekunden in eine handfeste biochemische Realität.
 
-Wenn dein Geist in einer Dauerschleife von Sorge, Groll oder Zukunftsangst gefangen ist, sendet dein Hypothalamus ein unmissverständliches Gefahrensignal an deine Nebennieren. Diese fluten deinen Blutkreislauf mit Cortisol und Adrenalin. Dein Körper nimmt diesen gedanklichen Film nicht als bloße Fantasie wahr – für deine Zellen brennt das Haus lichterloh. 
+Wenn dein Geist in einer Dauerschleife von Sorge, Groll oder Zukunftsangst gefangen ist, sendet dein Hypothalamus ein unmissverständliches Gefahrensignal an deine Nebennieren. Diese fluten deinen Blutkreislauf mit Cortisol und Adrenalin [1]. Dein Körper nimmt diesen gedanklichen Film nicht als bloße Fantasie wahr – für deine Zellen brennt das Haus lichterloh. 
 
-- **Die muskuläre Panzerung:** Um sich vor dieser empfundenen Bedrohung zu schützen, ziehen sich die tiefen Faszien und die glatte Muskulatur im Nacken, im Zwerchfell und im Beckenboden zusammen.
-- **Die Drosselung der Regeneration:** Der Körper stellt alle langfristigen Reparaturprozesse, das Immunsystem und die Verdauung ein, um Energie für das akute Überleben zu sparen.
+- **Die muskuläre Panzerung:** Um sich vor dieser empfundenen Bedrohung zu schützen, ziehen sich die tiefen Faszien und die glatte Muskulatur im Nacken, im Zwerchfell und im Beckenboden zusammen [2].
+- **Die Drosselung der Regeneration:** Der Körper stellt alle langfristigen Reparaturprozesse, das Immunsystem und die Verdauung ein, um Energie für das akute Überleben zu sparen [3].
 - **Der emotionale Feedback-Loop:** Der verspannte, schmerzende Körper meldet dem Gehirn zurück: *Ja, wir sind tatsächlich in Gefahr.* Ein Teufelskreis aus gedanklicher Enge und körperlicher Erstarrung entsteht.
 
 > "Du hast keinen Körper. Du bist dein Körper; und zugleich bist du jene weite Stille, in der dieser Körper atmet, empfindet und vergeht."
@@ -61,7 +61,7 @@ Wie können wir diesen tiefen Frieden in unser ganz normales Alltagsleben einlad
 Wir hetzen im Alltag oft von einer Aufgabe zur nächsten – vom Schreibtisch direkt ans Telefon, vom Auto direkt an den Herd. Unser Nervensystem verbleibt dabei in einem permanenten Zustand des Übergangs-Stress. Gewöhne dir an, an jeder symbolischen Schwelle (beim Öffnen einer Tür, beim Schließen des Laptops) für drei Sekunden innezuhalten. Spüre den Boden unter deinen Fußsohlen, lasse die Schultern bewusst sinken und atme einmal lang aus, bevor du den nächsten Raum betrittst.
 
 ### 2. Die somatische Abfrage vor Entscheidungen
-Bevor du das nächste Mal eine Verpflichtung eingehst oder eine Entscheidung triffst, frage nicht nur deinen logischen Verstand: *Macht das Sinn?* Richte deine Aufmerksamkeit für einen Augenblick in deine Körpermitte, in den Brustkorb oder den Bauchraum. Reagiert das Gewebe mit einer weichen, atmenden Weite (einem somatischen "Ja") oder mit einer subtilen, kühlen Enge und Verkrampfung (einem somatischen "Nein")? Deine Zellbiologie weiß oft Sekunden vor deinem Verstand, was dir wirklich gut tut.
+Bevor du das nächste Mal eine Verpflichtung eingehst oder eine Entscheidung triffst, frage nicht nur deinen logischen Verstand: *Macht das Sinn?* Richte deine Aufmerksamkeit für einen Augenblick in deine Körpermitte, in den Brustkorb oder den Bauchraum. Reagiert das Gewebe mit einer weichen, atmenden Weite (einem somatischen "Ja") oder mit einer subtilen, kühlen Enge und Verkrampfung (einem somatischen "Nein")? Deine Zellbiologie weiß oft Sekunden vor deinem Verstand, was dir wirklich gut tut [4].
 
 ### 3. Nähre das Unsichtbare
 Überprüfe deine tägliche "Nahrungsaufnahme" jenseits von Messer und Gabel. Welche Bilder mutest du deinen Augen morgens als Erstes zu? Welche Klänge und Gespräche lässt du in dein Bewusstsein? Nimm dir das Recht heraus, eine schützende "Bubble" um deine Wahrnehmung zu ziehen, die Lärm, Zynismus und digitale Hektik sanft draußen lässt.
@@ -70,3 +70,10 @@ Bevor du das nächste Mal eine Verpflichtung eingehst oder eine Entscheidung tri
 Wenn du dich am Abend schlafen legst, stelle dir vor, wie du alle Rollen, Pflichten und Identitäten des Tages wie einen schweren Mantel ablegst. Du bist im Schlaf kein Arbeiter, kein Partner, kein Problemlöser – du bist reines, regenerierendes Sein. Erlaube deinem Körper, schwer in die Matratze zu sinken, in dem tiefen Vertrauen, dass die Erde dich trägt.
 
 Ganzheitliches Leben ist kein fernes Ziel, das du irgendwann erreichen wirst, wenn du genug an dir gearbeitet hast. Es ist eine stille, verzeihliche Einladung, die in jedem einzelnen Atemzug auf dich wartet: Die Erlaubnis, hier und jetzt in deiner ganzen, wunderbaren Menschlichkeit vollkommen und zu Hause zu sein.
+
+## Wissenschaftliche Quellen & Studien
+
+[1] B. S. McEwen, "Neurobiological and systemic effects of chronic stress," Chronic Stress, vol. 1, p. 2470547017692328, 2017, doi: 10.1177/2470547017692328.
+[2] G. E. Daniels, "Role of the autonomic nervous system in bodily posture," Am. J. Psychiatry, vol. 104, no. 5, pp. 320–325, 1947, doi: 10.1176/ajp.104.5.320.
+[3] J. K. Kiecolt-Glaser et al., "Psychoneuroimmunology: psychological influences on immune function and health," J. Consult. Clin. Psychol., vol. 70, no. 3, pp. 537–547, 2002, doi: 10.1037/0022-006X.70.3.537.
+[4] A. R. Damasio, "The somatic marker hypothesis and the possible functions of the prefrontal cortex," Philos. Trans. R. Soc. Lond. B Biol. Sci., vol. 351, no. 1346, pp. 1413–1420, 1996, doi: 10.1098/rstb.1996.0125.

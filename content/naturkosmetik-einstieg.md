@@ -24,7 +24,7 @@ Warum verwendet die Industrie diese Stoffe so flächendeckend? Die Antwort ist s
 
 Wenn du eine paraffin- oder silikonhaltige Creme auf dein Gesicht aufträgst, erlebt deine Haut eine optische und haptische Täuschung:
 - Der Mineralölfilm legt sich wie eine unsichtbare, hauchdünne Plastikfolie über die Poren.
-- Die Haut fühlt sich augenblicklich seidig, glatt und aufgepolstert an, weil die normale Verdunstung von Wasser abrupt gestoppt wird (*Okklusionseffekt*).
+- Die Haut fühlt sich augenblicklich seidig, glatt und aufgepolstert an, weil die normale Verdunstung von Wasser abrupt gestoppt wird (*Okklusionseffekt*) [1].
 - Unter dieser Folie gerät die natürliche Regulation jedoch in eine tiefe Starre: Die Talgdrüsen stellen ihre Arbeit ein, weil die Sensoren melden, dass die Hautoberfläche von einer Fettschicht erstickt ist.
 
 Das Resultat kennen viele Menschen aus eigener Erfahrung: Setzt man die gewohnte Creme auch nur für einen Tag ab, spannt, schuppt und brennt die Haut extrem. Sie ist wie abhängig geworden vom äußeren Plastikfilm und hat verlernt, sich aus eigener Kraft zu nähren.
@@ -33,11 +33,11 @@ Das Resultat kennen viele Menschen aus eigener Erfahrung: Setzt man die gewohnte
 
 ## Skinimalismus: Warum weniger mehr ist
 
-Der vielleicht wichtigste Lehrsatz beim Einstieg in die naturheilkundliche Hautpflege ist der **Skinimalismus** – die bewusste Reduktion auf das Wesentliche. Die Haut benötigt keine 10-Schritte-Routine mit abwechselnden Seren, Säuren, Tonern und Masken. Eine solche Flut an Reizen überfordert das feine Hautmikrobiom und führt häufig zur sogenannten *perioralen Dermatitis* (einer Überpflegungs-Krankheit, bei der die Haut um den Mund herum rot blüht und schuppt).
+Der vielleicht wichtigste Lehrsatz beim Einstieg in die naturheilkundliche Hautpflege ist der **Skinimalismus** – die bewusste Reduktion auf das Wesentliche. Die Haut benötigt keine 10-Schritte-Routine mit abwechselnden Seren, Säuren, Tonern und Masken. Eine solche Flut an Reizen überfordert das feine Hautmikrobiom und führt häufig zur sogenannten *perioralen Dermatitis* (einer Überpflegungs-Krankheit, bei der die Haut um den Mund herum rot blüht und schuppt) [2].
 
 Reine Naturkosmetik setzt auf wenige, aber dafür hochreine, biokompatible Bausteine aus der Pflanzenwelt. Wenn wir eine kaltgepresste Pflanzenbutter oder ein unraffiniertes Samenöl verwenden, schenken wir der Haut keine toten Füllstoffe, sondern lebendige Nahrung:
 
-- **Echte Pflanzenlipide:** Öle aus der Mandel, dem Jojobasamen oder der Wildrose sind in ihrer Fettsäurestruktur dem menschlichen Talg erstaunlich ähnlich. Die Haut erkennt diese Lipide als körpereigen an, schleust sie tief ins Stratum corneum ein und repariert damit den brüchigen Mörtel unserer Hautbarriere.
+- **Echte Pflanzenlipide:** Öle aus der Mandel, dem Jojobasamen oder der Wildrose sind in ihrer Fettsäurestruktur dem menschlichen Talg erstaunlich ähnlich. Die Haut erkennt diese Lipide als körpereigen an, schleust sie tief ins Stratum corneum ein und repariert damit den brüchigen Mörtel unserer Hautbarriere [3].
 - **Natürliche Antioxidantien:** Kaltgepresste Öle stecken voller Vitamin E, Carotinoiden und Phytosterolen, die freie Radikale aus UV-Licht und Umweltgiftbelastung neutralisieren – ganz ohne synthetische Zusätze.
 - **Respekt vor dem Grundwasser:** Was du dir auf die Haut schmierst, wäschst du abends wieder ab. Naturkosmetik verlässt dein Badezimmer ohne Mikroplastik, ohne schwer abbaubare PEG-Derivate und ohne hormonell wirksame Konservierungsmittel.
 
@@ -45,7 +45,7 @@ Reine Naturkosmetik setzt auf wenige, aber dafür hochreine, biokompatible Baust
 
 ## Die Umstellungsphase: Geduld als dermatologischer Wirkstoff
 
-Wenn du dich entscheidest, von konventioneller Erdölkosmetik auf reine Pflanzenkraft umzusteigen, benötigt deine Haut eine kurze Übergangsphase. Biologen nennen dies oft die Entgiftungs- oder Erholungszeit. Da die obere Hautschicht etwa 28 Tage für eine komplette Zellerneuerung braucht, solltest du dir genau diesen Monat an geduldiger Beobachtung schenken.
+Wenn du dich entscheidest, von konventioneller Erdölkosmetik auf reine Pflanzenkraft umzusteigen, benötigt deine Haut eine kurze Übergangsphase. Biologen nennen dies oft die Entgiftungs- oder Erholungszeit. Da die obere Hautschicht etwa 28 Tage für eine komplette Zellerneuerung braucht, solltest du dir genau diesen Monat an geduldiger Beobachtung schenken [4].
 
 In den ersten ein bis zwei Wochen kann es vorkommen, dass sich die Haut kurzzeitig unruhig oder trocken anfühlt. Das liegt nicht daran, dass das Naturöl "nicht wirkt", sondern daran, dass die Haut nun zum ersten Mal seit Jahren wieder lernen muss, ihre eigenen Talgdrüsen zu aktivieren und die alte Parfüm- und Mineralölschicht abzutragen. Bleibe in dieser Phase sanft mit dir und gib deinem Gewebe das Vertrauen zurück.
 
@@ -66,3 +66,10 @@ Verwende am Abend keine schäumenden Gele mehr, die der Haut das Gefühl geben, 
 Mache das Auftragen deines Pflegeöls am Abend zu einer somatischen Meditation. Trage das Öl nicht hektisch im Stehen auf. Nimm dir 60 Sekunden Zeit. Verreibe die Tropfen in den Handflächen, schließe die Augen, führe die Hände vor das Gesicht und atme den erdigen, nussigen Duft tief ein. Drücke dann die Hände mit sanftem, gleichmäßigem Druck auf Stirn, Wangen und Kinn. Spüre die Wärme. Du pflegst nicht nur eine Hülle – du schenkst dir selbst liebevolle Zuwendung.
 
 Wenn wir der Haut ihre natürliche Würde zurückgeben und sie mit der puren, unverfälschten Essenz der Pflanzen versorgen, geschieht etwas Wunderbares: Sie hört auf zu kämpfen. Sie findet in ihre ursprüngliche Stabilität zurück und schenkt dir jenes klare, ruhige Strahlen, das aus der Tiefe einer harmonischen Balance entspringt.
+
+## Wissenschaftliche Quellen & Studien
+
+[1] A. V. Rawlings and C. R. Harding, "Moisturization and skin barrier function," Dermatol. Ther., vol. 17, no. s1, pp. 43–48, 2004, doi: 10.1111/j.1396-0296.2004.04s1005.x.
+[2] M. D. Lipozenčić and L. Hadžavdić, "Perioral dermatitis," Clin. Dermatol., vol. 32, no. 1, pp. 125–130, 2014, doi: 10.1016/j.clindermatol.2013.05.034.
+[3] T. K. Lin, L. Zhong, and J. L. Santiago, "Anti-inflammatory and skin barrier repair effects of topical application of some plant oils," Int. J. Mol. Sci., vol. 19, no. 1, p. 70, 2018, doi: 10.3390/ijms19010070.
+[4] E. Proksch et al., "The skin: an indispensable barrier," Exp. Dermatol., vol. 17, no. 12, pp. 1063–1072, 2008, doi: 10.1111/j.1600-0625.2008.00786.x.

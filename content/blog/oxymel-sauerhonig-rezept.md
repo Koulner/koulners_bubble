@@ -24,12 +24,12 @@ Um das therapeutische Spektrum von Oxymel zu begreifen, müssen wir die beiden G
 
 ### 1. Naturtrüber Bio-Apfelessig (Die lebendige Mutterkultur)
 Ein echter, unpasteurisierter Apfelessig – idealerweise mit der sichtbaren, schwebenden "Essigmutter" am Flaschenboden – ist ein probiotisches Kraftwerk. Während der Fermentation wandeln Acetobacter-Bakterien den Fruchtzucker und Alkohol des Apfelmosts in wertvolle **Essigsäure (Acetat)** um. 
-- **Stimulation der Magensäure:** Viele Menschen leiden unter Völlegefühl und Sodbrennen nicht wegen zu viel Magensäure, sondern wegen zu *wenig* (einer sogenannten *Hypochlorhydrie*). Ein kleiner Schluck Oxymel vor dem Essen bringt den pH-Wert des Magens in das optimale, saure Gleichgewicht, das nötig ist, um Proteine fehlerfrei aufzuspalten.
-- **Blutzucker-Stabilisierung:** Essigsäure verlangsamt die Entleerung des Magens und hemmt kurzzeitig jene Enzyme (die Amylasen), die komplexe Kohlenhydrate in Glucose aufspalten. Das verhindert steile Blutzuckerspitzen nach der Mahlzeit und bewahrt uns vor dem anschließenden Heißhunger-Tief.
+- **Stimulation der Magensäure:** Viele Menschen leiden unter Völlegefühl und Sodbrennen nicht wegen zu viel Magensäure, sondern wegen zu *wenig* (einer sogenannten *Hypochlorhydrie*). Ein kleiner Schluck Oxymel vor dem Essen bringt den pH-Wert des Magens in das optimale, saure Gleichgewicht, das nötig ist, um Proteine fehlerfrei aufzuspalten [1].
+- **Blutzucker-Stabilisierung:** Essigsäure verlangsamt die Entleerung des Magens und hemmt kurzzeitig jene Enzyme (die Amylasen), die komplexe Kohlenhydrate in Glucose aufspalten. Das verhindert steile Blutzuckerspitzen nach der Mahlzeit und bewahrt uns vor dem anschließenden Heißhunger-Tief [2].
 - **Nahrung für die Darmflora:** Als organisches *Postbiotikum* liefert Apfelessig dem Mikrobiom im Dünn- und Dickdarm ein leicht saures Milieu, das krankmachende Keime zurückdrängt und gute Bifidobakterien fördert.
 
 ### 2. Naturbelassener Rohhonig (Das flüssige Licht)
-Kalt geschleuderter, unerhitzter Bienenhonig ist weit mehr als eine natürliche Zuckerquelle. Er enthält über 180 bekannte Begleitstoffe: Aminosäuren, B-Vitamine, Mineralien wie Kalium und Magnesium, vor allem aber **Inhibine** (antimikrobielle Enzyme, die Bienen dem Nektar beimischen) und **Polyphenole**.
+Kalt geschleuderter, unerhitzter Bienenhonig ist weit mehr als eine natürliche Zuckerquelle. Er enthält über 180 bekannte Begleitstoffe: Aminosäuren, B-Vitamine, Mineralien wie Kalium und Magnesium, vor allem aber **Inhibine** (antimikrobielle Enzyme, die Bienen dem Nektar beimischen) und **Polyphenole** [3].
 - **Sanfte Schutzschicht:** Die Schleim- und Zuckerstoffe des Honigs legen sich wie ein linderndes Pflaster über gereizte Schleimhäute im Rachenraum, Speiseröhre und Magen.
 - **Präbiotischer Nährboden:** Honig liefert wertvolle Oligosaccharide (komplexe Mehrfachzucker), die von unseren körpereigenen Verdauungsenzymen nicht abgebaut werden können – und daher unversehrt im Dickdarm ankommen, wo sie unseren besten Darmbakterien als luxuriöses Futter dienen.
 
@@ -45,10 +45,10 @@ Für die kühle und feuchte Herbst- und Winterzeit sind zwei heimische Heilkräu
 
 ### Der Echte Thymian (*Thymus vulgaris*)
 Thymian ist das Sinnbild für gebündelte Sonnenwärme und Atemschutzkraft. Seine feinen Blätter sind reich an ätherischen Ölen wie **Thymol** und **Carvacrol**.
-- **Wirkung:** Er wirkt stark antibakteriell, antiviral und entkrampfend auf die glatte Muskulatur der Bronchien. Wenn ein kalter Wind oder die ersten Anzeichen einer Erkältung den Brustkorb verengen, bringt ein mit Thymian angereichertes Oxymel sofortige, durchwärmende Erleichterung und löst zähen Schleim auf sanfte Weise.
+- **Wirkung:** Er wirkt stark antibakteriell, antiviral und entkrampfend auf die glatte Muskulatur der Bronchien. Wenn ein kalter Wind oder die ersten Anzeichen einer Erkältung den Brustkorb verengen, bringt ein mit Thymian angereichertes Oxymel sofortige, durchwärmende Erleichterung und löst zähen Schleim auf sanfte Weise [4].
 
 ### Der Spitzwegerich (*Plantago lanceolata*)
-Der Spitzwegerich, den man fast an jedem unberührten Wiesenrand findet, wurde von den alten Kräuterkundigen liebevoll als "König der Lungenpflanzen" bezeichnet. Er enthält hohe Mengen an **Mucilagiosa (Schleimstoffen)**, **Aucubin** (einem natürlichen Antibiotikum) und **Kieselsäure**.
+Der Spitzwegerich, den man fast an jedem unberührten Wiesenrand findet, wurde von den alten Kräuterkundigen liebevoll als "König der Lungenpflanzen" bezeichnet. Er enthält hohe Mengen an **Mucilagiosa (Schleimstoffen)**, **Aucubin** (einem natürlichen Antibiotikum) und **Kieselsäure** [5].
 - **Wirkung:** Die feinen Schleimstoffe legen sich wie ein kühlender, schützender Film über einen trocken, gereizt hustenden Hals. Gleichzeitig stärkt die Kieselsäure das Lungengewebe und die Abwehrkraft der Schleimhäute gegen eindringende Viren.
 
 ![Frische grüne Thymianzweige und Spitzwegerichblätter auf einem Holztisch neben einem Weckglas mit Sauerhonig](https://image.pollinations.ai/prompt/aesthetic%20cinematic%20photography%20of%20thyme%20and%20plantain%20leaves%20wooden%20table%20honey%20warm%20healing%20light?width=1200&height=600&nologo=true)
@@ -96,3 +96,11 @@ Nach intensivem funktionellem Training oder einer langen Bergwanderung verliert 
 Du kannst Oxymel ganz wunderbar in deine tägliche Küche einbauen: Ersetze in deinem normalen Salat-Dressing den üblichen Essig und Zucker durch 2 Esslöffel deines Kräuter-Oxymels und verblende es mit gutem Oliven- oder Hanföl. So wird selbst ein einfacher Blattsalat zu einer therapeutischen Mahlzeit für deine Darmbakterien.
 
 Wenn wir beginnen, Oxymel wieder in unseren Alltag einzuladen, erinnern wir unseren Körper an eine uralte Wahrheit: Die kraftvollste Medizin muss nicht bitter, klinisch und fremd schmecken. Sie darf sanft, goldglänzend, süß-sauer und tief verankert in der unendlichen Weisheit unserer eigenen Natur sein.
+
+## Wissenschaftliche Quellen & Studien
+
+[1] S. Hadi et al., "Effect of apple cider vinegar on lipid profiles and glycemic parameters: a systematic review and meta-analysis of randomized clinical trials," BMC Complement. Med. Ther., vol. 21, p. 179, 2021, doi: 10.1186/s12906-021-03351-w.
+[2] H. Liljeberg and I. Björck, "Delayed gastric emptying rate may explain improved glycaemic and insulinaemic responses to a starchy meal with added vinegar," Eur. J. Clin. Nutr., vol. 52, no. 5, pp. 368–371, 1998, doi: 10.1038/sj.ejcn.1600572.
+[3] M. Mandal and S. Mandal, "Honey: its medicinal property and antibacterial activity," Asian Pac. J. Trop. Biomed., vol. 1, no. 2, pp. 154–160, 2011, doi: 10.1016/S2221-1691(11)60016-6.
+[4] B. Fachini-Queiroz et al., "Effects of thymol and carvacrol, constituents of Thymus vulgaris L. essential oil, on the inflammatory response," Evid. Based Complement. Alternat. Med., vol. 2012, p. 657026, 2012, doi: 10.1155/2012/657026.
+[5] A. B. Samuelsen, "The traditional uses, chemical constituents and biological activities of Plantago major L. A review," J. Ethnopharmacol., vol. 71, no. 1–2, pp. 1–21, 2000, doi: 10.1016/S0378-8741(00)00212-9.

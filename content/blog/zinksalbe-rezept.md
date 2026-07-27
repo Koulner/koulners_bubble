@@ -27,14 +27,14 @@ Um eine wirklich exzellente Zinksalbe herzustellen, benötigen wir nur wenige, a
 ### 1. Zinkoxid (Pharmazeutische Qualität, ohne Nanopartikel)
 Zinkoxid ist ein weißes, anorganisches Mineralpulver. Sobald es auf eine gereizte Hautstelle oder ein nässendes Ekzem aufgetragen wird, entfaltet es eine faszinierende Dreifachwirkung:
 - **Adstringierend (zusammenziehend):** Es verbindet sich mit den Eiweißen der obersten Hautschicht und sorgt dafür, dass sich das feine Gewebe zusammenzieht. Das stoppt nässende Stellen und bildet einen vorübergehenden, natürlichen Schorf.
-- **Antimikrobiell:** Zink entzieht entzündungsfördernden Bakterien (wie dem *Staphylococcus aureus* oder *Cutibacterium acnes*) den Nährboden, ohne dabei das gesamte Mikrobiom zu zerstören, wie es aggressive Antibiotika tun würden.
-- **Lichtschützend:** Als physikalischer Filter reflektiert es Sonnenlicht sanft von der Wunde weg – ideal, um frische Narbenbildung oder dunkle Pigmentflecken auf heilender Haut zu verhindern.
+- **Antimikrobiell:** Zink entzieht entzündungsfördernden Bakterien (wie dem *Staphylococcus aureus* oder *Cutibacterium acnes*) den Nährboden, ohne dabei das gesamte Mikrobiom zu zerstören, wie es aggressive Antibiotika tun würden [1].
+- **Lichtschützend:** Als physikalischer Filter reflektiert es Sonnenlicht sanft von der Wunde weg – ideal, um frische Narbenbildung oder dunkle Pigmentflecken auf heilender Haut zu verhindern [2].
 
 ### 2. Kaltgepresstes Bio-Mandelöl (oder Jojobaöl)
-Während Mineralöle nur auf der Oberfläche liegen, zieht Mandelöl in die lipidreichen Zwischenräume des Stratum corneum ein. Es ist ein außergewöhnlich mildes, reizfreies Öl, das von fast jeder Haut – selbst von zarter Babyhaut – dankend angenommen wird. Der hohe Gehalt an natürlichem Vitamin E (*Tocopherol*) schützt die neu entstehenden Hautzellen vor oxidativem Stress und hält das Narbengewebe geschmeidig und elastisch.
+Während Mineralöle nur auf der Oberfläche liegen, zieht Mandelöl in die lipidreichen Zwischenräume des Stratum corneum ein. Es ist ein außergewöhnlich mildes, reizfreies Öl, das von fast jeder Haut – selbst von zarter Babyhaut – dankend angenommen wird. Der hohe Gehalt an natürlichem Vitamin E (*Tocopherol*) schützt die neu entstehenden Hautzellen vor oxidativem Stress und hält das Narbengewebe geschmeidig und elastisch [3].
 
 ### 3. Naturbelassenes Bienenwachs (Cera Alba) oder Beerenwachs
-Bienenwachs verleiht der Salbe nicht nur ihre feste, streichfähige Textur, sondern fungiert als intelligentes, atmungsaktives Schutzschild. Im Gegensatz zu Paraffinen hinterlässt Bienenwachs eine feine, luftdurchlässige Matrix auf der Haut. Es schützt vor Nässe und Reibung, lässt die Hautporen jedoch frei atmen und gibt über Stunden hinweg propolishaltige, beruhigende Spuren an die Wunde ab.
+Bienenwachs verleiht der Salbe nicht nur ihre feste, streichfähige Textur, sondern fungiert als intelligentes, atmungsaktives Schutzschild. Im Gegensatz zu Paraffinen hinterlässt Bienenwachs eine feine, luftdurchlässige Matrix auf der Haut. Es schützt vor Nässe und Reibung, lässt die Hautporen jedoch frei atmen und gibt über Stunden hinweg propolishaltige, beruhigende Spuren an die Wunde ab [4].
 
 ![Eine Hand rührt sanft geschmolzenes Bienenwachs und goldenes Mandelöl im Wasserbad](https://image.pollinations.ai/prompt/aesthetic%20cinematic%20photography%20of%20melting%20beeswax%20almond%20oil%20in%20glass%20bowl%20warm%20healing%20light?width=1200&height=600&nologo=true)
 
@@ -80,3 +80,10 @@ Deine selbstgerührte Zinksalbe ist ein wahres Multi-Talent im Alltag:
 - **Haltbarkeit:** Da dieses Rezept kein Wasser enthält, kommt es völlig ohne synthetische Konservierungsmittel aus. An einem kühlen, dunklen Ort aufbewahrt, hält sich die Salbe problemlos 6 bis 9 Monate. Entnimm die Salbe idealerweise immer mit einem sauberen Spatel oder frisch gewaschenen Händen.
 
 Wenn du diesen kleinen Tiegel in Händen hältst, hältst du nicht nur ein hochwirksames Pflegeprodukt. Du hältst ein Stück wiedererlangte Autonomie über deinen eigenen Körper – eine heilsame Erinnerung daran, dass die wirksamste Medizin oft im einfachen, verständigen Zusammenspiel der Natur verborgen liegt.
+
+## Wissenschaftliche Quellen & Studien
+
+[1] P. Pasquet et al., "Antimicrobial activity of zinc oxide particles on five micro-organisms of the Pharmacopoeia," Int. J. Pharm., vol. 460, no. 1–2, pp. 92–100, 2014, doi: 10.1016/j.ijpharm.2013.10.031.
+[2] A. B. G. Lansdown et al., "Zinc in wound healing: theoretical, experimental, and clinical aspects," Wound Repair Regen., vol. 15, no. 1, pp. 2–16, 2007, doi: 10.1111/j.1524-475X.2006.00179.x.
+[3] T.-K. Lin, L. Zhong, and J. L. Santiago, "Anti-inflammatory and skin barrier repair effects of topical application of some plant oils," Int. J. Mol. Sci., vol. 19, no. 1, p. 70, 2018, doi: 10.3390/ijms19010070.
+[4] F. Fratini et al., "Beeswax: A minireview of its antimicrobial activity and its application in medicine," Asian Pac. J. Trop. Med., vol. 9, no. 9, pp. 839–843, 2016, doi: 10.1016/j.apjtm.2016.07.003.

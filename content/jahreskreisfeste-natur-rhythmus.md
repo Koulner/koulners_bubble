@@ -22,10 +22,10 @@ Der Grund, warum sich heute Millionen von Menschen trotz materiellem Überfluss 
 
 Unsere Vorfahren lebten über Hunderttausende von Jahren in symbiotischer Harmonie mit dem Stand der Sonne und dem Wechsel der Jahreszeiten. Unsere Biologie – unser Hormonsystem, unser Stoffwechsel und unsere Gehirnwellen – ist tief von sogenannten **chronobiologischen Rhythmen** durchdrungen:
 
-- **Der zirkadiane Rhythmus (Der 24-Stunden-Takt):** Gesteuert von Licht und Dunkelheit reguliert unsere Zirbeldrüse den Wechsel zwischen dem aktivierenden Tageshormon *Cortisol* und dem regenerierenden Schlafhormon *Melatonin*.
-- **Der zirkannuale Rhythmus (Der Jahreszyklus):** Genauso wie Tiere einen Fellwechsel erleben oder Winterschlaf halten, verändert sich auch der menschliche Organismus im Jahresverlauf. Im Winter senkt unsere Schilddrüse sanft den Grundumsatz, unser Immunsystem zieht sich in die innere Abwehr zurück und unser Nervensystem verlangt evolutionär nach Ruhe, Wärme, kohlenhydratreicherer Nahrung und längeren Schlafphasen.
+- **Der zirkadiane Rhythmus (Der 24-Stunden-Takt):** Gesteuert von Licht und Dunkelheit reguliert unsere Zirbeldrüse den Wechsel zwischen dem aktivierenden Tageshormon *Cortisol* und dem regenerierenden Schlafhormon *Melatonin* [1].
+- **Der zirkannuale Rhythmus (Der Jahreszyklus):** Genauso wie Tiere einen Fellwechsel erleben oder Winterschlaf halten, verändert sich auch der menschliche Organismus im Jahresverlauf. Im Winter senkt unsere Schilddrüse sanft den Grundumsatz, unser Immunsystem zieht sich in die innere Abwehr zurück und unser Nervensystem verlangt evolutionär nach Ruhe, Wärme, kohlenhydratreicherer Nahrung und längeren Schlafphasen [2].
 
-Wenn wir diese natürlichen Impulse durch künstliches Blaulicht, Koffein, nächtliches Arbeiten und den gesellschaftlichen Druck zu ständiger Produktivität unterdrücken, zwingen wir unseren Organismus in einen permanenten Alarmzustand. Wir betreiben Raubbau an unseren zellulären Batterien. Die philosophische und praktische Rückkehr in den **Jahreskreis** ist daher keine esoterische Romantik, sondern elementare Psychohygiene und proaktive Burnout-Prävention.
+Wenn wir diese natürlichen Impulse durch künstliches Blaulicht, Koffein, nächtliches Arbeiten und den gesellschaftlichen Druck zu ständiger Produktivität unterdrücken, zwingen wir unseren Organismus in einen permanenten Alarmzustand. Wir betreiben Raubbau an unseren zellulären Batterien [3]. Die philosophische und praktische Rückkehr in den **Jahreskreis** ist daher keine esoterische Romantik, sondern elementare Psychohygiene und proaktive Burnout-Prävention.
 
 > "Wer den Winter des Lebens verleugnet, verliert die Kraft für den Frühling. Ruhe ist kein Stillstand, sondern das unsichtbare Wurzelwachstum, das jede künftige Blüte erst möglich macht."
 
@@ -36,7 +36,7 @@ In den alten europäischen Naturtraditionen wurde das Jahr als ein großes Rad (
 Let us explore the philosophy of the seasons and how we can re-embed our lives within them:
 
 ### 1. Der Frühling: Das Wiedererwachen (Imbolc, Ostara, Beltane)
-Wenn die Tage spürbar länger werden und die ersten Schneeglöckchen die kalte Erde durchbrechen, wandelt sich auch unsere innere Biochemie. Das Licht kurbelt die Produktion von *Serotonin* und *Dopamin* an, während das Trägheitshormon Melatonin abgebaut wird.
+Wenn die Tage spürbar länger werden und die ersten Schneeglöckchen die kalte Erde durchbrechen, wandelt sich auch unsere innere Biochemie. Das Licht kurbelt die Produktion von *Serotonin* und *Dopamin* an, während das Trägheitshormon Melatonin abgebaut wird [4].
 - **Die Philosophie:** Der Frühling ist die Zeit des unschuldigen Neuanfangs, der Inspiration und des Keimens. Es ist der Moment, in dem wir neue Ideen säen, starre Gewohnheiten des Winters abschütteln und unseren Körper durch sanfte Bewegung in der frischen Luft aktivieren.
 - **Dein Frühlings-Ritual:** Mache eine bewusste Frühjahrskur. Sammle die ersten jungen, wilden Kräuter (wie Löwenzahn, Bärlauch oder Brennnessel), die extrem reich an Bitterstoffen und Chlorophyll sind, um deine Leber bei der natürlichen Ausleitung von Winter-Stoffwechselresten zu unterstützen.
 
@@ -66,3 +66,10 @@ Du musst dein Leben nicht komplett umkrempeln oder aufs Land ziehen, um im Einkl
 3. **Schaffe kleine Jahreszeit-Altäre:** Lege auf ein kleines Tablett in deiner Wohnung Dinge, die du bei deinen Spaziergängen im Wald findest: im Frühling eine blühende Knospe, im Sommer eine Feder, im Herbst eine glänzende Kastanie, im Winter einen Kiefernzapfen und eine Bienenwachskerze. So erinnert dich dein Zuhause täglich an den Rhythmus, der dich trägt.
 
 Wenn wir aufhören, gegen den Winter zu kämpfen, verlieren wir die Angst vor der Dunkelheit. Wir erkennen, dass wir kein abgetrenntes Rad im Getriebe einer unerbittlichen Leistungsmaschine sind, sondern ein lebendiger, atmender Teil der Natur. In Koulners Bubble darfst du durchatmen: Du musst heute nicht wie ein Sommersonnentag strahlen, wenn deine Seele gerade den sanften Nebel des Herbstes braucht.
+
+## Wissenschaftliche Quellen & Studien
+
+[1] T. Roenneberg and M. Merrow, "The circadian clock and human health," Curr. Biol., vol. 26, no. 10, pp. R432–R443, 2016, doi: 10.1016/j.cub.2016.04.011.
+[2] X. C. Dopico et al., "Widespread seasonal gene expression reveals annual differences in human immunity and physiology," Nat. Commun., vol. 6, p. 7000, 2015, doi: 10.1038/ncomms8000.
+[3] A.-M. Chang et al., "Evening use of light-emitting eReaders negatively affects sleep, circadian timing, and next-morning alertness," Proc. Natl. Acad. Sci. U. S. A., vol. 112, no. 4, pp. 1232–1237, 2015, doi: 10.1073/pnas.1418490112.
+[4] G. W. Lambert et al., "Effect of sunlight and season on serotonin turnover in the brain," Lancet, vol. 360, no. 9348, pp. 1840–1842, 2002, doi: 10.1016/S0140-6736(02)11737-5.

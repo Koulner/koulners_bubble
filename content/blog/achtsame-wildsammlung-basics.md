@@ -36,7 +36,7 @@ Betrachten wir nun drei absolute Könige der heimischen Wildflora. Sie wachsen f
 Von vielen Gartenbesitzern als lästiges „Unkraut“ geschmäht, ist die Brennnessel in Wahrheit eine der mächtigsten Heil- und Nährpflanzen des europäischen Kontinents. Wo sie wächst, zeigt sie einen stickstoffreichen, fruchtbaren Boden an. Ihr Brennen ist kein Angriff, sondern ihr weiser Schutzmechanismus für einen wertvollen Schatz an Nährstoffen.
 
 ### Die biochemische Signatur
-Die Brennnessel besticht durch einen überwältigenden Gehalt an **biologisch verfügbarem Eisen**, Magnesium, Kalzium, Kieselsäure (Silizium) und Vitamin C – im Vergleich zu einem herkömmlichen Kopfsalat liefert sie bis zu sechsmal mehr Kalzium und dreimal mehr Eisen. Ihre feinen Brennhaare enthalten Histamin, Acetylcholin und Ameisensäure.
+Die Brennnessel besticht durch einen überwältigenden Gehalt an **biologisch verfügbarem Eisen**, Magnesium, Kalzium, Kieselsäure (Silizium) und Vitamin C – im Vergleich zu einem herkömmlichen Kopfsalat liefert sie bis zu sechsmal mehr Kalzium und dreimal mehr Eisen [1]. Ihre feinen Brennhaare enthalten Histamin, Acetylcholin und Ameisensäure.
 
 ### Wirkung auf den Organismus
 - **Tiefenreinigung für Lymphe und Blut:** Sie regt den Stoffwechsel intensiv an, wirkt harntreibend (diuretisch) und spült abgelagerte Harnsäure und Stoffwechselabfälle sanft über die Nieren aus. Ideal als Frühjahrs- oder Herbstkur gegen Frühjahrsmüdigkeit und Gelenk-Zwicken.
@@ -62,10 +62,10 @@ Alles in einem Mörser oder Mixer zu einer intensiv smaragdgrünen Paste verarbe
 Wenn der Löwenzahn im Frühjahr und Sommer die Wiesen in ein leuchtendes Sonnengelb taucht, schenkt er uns das genaue Gegenmittel zu unserer oft zu süßen, fettreichen zivilisatorischen Ernährung: die **Heilkraft der Bitterstoffe**. In der modernen Lebensmittelindustrie wurden Bitterstoffe zugunsten eines gefälligen Einheitsgeschmacks fast vollständig aus den Kulturgemüsen herausgezüchtet – mit verheerenden Folgen für unsere Verdauungsorgane.
 
 ### Die biochemische Signatur
-Der Löwenzahn führt in allen Pflanzenteilen (Wurzel, Blatt und Stängel) wertvolle Sesquiterpenlaktone (die Bitterstoffe *Taraxacin*), reichlich **Inulin** (ein exzellentes Präbiotikum für unsere Bifidobakterien im Darm), Kalium und Flavonoide.
+Der Löwenzahn führt in allen Pflanzenteilen (Wurzel, Blatt und Stängel) wertvolle Sesquiterpenlaktone (die Bitterstoffe *Taraxacin*), reichlich **Inulin** (ein exzellentes Präbiotikum für unsere Bifidobakterien im Darm), Kalium und Flavonoide [2].
 
 ### Wirkung auf den Organismus
-- **Aktivierung des Verdauungsfeuers:** Sobald unsere Zungengrund-Rezeptoren die Bitterstoffe des Löwenzahns schmecken, signalisiert der Vagusnerv im Bruchteil einer Sekunde an den gesamten Verdauungstrakt: *Arbeit beginnt!* Speichelfluss, Magensäureproduktion und vor allem der Gallenfluss aus der Leber werden sofort angekurbelt.
+- **Aktivierung des Verdauungsfeuers:** Sobald unsere Zungengrund-Rezeptoren die Bitterstoffe des Löwenzahns schmecken, signalisiert der Vagusnerv im Bruchteil einer Sekunde an den gesamten Verdauungstrakt: *Arbeit beginnt!* Speichelfluss, Magensäureproduktion und vor allem der Gallenfluss aus der Leber werden sofort angekurbelt [2].
 - **Entlastung der Leber:** Die Pflanze ist das wichtigste Lebertonikum unserer Breiten. Sie hilft unserem primären Entgiftungsorgan dabei, fettlösliche Toxine, Medikamentenreste und überschüssige Hormone abzubauen und auszuscheiden.
 - **Sanfte Entwässerung:** Im Gegensatz zu chemischen Diuretika, die dem Körper wichtiges Kalium rauben, bringt der Löwenzahn sein eigenes Kalium in so reichlicher Menge mit, dass der Mineralienhaushalt beim Ausschwemmen von Ödemen perfekt in Balance bleibt.
 
@@ -77,10 +77,10 @@ Ernte an einem sonnigen Nachmittag frische, junge Löwenzahnblätter. Übergieß
 Der Spitzwegerich mit seinen charakteristischen, lanzettartigen Blättern, auf deren Rückseite die Blattadern deutlich spürbar hervorstehen, ist der treueste Begleiter des Wanderers. Er wächst bevorzugt an Wegrändern, Pfaden und Wiesen – fast so, als wollte er sich uns absichtlich vor die Füße legen, damit wir ihn im Notfall sofort griffbereit haben.
 
 ### Die biochemische Signatur
-Spitzwegerich ist ein Meisterwerk der pflanzlichen Synergie: Er enthält das hochwirksame Glykosid **Aucubin** (welches antibiotisch, entzündungshemmend und keimtötend wirkt), wohltuende **Schleimstoffe (Mucilagiosa)**, gerbende Tannine und zellfestigende Kieselsäure.
+Spitzwegerich ist ein Meisterwerk der pflanzlichen Synergie: Er enthält das hochwirksame Glykosid **Aucubin** (welches antibiotisch, entzündungshemmend und keimtötend wirkt), wohltuende **Schleimstoffe (Mucilagiosa)**, gerbende Tannine und zellfestigende Kieselsäure [3].
 
 ### Wirkung auf den Organismus
-- **Sofort-Hilfe bei Insektenstichen und Schürfwunden:** Draußen im Feld ist er die ungeschlagene Erste Hilfe. Seine Gerbstoffe ziehen verletztes Gewebe zusammen und stoppen Blutungen, während das Aucubin wie ein natürliches Desinfektionsmittel Schwellungen und den quälenden Juckreiz von Mücken- oder Bienenstichen in Minuten löscht.
+- **Sofort-Hilfe bei Insektenstichen und Schürfwunden:** Draußen im Feld ist er die ungeschlagene Erste Hilfe. Seine Gerbstoffe ziehen verletztes Gewebe zusammen und stoppen Blutungen, während das Aucubin wie ein natürliches Desinfektionsmittel Schwellungen und den quälenden Juckreiz von Mücken- oder Bienenstichen in Minuten löscht [4].
 - **Balsam für Lunge und Bronchien:** Innerlich angewendet legen sich seine feinen Schleimstoffe wie ein schützender Schal um gereizte, trockene Rachenschleimhäute und lindern quälenden Reizhusten.
 
 ### Praxis-Tipp zur Verarbeitung: Der Grüne-Pflaster-Trick
@@ -90,6 +90,13 @@ Wenn du dich bei einer Wanderung leicht an einem Dorn kratzt, dich eine Brennnes
 
 ## Dein Einstieg in die Wilde Apotheke
 
-Beginne deine Reise in die Wildsammlung nicht mit dem ehrgeizigen Ziel, sofort dreißig verschiedene Kräuter bestimmen zu wollen. Gehe nach draußen und freunde dich zunächst nur mit diesen drei Pflanzen an. Setze dich neben sie ins Gras, betrachte die Blattmaserung, schmecke ihre Nuancen. 
+Beginne deine Reise in die Wildsammlung nicht mit dem ehrgeizigen Ziel, sofort dreißig verschiedene Kräuter bestimmen zu wollen. Gehe nach draußen und freunde dich zunächst nur mit diesen three Pflanzen an. Setze dich neben sie ins Gras, betrachte die Blattmaserung, schmecke ihre Nuancen. 
 
 Wenn wir uns der wilden Pflanzenwelt auf diese feinfühlige, achtsame Weise nähern, verwandelt sich die Natur von einer bloßen Umgebung in ein vertrautes Zuhause. Du gehst nicht mehr durch eine fremde Wildnis – du spazierst durch den lebendigen, nährenden Kräutergarten einer Erde, die unentwegt dafür sorgt, dass es uns gut geht.
+
+## Wissenschaftliche Quellen & Studien
+
+[1] B. C. Joshi, M. Mukhija, and A. N. Kalia, "Phytochemical and pharmacological potential of Urtica dioica: a review," Int. J. Green Pharm., vol. 8, no. 4, pp. 202–209, 2014, doi: 10.4103/0973-8258.142666.
+[2] K. Schütz, R. Carle, and A. Schieber, "Taraxacum—a review on its phytochemical and pharmacological profile," J. Ethnopharmacol., vol. 107, no. 3, pp. 313–323, 2006, doi: 10.1016/j.jep.2006.07.021.
+[3] A. B. Samuelsen, "The traditional uses, chemical constituents and biological activities of Plantago major L. A review," J. Ethnopharmacol., vol. 71, no. 1-2, pp. 1–21, 2000, doi: 10.1016/S0378-8741(00)00212-9.
+[4] P. Buzzini et al., "Antimicrobial and antiviral activity of hydrolysable tannins," Mini-Rev. Med. Chem., vol. 8, no. 12, pp. 1179–1187, 2008, doi: 10.2174/138955708786140990.
