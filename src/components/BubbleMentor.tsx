@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, MessageCircleHeart, X, Send, Bot, User } from "lucide-react";
 
@@ -10,6 +11,7 @@ interface Message {
 }
 
 export default function BubbleMentor() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -46,7 +48,7 @@ export default function BubbleMentor() {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: newMessages }),
+        body: JSON.stringify({ messages: newMessages, pathname }),
       });
 
       if (!response.ok) {

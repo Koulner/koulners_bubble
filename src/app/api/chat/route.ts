@@ -5,86 +5,150 @@ import matter from "gray-matter";
 import { createOpenAI } from "@ai-sdk/openai";
 import { streamText } from "ai";
 
-// Cache für das reduzierte Blog-Wissen im Arbeitsspeicher (RAG-Optimierung)
-let cachedCompactKnowledge: string | null = null;
+// Cache für das Blog-Wissen (RAG-Optimierung)
+interface ArticleKnowledge {
+  slug: string;
+  title: string;
+  category: string;
+  description: string;
+  fullContent: string;
+  compactSummary: string;
+}
+
+let cachedArticles: ArticleKnowledge[] | null = null;
+
+function loadArticles(): ArticleKnowledge[] {
+  if (cachedArticles && process.env.NODE_ENV === "production") return cachedArticles;
+
+  const contentDirs = [
+    path.join(process.cwd(), "content/blog"),
+    path.join(process.cwd(), "content"),
+  ];
+  const seenSlugs = new Set<string>();
+  const articles: ArticleKnowledge[] = [];
+
+  for (const dir of contentDirs) {
+    if (!fs.existsSync(dir)) continue;
+    const files = fs.readdirSync(dir).filter((f) => f.endsWith(".md") || f.endsWith(".mdx"));
+
+    for (const file of files) {
+      const slug = file.replace(/\.mdx?$/, "");
+      if (seenSlugs.has(slug)) continue;
+      seenSlugs.add(slug);
+
+      const raw = fs.readFileSync(path.join(dir, file), "utf8");
+      const { data, content } = matter(raw);
+      const title = data.title || slug;
+      const category = data.category || "Allgemein";
+      const description = data.description || data.excerpt || "";
+      const cleanContent = content.replace(/\r?\n+/g, " ").trim();
+      const shortSummary = description || (cleanContent.length > 250 ? cleanContent.substring(0, 250) + "..." : cleanContent);
+
+      articles.push({
+        slug,
+        title,
+        category,
+        description,
+        fullContent: content.trim(),
+        compactSummary: `- **Titel:** ${title} *(Kategorie: ${category})*\n  **Zusammenfassung:** ${shortSummary}`,
+      });
+    }
+  }
+  cachedArticles = articles;
+  return articles;
+}
 
 /**
- * 1. Kontext-Reduzierung (RAG-Optimierung)
- * Extrahiert pro Datei nur den Titel aus dem Frontmatter/Dateinamen
- * und maximal die ersten 250 Zeichen des Textbodys.
+ * 1. Hybrides RAG-System (Kontext-Bewusstsein)
+ * Wenn der Pfad zu einem Markdown-Artikel im /content Ordner passt, lade den kompletten Inhalt
+ * dieses einen Artikels in den Kontext. Von allen anderen Artikeln wird nur Titel und
+ * description (Zusammenfassung) geladen, um Token zu sparen und 429-Fehler zu vermeiden.
  */
-function getCompactBlogKnowledge(): string {
-  if (cachedCompactKnowledge) return cachedCompactKnowledge;
+function getHybridBlogKnowledge(pathname?: string): { knowledgeText: string; activeArticle?: ArticleKnowledge } {
+  const articles = loadArticles();
+  const activeArticles: string[] = [];
+  const otherArticles: string[] = [];
+  let activeArticle: ArticleKnowledge | undefined = undefined;
 
-  const contentDir = path.join(process.cwd(), "content/blog");
-  if (!fs.existsSync(contentDir)) return "Keine Artikel gefunden.";
+  for (const art of articles) {
+    const isCurrentArticle = pathname && (
+      pathname === `/blog/${art.slug}` ||
+      pathname === `/${art.slug}` ||
+      pathname.endsWith(`/${art.slug}`) ||
+      pathname.toLowerCase().endsWith(`/${art.slug.toLowerCase()}`)
+    );
 
-  const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".md") || f.endsWith(".mdx"));
-  
-  const knowledgeChunks = files.map((file) => {
-    const raw = fs.readFileSync(path.join(contentDir, file), "utf8");
-    const { data, content } = matter(raw);
-    
-    // Titel aus Frontmatter oder Dateiname
-    const title = data.title || file.replace(/\.mdx?$/, "");
-    const category = data.category || "Allgemein";
-    
-    // Bereinige den Textbody von Zeilenumbrüchen und überschüssigen Leerzeichen
-    const cleanContent = content.replace(/\r?\n+/g, " ").trim();
-    // Maximal die ersten 250 Zeichen als kurze Zusammenfassung
-    const shortSummary = cleanContent.length > 250 ? cleanContent.substring(0, 250) + "..." : cleanContent;
+    if (isCurrentArticle) {
+      activeArticle = art;
+      activeArticles.push(
+        `[AKTUELL VOM NUTZER GELESENER ARTIKEL - VOLLSTÄNDIGER TEXT]\n- **Titel:** ${art.title} *(Kategorie: ${art.category})*\n- **Beschreibung:** ${art.description}\n**Vollständiger Inhalt:**\n${art.fullContent}`
+      );
+    } else {
+      otherArticles.push(art.compactSummary);
+    }
+  }
 
-    return `- **Titel:** ${title} *(Kategorie: ${category})*
-  **Zusammenfassung:** ${shortSummary}`;
-  });
+  let knowledgeText = "";
+  if (activeArticles.length > 0) {
+    knowledgeText += `=== AKTUELL GELESENER ARTIKEL ===\n${activeArticles.join("\n\n")}\n=================================\n\n`;
+  }
+  knowledgeText += `--- WEITERE ARTIKEL IM BLOG (KOMPAKTE ÜBERSICHT) ---\n${otherArticles.join("\n\n")}`;
 
-  cachedCompactKnowledge = knowledgeChunks.join("\n\n");
-  return cachedCompactKnowledge;
+  return { knowledgeText, activeArticle };
 }
 
 // Empathischer Fallback-Generator, falls beide API-Provider (Groq & OpenRouter) nicht erreichbar sind oder Schlüssel fehlen
-function generateFallbackResponse(userMessage: string, knowledge: string): string {
+function generateFallbackResponse(userMessage: string, knowledgeText: string, activeArticle?: ArticleKnowledge): string {
   const query = userMessage.toLowerCase();
-  
-  const contentDir = path.join(process.cwd(), "content/blog");
+  const articles = loadArticles();
+
+  if (activeArticle) {
+    const paragraphs = activeArticle.fullContent.split(/\n\s*\n/).filter((p) => p.trim().length > 40 && !p.startsWith("#"));
+    const bestQuote = paragraphs.find((p) => query.split(" ").some((w) => w.length > 3 && p.toLowerCase().includes(w))) || paragraphs[0] || activeArticle.description;
+
+    return `Hallo du, schön, dass du in Koulners Bubble verweilst. 🌿
+
+Wie Koulners Bubble im Artikel **"${activeArticle.title}"** beschreibt:
+
+> ${bestQuote.replace(/\n/g, " ")}
+
+Ich bin hier, um dich sanft auf deiner Reise zu begleiten. Was möchtest du noch zu diesem Thema oder unseren anderen Titeln erfahren?
+
+*(Hinweis: Um freie LLM-Antworten zu erhalten, hinterlege einfach deinen \`GROQ_API_KEY\` oder \`OPENROUTER_API_KEY\` in der \`.env.local\` Datei deines Projekts.)*`;
+  }
+
   let bestMatchTitle = "";
   let bestMatchExcerpt = "";
   let bestMatchCategory = "";
 
-  if (fs.existsSync(contentDir)) {
-    const files = fs.readdirSync(contentDir).filter((f) => f.endsWith(".md") || f.endsWith(".mdx"));
-    for (const file of files) {
-      const raw = fs.readFileSync(path.join(contentDir, file), "utf8");
-      const { data, content } = matter(raw);
-      const fullText = `${data.title} ${data.category} ${data.excerpt} ${content}`.toLowerCase();
-      
-      const keywords = query.split(" ").filter((w) => w.length > 3);
-      const matchCount = keywords.filter((k) => fullText.includes(k)).length;
+  for (const art of articles) {
+    const fullText = `${art.title} ${art.category} ${art.description} ${art.fullContent}`.toLowerCase();
+    const keywords = query.split(" ").filter((w) => w.length > 3);
+    const matchCount = keywords.filter((k) => fullText.includes(k)).length;
 
-      if (matchCount > 0 || fullText.includes(query)) {
-        bestMatchTitle = data.title;
-        bestMatchExcerpt = data.excerpt;
-        bestMatchCategory = data.category;
-        break;
-      }
+    if (matchCount > 0 || fullText.includes(query)) {
+      bestMatchTitle = art.title;
+      bestMatchExcerpt = art.description;
+      bestMatchCategory = art.category;
+      break;
     }
   }
 
   if (bestMatchTitle) {
     return `Hallo du, schön, dass du in Koulners Bubble verweilst. 🌿
 
-Zu deiner Frage fällt mir sofort unser Beitrag **"${bestMatchTitle}"** aus der Kategorie *${bestMatchCategory}* ein.
+Wie Koulners Bubble im Artikel **"${bestMatchTitle}"** beschreibt:
 
-${bestMatchExcerpt}
+> ${bestMatchExcerpt}
 
-Wenn du möchtest, kannst du dir diesen Beitrag direkt in unserer Ruhe-Oase durchlesen. Ich bin hier, um dich sanft auf deiner Reise durch unsere 14 Artikel zu begleiten. Was möchtest du noch erfahren?
+Wenn du möchtest, kannst du dir diesen Beitrag direkt in unserer Ruhe-Oase durchlesen. Ich bin hier, um dich sanft auf deiner Reise zu begleiten. Was möchtest du noch erfahren?
 
 *(Hinweis: Um freie LLM-Antworten zu erhalten, hinterlege einfach deinen \`GROQ_API_KEY\` oder \`OPENROUTER_API_KEY\` in der \`.env.local\` Datei deines Projekts.)*`;
   }
 
   return `Herzlich willkommen in Koulners Bubble! ✨ Ich bin dein sanfter Bubble Guide. 
 
-Ich kenne all unsere 14 Artikel in den 7 Kategorien (Natur, Philosophie, Ganzheitliche Gesundheit, DIY Kosmetik, Ernährung, Frequenzen und Funktionelles Training). Frag mich gerne nach Tipps für dein Nervensystem, nach einem ayurvedischen Frühstücksrezept oder nach Übungen für innere Ruhe!
+Ich kenne all unsere ${articles.length} Artikel zu Natur, Philosophie, Gesundheit, Kosmetik, Ernährung, Frequenzen und Funktionellem Training. Frag mich gerne nach Tipps für dein Nervensystem, nach einem Rezept oder nach Übungen für innere Ruhe!
 
 *(Hinweis: Um freie LLM-Antworten zu erhalten, hinterlege einfach deinen \`GROQ_API_KEY\` oder \`OPENROUTER_API_KEY\` in der \`.env.local\` Datei deines Projekts.)*`;
 }
@@ -103,25 +167,26 @@ const openrouter = createOpenAI({
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { messages } = body;
+    const { messages, pathname } = body;
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
       return NextResponse.json({ error: "Keine Nachrichten erhalten" }, { status: 400 });
     }
 
     const lastMessage = messages[messages.length - 1].content;
-    const compactKnowledge = getCompactBlogKnowledge();
+    const { knowledgeText, activeArticle } = getHybridBlogKnowledge(pathname);
 
-    // Kompakter System-Prompt für den "Bubble Guide"
-    const systemPrompt = `Du bist der empathische 'Bubble Guide' von Koulners Bubble. Deine Aufgabe ist es, Besuchern sanft und lehrreich Fragen zu den Themen Natur, Philosophie, Gesundheit, DIY-Kosmetik, Ernährung, Frequenzen und Funktionelles Training auf diesem Blog zu beantworten.
-Du strahlst Ruhe, Heilung und Zuneigung aus. Nutze eine warme, freundliche und weiche Sprache.
-Du hast Zugriff auf die folgende kompakte Übersicht unserer Blog-Artikel (RAG-Wissensbasis). Beantworte Fragen bevorzugt mit diesem Wissen und verweise gerne auf die passenden Artikel-Titel:
+    // 3. Der neue System-Prompt (Personality Upgrade & tiefgündiges Zitieren)
+    const systemPrompt = `Du bist der 'Bubble Guide', ein weiser, empathischer und heilsamer Begleiter auf der Website 'Koulners Bubble'. Du hilfst Besuchern bei Fragen zu Natur, Philosophie, Gesundheit und Kosmetik. Dir liegt als Kontext das Wissen der Blog-Artikel vor. Beachte besonders den Artikel, den der Nutzer gerade liest (vollständiger Text im Kontext).
+Deine Vorgaben:
+- Strahle Ruhe und Zuneigung aus. Nutze eine erdende, bildhafte Sprache.
+- Wenn du Wissen aus den Artikeln nutzt, zitiere die schönsten und wichtigsten Sätze wörtlich, indem du Markdown-Blockzitate (>) verwendest.
+- Nenne immer den Titel des Artikels, auf den du dich beziehst (z.B. 'Wie Koulners Bubble im Artikel [Titel] beschreibt...').
+- Antworte präzise, aber tiefgründig. Vermeide KI-Floskeln.
 
---- KOMPAKTE WISSENS-DATENBANK ---
-${compactKnowledge}
-----------------------------------
-
-Antworte prägnant, liebevoll und im Markdown-Format.`;
+--- WISSENS-DATENBANK & AKTUELLER KONTEXT ---
+${knowledgeText}
+---------------------------------------------`;
 
     // 2. Fallback-Logik: Primary Provider (Groq -> OpenRouter -> Lokaler Fallback)
     try {
@@ -129,7 +194,7 @@ Antworte prägnant, liebevoll und im Markdown-Format.`;
         throw new Error("GROQ_API_KEY nicht in .env.local gefunden");
       }
 
-      console.log("Starte Chat-Aufruf über Primary Provider (Groq)...");
+      console.log(`Starte Chat-Aufruf über Primary Provider (Groq)${activeArticle ? ` [Aktiver Kontext: ${activeArticle.title}]` : ""}...`);
       const result = await streamText({
         model: groq.chat("llama-3.3-70b-versatile"),
         system: systemPrompt,
@@ -148,7 +213,7 @@ Antworte prägnant, liebevoll und im Markdown-Format.`;
           throw new Error("OPENROUTER_API_KEY nicht in .env.local gefunden");
         }
 
-        console.log("Starte Fallback-Aufruf über OpenRouter (openai/gpt-oss-20b:free)...");
+        console.log(`Starte Fallback-Aufruf über OpenRouter (openai/gpt-oss-20b:free)${activeArticle ? ` [Aktiver Kontext: ${activeArticle.title}]` : ""}...`);
         const result = await streamText({
           model: openrouter.chat("openai/gpt-oss-20b:free"),
           system: systemPrompt,
@@ -163,7 +228,7 @@ Antworte prägnant, liebevoll und im Markdown-Format.`;
         console.error("OpenRouter Aufruf ebenfalls fehlgeschlagen, nutze lokalen Fallback:", openRouterError?.message || openRouterError);
 
         // Letzte Sicherheitsstufe: Empathische lokale JSON-Antwort, damit der Chat niemals abstürzt
-        const fallbackReply = generateFallbackResponse(lastMessage, compactKnowledge);
+        const fallbackReply = generateFallbackResponse(lastMessage, knowledgeText, activeArticle);
         return NextResponse.json({ reply: fallbackReply });
       }
     }
