@@ -4,8 +4,9 @@ import React, { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, MessageCircleHeart, X, Send, Bot, User } from "lucide-react";
+import { Sparkles, MessageCircleHeart, X, Send, Bot, User, Maximize2, Minimize2 } from "lucide-react";
 
 interface Message {
   role: "assistant" | "user";
@@ -15,6 +16,7 @@ interface Message {
 export default function BubbleMentor() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -119,7 +121,11 @@ export default function BubbleMentor() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: "spring", stiffness: 260, damping: 25 }}
-            className="mb-4 w-[90vw] max-w-[400px] h-[520px] bg-surface/95 backdrop-blur-xl border border-sand/50 rounded-3xl shadow-2xl flex flex-col overflow-hidden text-text-main"
+            className={`mb-4 w-[92vw] bg-surface/95 backdrop-blur-xl border border-sand/50 rounded-3xl shadow-2xl flex flex-col overflow-hidden text-text-main transition-all duration-300 ${
+              isExpanded
+                ? "max-w-[800px] h-[82vh] max-h-[760px]"
+                : "max-w-[440px] h-[560px]"
+            }`}
           >
             {/* Header */}
             <div className="p-4 bg-sand/30 border-b border-sand/40 flex items-center justify-between">
@@ -134,13 +140,24 @@ export default function BubbleMentor() {
                   <p className="text-[11px] text-text-muted">Sanfter KI-Mentor & Wissenshüter</p>
                 </div>
               </div>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="p-1.5 rounded-full hover:bg-sand/50 text-text-muted hover:text-text-main transition-colors"
-                aria-label="Chat schließen"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className="p-1.5 rounded-full hover:bg-sand/50 text-text-muted hover:text-text-main transition-colors"
+                  aria-label={isExpanded ? "Chat verkleinern" : "Chat vergrößern"}
+                  title={isExpanded ? "Verkleinern" : "Vergrößern"}
+                >
+                  {isExpanded ? <Minimize2 className="w-4.5 h-4.5" /> : <Maximize2 className="w-4.5 h-4.5" />}
+                </button>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="p-1.5 rounded-full hover:bg-sand/50 text-text-muted hover:text-text-main transition-colors"
+                  aria-label="Chat schließen"
+                  title="Schließen"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
             {/* Messages */}
@@ -164,17 +181,30 @@ export default function BubbleMentor() {
                     {msg.role === "user" ? <User className="w-3.5 h-3.5" /> : <Bot className="w-3.5 h-3.5" />}
                   </div>
                   <div
-                    className={`max-w-[78%] px-4 py-3 rounded-2xl leading-relaxed ${
+                    className={`px-4 py-3 rounded-2xl leading-relaxed ${
                       msg.role === "user"
-                        ? "bg-terracotta text-white rounded-tr-none shadow-sm whitespace-pre-wrap"
-                        : "bg-white/90 border border-sand/40 text-text-main rounded-tl-none shadow-sm"
+                        ? "max-w-[78%] bg-terracotta text-white rounded-tr-none shadow-sm whitespace-pre-wrap"
+                        : `${isExpanded ? "max-w-[96%]" : "max-w-[92%]"} bg-white/95 border border-sand/40 text-text-main rounded-tl-none shadow-sm overflow-hidden`
                     }`}
                   >
                     {msg.role === "user" ? (
                       msg.content
                     ) : (
                       <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
                         components={{
+                          table: ({ children }) => (
+                            <div className="my-2.5 w-full overflow-x-auto rounded-xl border border-sand/60 bg-sand/15 shadow-2xs">
+                              <table className="w-full text-left text-xs border-collapse">{children}</table>
+                            </div>
+                          ),
+                          thead: ({ children }) => (
+                            <thead className="bg-sage/15 border-b border-sand/60 text-sage-dark font-serif font-medium">{children}</thead>
+                          ),
+                          tbody: ({ children }) => <tbody className="divide-y divide-sand/40">{children}</tbody>,
+                          tr: ({ children }) => <tr className="hover:bg-sand/20 transition-colors">{children}</tr>,
+                          th: ({ children }) => <th className="px-3 py-2 font-semibold text-text-main whitespace-nowrap">{children}</th>,
+                          td: ({ children }) => <td className="px-3 py-2 text-text-main/90 align-top leading-relaxed">{children}</td>,
                           a: ({ href, children }) => {
                             const isInternal = href && (href.startsWith("/") || href.startsWith("#"));
                             if (isInternal) {
