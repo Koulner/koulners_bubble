@@ -12,10 +12,12 @@ export interface BlogPostMeta {
   date: string;
   category: "Natur" | "Philosophie" | "Ganzheitliche Gesundheit" | "DIY Kosmetik" | "Ernährung" | "Frequenzen" | "Funktionelles Training" | string;
   excerpt: string;
+  description?: string;
   image: string;
   readTime: string;
   author: string;
 }
+
 
 export interface BlogPostFull extends BlogPostMeta {
   contentHtml: string;
