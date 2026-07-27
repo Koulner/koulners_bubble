@@ -53,14 +53,45 @@ export default function BubbleMentor() {
         throw new Error("Fehler bei der Anfrage");
       }
 
-      const data = await response.json();
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: data.reply || "Ich sammle meine Gedanken, bitte atme tief durch.",
-        },
-      ]);
+      const contentType = response.headers.get("content-type") || "";
+
+      if (contentType.includes("application/json")) {
+        const data = await response.json();
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content: data.reply || "Ich sammle meine Gedanken, bitte atme tief durch.",
+          },
+        ]);
+      } else {
+        // Live-Streaming der Antwort vom LLM
+        const reader = response.body?.getReader();
+        const decoder = new TextDecoder();
+        let assistantContent = "";
+
+        // Platzhalter für die generierte Nachricht anlegen
+        setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
+
+        if (reader) {
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            const chunk = decoder.decode(value, { stream: true });
+            assistantContent += chunk;
+
+            // Chat in Echtzeit flüssig Token für Token aktualisieren
+            setMessages((prev) => {
+              const updated = [...prev];
+              updated[updated.length - 1] = {
+                role: "assistant",
+                content: assistantContent,
+              };
+              return updated;
+            });
+          }
+        }
+      }
     } catch (err) {
       setMessages((prev) => [
         ...prev,
