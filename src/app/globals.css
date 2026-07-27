@@ -1,26 +1,65 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@plugin "@tailwindcss/typography";
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg-cream: #FAF7F2;
+  --color-bg-sand: #F3ECE1;
+  --color-bg-card: #FDFBF7;
+  --color-text-dark: #2C2723;
+  --color-text-muted: #6A6057;
+  --color-sage: #7A9A8B;
+  --color-sage-light: #E7EFEB;
+  --color-sage-dark: #567365;
+  --color-terracotta: #C87A65;
+  --color-terracotta-light: #F9EDE9;
+  --color-amber-warm: #D4A373;
+  --color-border-warm: #E6DCD0;
+  
+  --font-sans: var(--font-outfit), sans-serif;
+  --font-serif: var(--font-playfair), serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #FAF7F2;
+  --foreground: #2C2723;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom scrollbar for immersive feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF7F2;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4C8BC;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B6A89A;
+}
+
+/* Soft blur utility for hero glassmorphism */
+.bubble-glass {
+  background: rgba(253, 251, 247, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(230, 220, 208, 0.5);
+}
+
+.bubble-glass-dark {
+  background: rgba(44, 39, 35, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
