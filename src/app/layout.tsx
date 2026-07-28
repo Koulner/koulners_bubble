@@ -19,6 +19,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://koulners-bubble.de"),
   title: "Koulners Bubble | Dein Raum für Ruhe, Heilung & Zuneigung",
   description: "Tritt in eine schützende digitale Bubble ein. Inspirierende Gedanken über Natur, Philosophie, ganzheitliche Gesundheit und DIY Kosmetik.",
   keywords: ["Heilung", "Ruhe", "Achtsamkeit", "Philosophie", "Ganzheitliche Gesundheit", "DIY Kosmetik", "Natur", "Koulners Bubble"],
