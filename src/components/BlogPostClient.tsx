@@ -118,7 +118,7 @@ export default function BlogPostClient({ post, relatedPosts, children }: BlogPos
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="prose prose-lg max-w-none font-sans text-text-dark/90 leading-relaxed space-y-6
+          className="prose prose-sm md:prose-lg max-w-none font-sans text-text-dark/90 leading-relaxed space-y-6
             prose-headings:font-serif prose-headings:font-normal prose-headings:text-text-dark prose-headings:tracking-tight
             prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-b prose-h2:border-border-warm/50 prose-h2:pb-3
             prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-8 prose-h3:mb-4

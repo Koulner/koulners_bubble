@@ -113,7 +113,8 @@ export default function BubbleMentor() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 font-sans">
+    <>
+      <div className="fixed bottom-6 right-6 z-50 font-sans md:bottom-6 md:right-6 pb-safe pr-safe">
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -121,10 +122,10 @@ export default function BubbleMentor() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: "spring", stiffness: 260, damping: 25 }}
-            className={`mb-4 w-[92vw] bg-surface/95 backdrop-blur-xl border border-sand/50 rounded-3xl shadow-2xl flex flex-col overflow-hidden text-text-main transition-all duration-300 ${
+            className={`fixed inset-0 w-full h-full md:inset-auto md:bottom-28 md:right-6 z-50 bg-surface/95 md:bg-surface/95 backdrop-blur-xl border-0 md:border border-sand/50 rounded-none md:rounded-3xl shadow-2xl flex flex-col overflow-hidden text-text-main transition-all duration-300 ${
               isExpanded
-                ? "max-w-[800px] h-[82vh] max-h-[760px]"
-                : "max-w-[440px] h-[560px]"
+                ? "md:max-w-[800px] md:w-[800px] md:h-[82vh] md:max-h-[760px]"
+                : "md:max-w-[440px] md:w-[440px] md:h-[560px]"
             }`}
           >
             {/* Header */}
@@ -143,19 +144,19 @@ export default function BubbleMentor() {
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => setIsExpanded(!isExpanded)}
-                  className="p-1.5 rounded-full hover:bg-sand/50 text-text-muted hover:text-text-main transition-colors"
+                  className="hidden md:flex p-2 rounded-full hover:bg-sand/50 text-text-muted hover:text-text-main transition-colors min-touch items-center justify-center"
                   aria-label={isExpanded ? "Chat verkleinern" : "Chat vergrößern"}
                   title={isExpanded ? "Verkleinern" : "Vergrößern"}
                 >
-                  {isExpanded ? <Minimize2 className="w-4.5 h-4.5" /> : <Maximize2 className="w-4.5 h-4.5" />}
+                  {isExpanded ? <Minimize2 className="w-5 h-5" /> : <Maximize2 className="w-5 h-5" />}
                 </button>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-1.5 rounded-full hover:bg-sand/50 text-text-muted hover:text-text-main transition-colors"
+                  className="p-2 rounded-full hover:bg-sand/50 text-text-muted hover:text-text-main transition-colors min-touch flex items-center justify-center"
                   aria-label="Chat schließen"
                   title="Schließen"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-6 h-6 md:w-5 md:h-5" />
                 </button>
               </div>
             </div>
@@ -269,45 +270,52 @@ export default function BubbleMentor() {
             </div>
 
             {/* Input Form */}
-            <form onSubmit={handleSend} className="p-3 bg-sand/20 border-t border-sand/40 flex gap-2">
-              <input
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Frag mich sanft etwas..."
-                className="flex-1 bg-white/90 border border-sand/60 rounded-full px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sage/40 text-text-main placeholder-text-muted transition-all"
-              />
-              <button
-                type="submit"
-                disabled={!input.trim() || isLoading}
-                className="w-10 h-10 rounded-full bg-sage hover:bg-sage/90 disabled:opacity-50 disabled:hover:bg-sage text-white flex items-center justify-center shadow-md transition-all transform active:scale-95"
-                aria-label="Nachricht senden"
-              >
-                <Send className="w-4 h-4" />
-              </button>
+            <form onSubmit={handleSend} className="p-4 bg-sand/20 border-t border-sand/40 pb-safe">
+              <div className="relative flex items-center">
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder="Erzähl mir von deinen Gedanken..."
+                  disabled={isLoading}
+                  className="w-full pl-5 pr-14 py-4 rounded-full bg-white/70 border border-sand/60 focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/20 transition-all text-sm shadow-sm disabled:opacity-50 min-touch"
+                />
+                <button
+                  type="submit"
+                  disabled={!input.trim() || isLoading}
+                  className="absolute right-2 p-2.5 bg-sage hover:bg-sage-dark text-white rounded-full transition-all disabled:opacity-40 disabled:hover:bg-sage min-touch flex items-center justify-center"
+                  aria-label="Nachricht senden"
+                >
+                  {isLoading ? (
+                    <div className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+                  ) : (
+                    <Send className="w-5 h-5 ml-0.5" />
+                  )}
+                </button>
+              </div>
             </form>
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Floating Trigger Button */}
-      {!isOpen && (
-        <motion.button
-          onClick={() => setIsOpen(true)}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="relative group flex items-center gap-2.5 px-5 py-3.5 bg-sage hover:bg-sage/95 text-white rounded-full shadow-2xl transition-all border border-white/20"
-          aria-label="Bubble Guide Chat öffnen"
-        >
-          {/* Sanfter Glow-Effekt im Hintergrund */}
-          <span className="absolute -inset-1 rounded-full bg-gradient-to-r from-sage via-amber to-terracotta opacity-40 blur-md group-hover:opacity-75 transition duration-500 animate-pulse" />
-          
-          <div className="relative flex items-center gap-2 font-serif text-sm font-medium tracking-wide">
-            <MessageCircleHeart className="w-5 h-5" />
-            <span>Bubble Guide</span>
-          </div>
-        </motion.button>
-      )}
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setIsOpen(true)}
+            className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-sage text-white shadow-xl flex items-center justify-center hover:bg-sage-dark transition-colors border-2 border-white/20 min-touch"
+            aria-label="Bubble Guide öffnen"
+          >
+            <MessageCircleHeart className="w-7 h-7 md:w-8 md:h-8" />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
+    </>
   );
 }

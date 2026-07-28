@@ -173,4 +173,10 @@ export const mdxComponents = {
   img: ({ src, alt }: { src?: string; alt?: string }) => (
     <CustomImage src={src} alt={alt} />
   ),
+  // Responsive Tabellen auf Mobile
+  table: ({ children, ...props }: any) => (
+    <div className="w-full overflow-x-auto block whitespace-nowrap pb-2 min-touch">
+      <table {...props}>{children}</table>
+    </div>
+  ),
 };
