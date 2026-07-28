@@ -96,7 +96,9 @@ export default function HomeClient({ initialPosts, categories }: HomeClientProps
               Mit <Heart className="w-3 h-3 text-terracotta inline fill-terracotta/20" /> und Ruhe gestaltet
             </span>
             <span>•</span>
-            <span>Next.js & Framer Motion</span>
+            <a href="/studio" className="hover:text-terracotta transition-colors flex items-center gap-1">
+              <ShieldCheck className="w-3.5 h-3.5 text-sage inline" /> Bubble Studio
+            </a>
           </div>
         </div>
       </footer>

@@ -20,16 +20,23 @@ export interface BlogPostMeta {
   image: string;
   readTime: string;
   author: string;
+  draft?: boolean;
 }
 
 export interface BlogPostFull extends BlogPostMeta {
   contentHtml: string;
 }
 
+export interface BlogPostRaw extends BlogPostMeta {
+  rawContent: string;
+  body: string;
+}
+
 /**
- * Holt alle Blog-Artikel Metadaten aus /content/blog, sortiert nach Datum
+ * Holt alle Blog-Artikel Metadaten aus /content/blog, sortiert nach Datum.
+ * Filtert standardmäßig alle Entwürfe (draft: true) heraus!
  */
-export function getAllPosts(): BlogPostMeta[] {
+export function getAllPosts(includeDrafts = false): BlogPostMeta[] {
   if (!fs.existsSync(contentDirectory)) {
     return [];
   }
@@ -49,18 +56,21 @@ export function getAllPosts(): BlogPostMeta[] {
       return {
         slug,
         ...data,
+        draft: Boolean(data.draft),
         category: normalizeCategories(data.category),
       };
-    });
+    })
+    .filter((post) => includeDrafts || !post.draft);
 
   // Sortiere nach Datum absteigend
   return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
 /**
- * Holt einen einzelnen Blogpost nach Slug inklusive konvertiertem HTML
+ * Holt einen einzelnen Blogpost nach Slug inklusive konvertiertem HTML.
+ * Blockiert Entwürfe bei öffentlichen Abfragen (wenn includeDrafts false ist).
  */
-export async function getPostBySlug(slug: string): Promise<BlogPostFull | null> {
+export async function getPostBySlug(slug: string, includeDrafts = false): Promise<BlogPostFull | null> {
   const mdPath = path.join(contentDirectory, `${slug}.md`);
   const mdxPath = path.join(contentDirectory, `${slug}.mdx`);
 
@@ -75,6 +85,11 @@ export async function getPostBySlug(slug: string): Promise<BlogPostFull | null> 
 
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const matterResult = matter(fileContents);
+  const data = matterResult.data as Omit<BlogPostMeta, "slug">;
+
+  if (!includeDrafts && data.draft === true) {
+    return null;
+  }
 
   // Konvertiere Markdown zu HTML string
   const processedContent = await remark()
@@ -82,21 +97,63 @@ export async function getPostBySlug(slug: string): Promise<BlogPostFull | null> 
     .use(html, { sanitize: false })
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
-  const data = matterResult.data as Omit<BlogPostMeta, "slug">;
 
   return {
     slug,
     contentHtml,
     ...data,
+    draft: Boolean(data.draft),
     category: normalizeCategories(data.category),
   };
 }
 
 /**
+ * Holt den rohen Markdown-Inhalt inklusive Frontmatter für den Editor im Bubble Studio
+ */
+export function getRawPostBySlug(slug: string): BlogPostRaw | null {
+  const mdPath = path.join(contentDirectory, `${slug}.md`);
+  const mdxPath = path.join(contentDirectory, `${slug}.mdx`);
+
+  let fullPath = "";
+  if (fs.existsSync(mdPath)) {
+    fullPath = mdPath;
+  } else if (fs.existsSync(mdxPath)) {
+    fullPath = mdxPath;
+  } else {
+    return null;
+  }
+
+  const fileContents = fs.readFileSync(fullPath, "utf8");
+  const matterResult = matter(fileContents);
+  const data = matterResult.data as Omit<BlogPostMeta, "slug">;
+
+  return {
+    slug,
+    rawContent: fileContents,
+    body: matterResult.content,
+    ...data,
+    draft: Boolean(data.draft),
+    category: normalizeCategories(data.category),
+  };
+}
+
+/**
+ * Speichert eine Markdown-Datei lokal synchron (als Fallback oder Ergänzung zu GitOps)
+ */
+export function saveLocalPost(slug: string, rawContent: string): void {
+  const mdPath = path.join(contentDirectory, `${slug}.md`);
+  const rootPath = path.join(process.cwd(), "content", `${slug}.md`);
+  fs.writeFileSync(mdPath, rawContent, "utf8");
+  if (fs.existsSync(path.dirname(rootPath))) {
+    fs.writeFileSync(rootPath, rawContent, "utf8");
+  }
+}
+
+/**
  * Holt alle verfügbaren Kategorien
  */
-export function getAllCategories(): string[] {
-  const posts = getAllPosts();
+export function getAllCategories(includeDrafts = false): string[] {
+  const posts = getAllPosts(includeDrafts);
   const categories = new Set<string>();
   posts.forEach((post) => {
     const cats = normalizeCategories(post.category);
@@ -110,7 +167,7 @@ export function getAllCategories(): string[] {
  */
 export function getRelatedPosts(currentSlug: string, category: CategoryType | CategoryType[], limit = 3): BlogPostMeta[] {
   const currentCats = normalizeCategories(category);
-  const allPosts = getAllPosts();
+  const allPosts = getAllPosts(false);
   const related = allPosts.filter((post) => {
     if (post.slug === currentSlug) return false;
     const postCats = normalizeCategories(post.category);

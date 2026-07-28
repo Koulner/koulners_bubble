@@ -1,0 +1,484 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  FileText,
+  CheckCircle2,
+  Clock,
+  Plus,
+  Sparkles,
+  Save,
+  GitCommit,
+  ArrowLeft,
+  LogOut,
+  ShieldCheck,
+  Eye,
+  Code,
+  RefreshCw,
+  AlertCircle,
+  Wand2,
+} from "lucide-react";
+import { signOut } from "next-auth/react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+interface ArticleMeta {
+  slug: string;
+  title: string;
+  date: string;
+  category: string[];
+  excerpt: string;
+  draft?: boolean;
+}
+
+interface StudioDashboardProps {
+  user: {
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+  };
+}
+
+export default function StudioDashboard({ user }: StudioDashboardProps) {
+  const [articles, setArticles] = useState<ArticleMeta[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState<"drafts" | "published">("published");
+
+  // Editor State
+  const [editingSlug, setEditingSlug] = useState<string | null>(null);
+  const [rawContent, setRawContent] = useState<string>("");
+  const [editorLoading, setEditorLoading] = useState<boolean>(false);
+  const [saveStatus, setSaveStatus] = useState<{ type: "idle" | "saving" | "success" | "error"; message?: string }>({
+    type: "idle",
+  });
+
+  // Co-Pilot State
+  const [copilotOpen, setCopilotOpen] = useState(false);
+  const [copilotPrompt, setCopilotPrompt] = useState("");
+  const [copilotLoading, setCopilotLoading] = useState(false);
+
+  // Artikel aus der API laden
+  const fetchArticles = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/studio/articles");
+      if (res.ok) {
+        const data = await res.json();
+        setArticles(data.posts || []);
+      }
+    } catch (err) {
+      console.error("Fehler beim Laden der Artikel:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchArticles();
+  }, []);
+
+  // Artikel zum Bearbeiten öffnen
+  const openEditor = async (slug: string) => {
+    setEditingSlug(slug);
+    setEditorLoading(true);
+    setSaveStatus({ type: "idle" });
+    try {
+      const res = await fetch(`/api/studio/articles?slug=${slug}`);
+      if (res.ok) {
+        const data = await res.json();
+        setRawContent(data.post.rawContent || "");
+      }
+    } catch (err) {
+      console.error("Fehler beim Laden des Artikels:", err);
+    } finally {
+      setEditorLoading(false);
+    }
+  };
+
+  // Neuen Artikel (Entwurf) anlegen
+  const createNewArticle = () => {
+    const newSlug = `neuer-artikel-${Date.now()}`;
+    const defaultContent = `---
+title: "Neuer inspirierender Artikel"
+category: "Entfaltung"
+level: "Praxis"
+date: "${new Date().toISOString().split("T")[0]}"
+description: "Eine kurze Beschreibung für das SEO-Meta-Tag und die Blogkarte."
+excerpt: "Der kurze Auszug für die Übersicht in Koulners Bubble."
+image: "https://image.pollinations.ai/prompt/aesthetic%20cinematic%20photography%20of%20calm%20nature%20forest%20warm%20healing%20light?width=1200&height=600&nologo=true"
+readTime: "5 Min. Lesezeit"
+author: "${user.name || "Guide"}"
+draft: true
+---
+
+![Bildbeschreibung](https://image.pollinations.ai/prompt/aesthetic%20cinematic%20photography%20of%20calm%20nature%20forest%20warm%20healing%20light?width=1200&height=600&nologo=true)
+
+Beginne hier mit deiner inspirierenden Einleitung...
+
+> Ein markantes Zitat, das die Kernbotschaft zusammenfasst.
+
+## Die erste Hauptüberschrift
+
+Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
+`;
+    setEditingSlug(newSlug);
+    setRawContent(defaultContent);
+    setSaveStatus({ type: "idle" });
+  };
+
+  // Speichern & GitOps Push
+  const handleSave = async () => {
+    if (!editingSlug) return;
+    setSaveStatus({ type: "saving", message: "Speichere lokal & pushe via GitOps..." });
+    try {
+      const res = await fetch("/api/save-content", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug: editingSlug, rawContent }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSaveStatus({
+          type: "success",
+          message: data.gitOps ? "Erfolgreich via GitOps gepusht!" : "Lokal gespeichert (kein GitHub Token aktiv).",
+        });
+        fetchArticles();
+      } else {
+        setSaveStatus({ type: "error", message: data.error || "Fehler beim Speichern." });
+      }
+    } catch (err: any) {
+      setSaveStatus({ type: "error", message: err.message || "Netzwerkfehler beim Speichern." });
+    }
+  };
+
+  // AI Co-Pilot aufrufen
+  const handleCopilot = async () => {
+    if (!rawContent) return;
+    setCopilotLoading(true);
+    try {
+      const res = await fetch("/api/copilot", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          rawContent,
+          instruction: copilotPrompt || "Überarbeite diesen Text empathisch und verbessere die Lesbarkeit.",
+        }),
+      });
+      const data = await res.json();
+      if (res.ok && data.revisedContent) {
+        setRawContent(data.revisedContent);
+        setCopilotOpen(false);
+        setCopilotPrompt("");
+        setSaveStatus({ type: "success", message: "Mit Bubble Guide erfolgreich überarbeitet!" });
+      } else {
+        setSaveStatus({ type: "error", message: data.error || "Co-Pilot Fehler." });
+      }
+    } catch (err: any) {
+      setSaveStatus({ type: "error", message: err.message || "Netzwerkfehler beim Co-Pilot." });
+    } finally {
+      setCopilotLoading(false);
+    }
+  };
+
+  // Draft Toggle (im YAML Frontmatter umschalten)
+  const toggleDraftInContent = () => {
+    if (!rawContent) return;
+    if (rawContent.includes("draft: true")) {
+      setRawContent(rawContent.replace("draft: true", "draft: false"));
+    } else if (rawContent.includes("draft: false")) {
+      setRawContent(rawContent.replace("draft: false", "draft: true"));
+    } else {
+      // Füge draft: true nach dem title ein
+      setRawContent(rawContent.replace(/---(\r?\n)/, "---\n$1draft: true\n"));
+    }
+  };
+
+  const isDraft = rawContent.includes("draft: true");
+
+  const draftsList = articles.filter((a) => a.draft === true);
+  const publishedList = articles.filter((a) => !a.draft);
+
+  return (
+    <div className="min-h-screen bg-[#050B08] text-[#E8F0EB] flex flex-col font-sans selection:bg-[#2D5A3C] selection:text-white">
+      {/* Top Header */}
+      <header className="w-full border-b border-[#2D5A3C]/30 bg-[#0F1B15]/90 backdrop-blur-md px-6 py-4 flex items-center justify-between sticky top-0 z-40">
+        <div className="flex items-center gap-4">
+          {editingSlug && (
+            <button
+              onClick={() => setEditingSlug(null)}
+              className="p-2 rounded-xl bg-[#2D5A3C]/20 hover:bg-[#2D5A3C]/40 text-[#A3C9A8] hover:text-white transition-colors cursor-pointer flex items-center gap-1.5 text-xs font-medium"
+            >
+              <ArrowLeft className="w-4 h-4" /> Zurück zur Übersicht
+            </button>
+          )}
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#2D5A3C] to-[#1e3e29] flex items-center justify-center border border-[#4E8752]/50 shadow-md">
+              <Sparkles className="w-5 h-5 text-[#D9A05B]" />
+            </div>
+            <div>
+              <h1 className="text-base font-bold text-white tracking-tight flex items-center gap-2">
+                Bubble Studio
+                <span className="px-2 py-0.5 rounded-full bg-[#2D5A3C]/40 border border-[#4E8752]/40 text-[#A3C9A8] text-[10px] font-semibold uppercase tracking-wider flex items-center gap-1">
+                  <ShieldCheck className="w-3 h-3 text-[#D9A05B]" /> Enterprise Auth • GitOps
+                </span>
+              </h1>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-2xl bg-[#050B08]/60 border border-[#2D5A3C]/30">
+            {user.image && <img src={user.image} alt="User avatar" className="w-6 h-6 rounded-full" />}
+            <span className="text-xs font-medium text-[#E8F0EB]">{user.name || user.email || "Whitelist User"}</span>
+          </div>
+          <button
+            onClick={() => signOut({ callbackUrl: "/" })}
+            className="p-2 rounded-xl bg-red-950/40 hover:bg-red-900/60 text-red-300 border border-red-500/30 transition-colors cursor-pointer text-xs flex items-center gap-1.5 font-medium"
+            title="Abmelden"
+          >
+            <LogOut className="w-4 h-4" /> Abmelden
+          </button>
+        </div>
+      </header>
+
+      {/* Main Content Area */}
+      <main className="flex-1 flex flex-col p-6 max-w-7xl mx-auto w-full">
+        {!editingSlug ? (
+          /* TABsübersicht (Dashboard) */
+          <div className="flex-1 flex flex-col">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+              <div>
+                <h2 className="text-2xl font-bold text-white tracking-tight">Content Management</h2>
+                <p className="text-sm text-[#A3C9A8] mt-1">
+                  Verwalte deine Artikel, Entwürfe und automatisierten GitOps-Deployments.
+                </p>
+              </div>
+              <button
+                onClick={createNewArticle}
+                className="py-3 px-5 rounded-2xl bg-gradient-to-r from-[#2D5A3C] to-[#1e3e29] hover:from-[#3a724d] hover:to-[#2D5A3C] text-white font-medium flex items-center gap-2 shadow-lg hover:shadow-[#2D5A3C]/30 border border-[#4E8752]/50 transition-all cursor-pointer w-fit"
+              >
+                <Plus className="w-5 h-5 text-[#D9A05B]" /> Neuer Artikel (Entwurf)
+              </button>
+            </div>
+
+            {/* Tabs Selector */}
+            <div className="flex items-center gap-2 border-b border-[#2D5A3C]/30 mb-6">
+              <button
+                onClick={() => setActiveTab("published")}
+                className={`py-3 px-6 font-medium text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer ${
+                  activeTab === "published"
+                    ? "border-[#D9A05B] text-[#D9A05B]"
+                    : "border-transparent text-[#A3C9A8]/70 hover:text-white"
+                }`}
+              >
+                <CheckCircle2 className="w-4 h-4" /> Veröffentlicht ({publishedList.length})
+              </button>
+              <button
+                onClick={() => setActiveTab("drafts")}
+                className={`py-3 px-6 font-medium text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer ${
+                  activeTab === "drafts"
+                    ? "border-[#D9A05B] text-[#D9A05B]"
+                    : "border-transparent text-[#A3C9A8]/70 hover:text-white"
+                }`}
+              >
+                <Clock className="w-4 h-4" /> Entwürfe ({draftsList.length})
+              </button>
+            </div>
+
+            {/* Artikel Grid */}
+            {loading ? (
+              <div className="flex-1 flex items-center justify-center py-20">
+                <RefreshCw className="w-8 h-8 text-[#D9A05B] animate-spin" />
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {(activeTab === "published" ? publishedList : draftsList).map((art) => (
+                  <motion.div
+                    key={art.slug}
+                    layout
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="bg-[#0F1B15]/80 border border-[#2D5A3C]/40 rounded-3xl p-6 flex flex-col justify-between hover:border-[#4E8752]/70 transition-all shadow-lg group"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <span className="px-2.5 py-1 rounded-full bg-[#2D5A3C]/30 text-[#A3C9A8] text-xs font-medium">
+                          {Array.isArray(art.category) ? art.category.join(", ") : art.category}
+                        </span>
+                        <span className="text-xs text-[#A3C9A8]/60">{art.date}</span>
+                      </div>
+                      <h3 className="text-lg font-bold text-white group-hover:text-[#D9A05B] transition-colors line-clamp-2 mb-2">
+                        {art.title}
+                      </h3>
+                      <p className="text-sm text-[#A3C9A8]/80 line-clamp-3 mb-6">{art.excerpt}</p>
+                    </div>
+
+                    <div className="pt-4 border-t border-[#2D5A3C]/20 flex items-center justify-between">
+                      <span className="text-xs font-mono text-[#A3C9A8]/50 truncate max-w-[150px]">/{art.slug}</span>
+                      <button
+                        onClick={() => openEditor(art.slug)}
+                        className="py-2 px-4 rounded-xl bg-[#2D5A3C]/30 hover:bg-[#2D5A3C] text-white text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer border border-[#4E8752]/40"
+                      >
+                        <FileText className="w-3.5 h-3.5 text-[#D9A05B]" /> Im Editor bearbeiten
+                      </button>
+                    </div>
+                  </motion.div>
+                ))}
+
+                {(activeTab === "published" ? publishedList : draftsList).length === 0 && (
+                  <div className="col-span-full py-16 text-center border border-dashed border-[#2D5A3C]/30 rounded-3xl bg-[#0F1B15]/30">
+                    <AlertCircle className="w-10 h-10 text-[#A3C9A8]/40 mx-auto mb-3" />
+                    <p className="text-[#A3C9A8]">
+                      Keine {activeTab === "published" ? "veröffentlichten Artikel" : "Entwürfe"} vorhanden.
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        ) : (
+          /* SPLIT-SCREEN MARKDOWN EDITOR */
+          <div className="flex-1 flex flex-col h-[calc(100vh-140px)]">
+            {/* Editor Action Bar */}
+            <div className="bg-[#0F1B15] border border-[#2D5A3C]/40 rounded-2xl p-4 mb-4 flex flex-wrap items-center justify-between gap-4 shadow-xl">
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-mono px-3 py-1 rounded-lg bg-[#050B08] border border-[#2D5A3C]/30 text-[#D9A05B]">
+                  Slug: {editingSlug}
+                </span>
+                <button
+                  onClick={toggleDraftInContent}
+                  className={`py-1.5 px-3 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer border ${
+                    isDraft
+                      ? "bg-amber-950/60 text-amber-300 border-amber-500/40 hover:bg-amber-900/60"
+                      : "bg-emerald-950/60 text-emerald-300 border-emerald-500/40 hover:bg-emerald-900/60"
+                  }`}
+                >
+                  {isDraft ? <Clock className="w-3.5 h-3.5 text-amber-400" /> : <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />}
+                  Status: {isDraft ? "Entwurf (Draft)" : "Veröffentlicht"}
+                </button>
+              </div>
+
+              <div className="flex items-center gap-3 ml-auto">
+                {/* AI Co-Pilot Button */}
+                <button
+                  onClick={() => setCopilotOpen(!copilotOpen)}
+                  disabled={copilotLoading}
+                  className="py-2 px-4 rounded-xl bg-gradient-to-r from-purple-900/60 to-indigo-900/60 hover:from-purple-800 hover:to-indigo-800 text-purple-200 border border-purple-500/40 text-xs font-semibold flex items-center gap-2 shadow-md transition-all cursor-pointer disabled:opacity-50"
+                >
+                  <Wand2 className="w-4 h-4 text-purple-300 animate-pulse" />
+                  <span>Mit Bubble Guide überarbeiten</span>
+                </button>
+
+                {/* GitOps Speichern */}
+                <button
+                  onClick={handleSave}
+                  disabled={saveStatus.type === "saving"}
+                  className="py-2 px-5 rounded-xl bg-gradient-to-r from-[#2D5A3C] to-[#1e3e29] hover:from-[#3a724d] hover:to-[#2D5A3C] text-white border border-[#4E8752]/50 text-xs font-semibold flex items-center gap-2 shadow-lg hover:shadow-[#2D5A3C]/30 transition-all cursor-pointer disabled:opacity-50"
+                >
+                  {saveStatus.type === "saving" ? (
+                    <RefreshCw className="w-4 h-4 animate-spin text-[#D9A05B]" />
+                  ) : (
+                    <GitCommit className="w-4 h-4 text-[#D9A05B]" />
+                  )}
+                  <span>Speichern via GitOps</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Save / Status Toast */}
+            {saveStatus.type !== "idle" && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`mb-4 p-3 rounded-xl border text-xs font-medium flex items-center gap-2 ${
+                  saveStatus.type === "success"
+                    ? "bg-emerald-950/80 border-emerald-500/40 text-emerald-200"
+                    : saveStatus.type === "error"
+                    ? "bg-red-950/80 border-red-500/40 text-red-200"
+                    : "bg-blue-950/80 border-blue-500/40 text-blue-200"
+                }`}
+              >
+                {saveStatus.type === "saving" && <RefreshCw className="w-4 h-4 animate-spin shrink-0" />}
+                {saveStatus.type === "success" && <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />}
+                {saveStatus.type === "error" && <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />}
+                <span>{saveStatus.message}</span>
+              </motion.div>
+            )}
+
+            {/* AI Co-Pilot Modal/Bar */}
+            <AnimatePresence>
+              {copilotOpen && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="overflow-hidden mb-4"
+                >
+                  <div className="p-4 rounded-2xl bg-gradient-to-r from-purple-950/70 to-indigo-950/70 border border-purple-500/40 flex flex-col sm:flex-row gap-3 items-center">
+                    <input
+                      type="text"
+                      placeholder="Anweisung an den Bubble Guide (z.B. 'Stärke das E-E-A-T Fundament' oder 'Korrigiere Rechtschreibung')..."
+                      value={copilotPrompt}
+                      onChange={(e) => setCopilotPrompt(e.target.value)}
+                      className="flex-1 bg-[#050B08]/80 border border-purple-500/30 rounded-xl px-4 py-2.5 text-xs text-white placeholder-purple-300/40 focus:outline-none focus:border-purple-400 w-full"
+                    />
+                    <button
+                      onClick={handleCopilot}
+                      disabled={copilotLoading}
+                      className="py-2.5 px-5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs flex items-center gap-2 transition-all cursor-pointer shrink-0 disabled:opacity-50"
+                    >
+                      {copilotLoading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Sparkles className="w-4 h-4" />}
+                      <span>Überarbeitung starten</span>
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Ablenkungsfreier Split-Screen Editor */}
+            {editorLoading ? (
+              <div className="flex-1 flex items-center justify-center bg-[#0F1B15]/40 rounded-3xl border border-[#2D5A3C]/30">
+                <RefreshCw className="w-8 h-8 text-[#D9A05B] animate-spin" />
+              </div>
+            ) : (
+              <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4 min-h-0">
+                {/* Linker Split: Raw Markdown Editor */}
+                <div className="flex flex-col bg-[#0F1B15]/90 border border-[#2D5A3C]/40 rounded-3xl overflow-hidden shadow-xl">
+                  <div className="px-5 py-3 border-b border-[#2D5A3C]/30 bg-[#050B08]/60 flex items-center justify-between text-xs font-mono text-[#A3C9A8]/80">
+                    <span className="flex items-center gap-1.5 font-semibold">
+                      <Code className="w-4 h-4 text-[#D9A05B]" /> Markdown & Frontmatter
+                    </span>
+                    <span>{rawContent.length} Zeichen</span>
+                  </div>
+                  <textarea
+                    value={rawContent}
+                    onChange={(e) => setRawContent(e.target.value)}
+                    placeholder="Schreibe oder paste hier deinen Markdown-Inhalt..."
+                    className="flex-1 p-5 bg-transparent text-sm font-mono text-[#E8F0EB] focus:outline-none resize-none leading-relaxed overflow-y-auto"
+                    spellCheck={false}
+                  />
+                </div>
+
+                {/* Rechter Split: Live Markdown Preview */}
+                <div className="flex flex-col bg-[#0F1B15]/90 border border-[#2D5A3C]/40 rounded-3xl overflow-hidden shadow-xl">
+                  <div className="px-5 py-3 border-b border-[#2D5A3C]/30 bg-[#050B08]/60 flex items-center justify-between text-xs font-mono text-[#A3C9A8]/80">
+                    <span className="flex items-center gap-1.5 font-semibold">
+                      <Eye className="w-4 h-4 text-[#D9A05B]" /> Live Vorschau
+                    </span>
+                    <span>Koulners Bubble Rendering</span>
+                  </div>
+                  <div className="flex-1 p-6 overflow-y-auto prose prose-invert max-w-none prose-headings:text-white prose-p:text-[#E8F0EB]/90 prose-a:text-[#D9A05B] prose-blockquote:border-[#D9A05B] prose-blockquote:bg-[#2D5A3C]/10 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-xl">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {rawContent.replace(/^---[\s\S]+?---(\r?\n)/, "") || "*Vorschau des Artikels...*"}
+                    </ReactMarkdown>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </main>
+    </div>
+  );
+}
