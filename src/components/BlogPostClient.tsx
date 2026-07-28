@@ -7,6 +7,7 @@ import type { BlogPostFull, BlogPostMeta } from "@/lib/content";
 import { normalizeCategories } from "@/lib/categories";
 import { ArrowLeft, Clock, Calendar, User, Sparkles, Share2, Heart } from "lucide-react";
 import RelatedArticles from "./RelatedArticles";
+import NewsletterBox from "./NewsletterBox";
 
 interface BlogPostClientProps {
   post: BlogPostFull;
@@ -131,7 +132,10 @@ export default function BlogPostClient({ post, relatedPosts, children }: BlogPos
           {children ? children : <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />}
         </motion.article>
 
-        {/* 4.5 Verwandte Artikel (Related Articles) */}
+        {/* 4.5 Newsletter Box */}
+        <NewsletterBox />
+
+        {/* 4.6 Verwandte Artikel (Related Articles) */}
         {relatedPosts && relatedPosts.length > 0 && (
           <RelatedArticles posts={relatedPosts} />
         )}
