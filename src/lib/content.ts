@@ -20,6 +20,7 @@ export interface BlogPostMeta {
   image: string;
   readTime: string;
   author: string;
+  level?: string;
   draft?: boolean;
   archived?: boolean;
 }
@@ -32,6 +33,10 @@ export interface BlogPostFull extends BlogPostMeta {
 export interface BlogPostRaw extends BlogPostMeta {
   rawContent: string;
   body: string;
+}
+
+export interface BlogPostSearchItem extends BlogPostMeta {
+  content: string;
 }
 
 /**
@@ -51,7 +56,6 @@ export function getAllPosts(includeDrafts = false, includeArchived = false): Blo
       const fullPath = path.join(contentDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, "utf8");
 
-      // Nutze gray-matter zum Auslesen des YAML-Frontmatters
       const matterResult = matter(fileContents);
       const data = matterResult.data as Omit<BlogPostMeta, "slug">;
 
@@ -65,7 +69,39 @@ export function getAllPosts(includeDrafts = false, includeArchived = false): Blo
     })
     .filter((post) => (includeDrafts || !post.draft) && (includeArchived || !post.archived));
 
-  // Sortiere nach Datum absteigend
+  return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
+}
+
+/**
+ * Holt alle Artikel inklusive rohem Markdown-Body für die Fuse.js Volltextsuche
+ */
+export function getAllPostsForSearch(): BlogPostSearchItem[] {
+  if (!fs.existsSync(contentDirectory)) {
+    return [];
+  }
+
+  const fileNames = fs.readdirSync(contentDirectory);
+  const allPostsData = fileNames
+    .filter((fileName) => fileName.endsWith(".md") || fileName.endsWith(".mdx"))
+    .map((fileName) => {
+      const slug = fileName.replace(/\.mdx?$/, "");
+      const fullPath = path.join(contentDirectory, fileName);
+      const fileContents = fs.readFileSync(fullPath, "utf8");
+
+      const matterResult = matter(fileContents);
+      const data = matterResult.data as Omit<BlogPostMeta, "slug">;
+
+      return {
+        slug,
+        ...data,
+        content: matterResult.content,
+        draft: Boolean(data.draft),
+        archived: Boolean(data.archived),
+        category: normalizeCategories(data.category),
+      };
+    })
+    .filter((post) => !post.draft && !post.archived);
+
   return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 

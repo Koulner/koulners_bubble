@@ -31,6 +31,7 @@ import {
   Video,
   Layout,
   Table as TableIcon,
+  Tag,
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import ReactMarkdown from "react-markdown";
@@ -59,7 +60,14 @@ interface StudioDashboardProps {
 export default function StudioDashboard({ user }: StudioDashboardProps) {
   const [articles, setArticles] = useState<ArticleMeta[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"drafts" | "published" | "archived">("published");
+  const [activeTab, setActiveTab] = useState<"drafts" | "published" | "archived" | "categories">("published");
+
+  // Kategorien Management State
+  const [availableCategories, setAvailableCategories] = useState<string[]>([]);
+  const [newCatInput, setNewCatInput] = useState<string>("");
+  const [catSaveStatus, setCatSaveStatus] = useState<{ type: "idle" | "saving" | "success" | "error"; message?: string }>({
+    type: "idle",
+  });
 
   // Bulk Actions Selection State
   const [selectedSlugs, setSelectedSlugs] = useState<string[]>([]);
@@ -124,8 +132,59 @@ export default function StudioDashboard({ user }: StudioDashboardProps) {
     }
   };
 
+  const fetchCategories = async () => {
+    try {
+      const res = await fetch("/api/studio/categories");
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data.categories)) {
+          setAvailableCategories(data.categories);
+        }
+      }
+    } catch (err) {
+      console.error("Fehler beim Laden der Kategorien:", err);
+    }
+  };
+
+  const saveCategoriesToBackend = async (updated: string[]) => {
+    setCatSaveStatus({ type: "saving", message: "Speichere Kategorien via GitOps..." });
+    try {
+      const res = await fetch("/api/studio/categories", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ categories: updated }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setAvailableCategories(data.categories);
+        setCatSaveStatus({
+          type: "success",
+          message: `${data.message} ${data.gitOps ? "(via GitOps gepusht)" : "(lokal synchronisiert)"}`,
+        });
+      } else {
+        setCatSaveStatus({ type: "error", message: data.error || "Fehler beim Speichern der Kategorien." });
+      }
+    } catch (err: any) {
+      setCatSaveStatus({ type: "error", message: err?.message || "Netzwerkfehler beim Speichern." });
+    }
+  };
+
+  const handleAddCategory = () => {
+    if (!newCatInput.trim()) return;
+    const updated = Array.from(new Set([...availableCategories, newCatInput.trim()]));
+    setNewCatInput("");
+    saveCategoriesToBackend(updated);
+  };
+
+  const handleDeleteCategory = (catToDelete: string) => {
+    if (!confirm(`Möchtest du die Kategorie "${catToDelete}" wirklich löschen?`)) return;
+    const updated = availableCategories.filter((c) => c !== catToDelete);
+    saveCategoriesToBackend(updated);
+  };
+
   useEffect(() => {
     fetchArticles();
+    fetchCategories();
   }, []);
 
   // Artikel zum Bearbeiten öffnen
@@ -198,6 +257,17 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
     setMetaTitle(defaultTitle);
     setMetaCategories(defaultCats);
     setSaveStatus({ type: "idle" });
+  };
+
+  const toggleCategorySelection = (cat: string) => {
+    const selectedCats = metaCategories.split(",").map((c) => c.trim()).filter(Boolean);
+    let updated: string[];
+    if (selectedCats.includes(cat)) {
+      updated = selectedCats.filter((c) => c !== cat);
+    } else {
+      updated = [...selectedCats, cat];
+    }
+    setMetaCategories(updated.join(", "));
   };
 
   // Speichern & GitOps Push mit Frontmatter-Aktualisierung
@@ -474,10 +544,20 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
                 >
                   <Archive className="w-4 h-4" /> Archiviert ({archivedList.length})
                 </button>
+                <button
+                  onClick={() => { setActiveTab("categories"); setSelectedSlugs([]); }}
+                  className={`py-2.5 px-5 font-medium text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer shrink-0 ${
+                    activeTab === "categories"
+                      ? "border-[#D9A05B] text-[#D9A05B]"
+                      : "border-transparent text-[#A3C9A8]/70 hover:text-white"
+                  }`}
+                >
+                  <Tag className="w-4 h-4" /> Kategorien ({availableCategories.length})
+                </button>
               </div>
 
               {/* "Alle auswählen"-Checkbox */}
-              {currentList.length > 0 && (
+              {activeTab !== "categories" && currentList.length > 0 && (
                 <label className="flex items-center gap-2 text-xs font-semibold text-[#A3C9A8] hover:text-white cursor-pointer select-none px-3.5 py-2 rounded-xl bg-[#0F1B15]/80 border border-[#2D5A3C]/40 shrink-0 shadow-sm transition-colors">
                   <input
                     type="checkbox"
@@ -548,8 +628,86 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
               )}
             </AnimatePresence>
 
-            {/* Artikel Grid */}
-            {loading ? (
+            {/* Kategorie Management (Single Source of Truth) oder Artikel Grid */}
+            {activeTab === "categories" ? (
+              <div className="bg-[#0F1B15]/90 border border-[#2D5A3C]/40 rounded-3xl p-6 shadow-xl max-w-3xl">
+                <div className="flex items-center justify-between gap-4 pb-6 border-b border-[#2D5A3C]/30 mb-6">
+                  <div>
+                    <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                      <Tag className="w-5 h-5 text-[#D9A05B]" /> Zentrales Kategorie-Management
+                    </h3>
+                    <p className="text-sm text-[#A3C9A8] mt-1">
+                      Verwalte die Single Source of Truth für alle Blog-Kategorien (gespeichert in <code className="text-[#D9A05B]">content/categories.json</code>).
+                    </p>
+                  </div>
+                </div>
+
+                {catSaveStatus.type !== "idle" && (
+                  <div
+                    className={`p-4 rounded-2xl border text-sm font-medium mb-6 flex items-center gap-3 shadow-lg ${
+                      catSaveStatus.type === "success"
+                        ? "bg-emerald-950/80 border-emerald-500/40 text-emerald-200"
+                        : catSaveStatus.type === "error"
+                        ? "bg-red-950/80 border-red-500/40 text-red-200"
+                        : "bg-blue-950/80 border-blue-500/40 text-blue-200"
+                    }`}
+                  >
+                    {catSaveStatus.type === "saving" && <RefreshCw className="w-5 h-5 animate-spin text-[#D9A05B]" />}
+                    {catSaveStatus.type === "success" && <CheckCircle2 className="w-5 h-5 text-emerald-400" />}
+                    {catSaveStatus.type === "error" && <AlertCircle className="w-5 h-5 text-red-400" />}
+                    <span>{catSaveStatus.message}</span>
+                  </div>
+                )}
+
+                {/* Neue Kategorie hinzufügen */}
+                <div className="flex gap-3 mb-8">
+                  <input
+                    type="text"
+                    value={newCatInput}
+                    onChange={(e) => setNewCatInput(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleAddCategory()}
+                    placeholder="Neue Kategorie eingeben..."
+                    className="flex-1 bg-[#050B08] border border-[#2D5A3C]/50 rounded-2xl px-4 py-3 text-sm text-white font-medium focus:outline-none focus:border-[#D9A05B] transition-colors shadow-inner"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleAddCategory}
+                    disabled={!newCatInput.trim()}
+                    className="py-3 px-6 rounded-2xl bg-[#D9A05B] hover:bg-[#c7904e] disabled:opacity-50 text-[#050B08] font-bold text-sm flex items-center gap-2 shadow-lg transition-all cursor-pointer"
+                  >
+                    <Plus className="w-4 h-4" /> Hinzufügen
+                  </button>
+                </div>
+
+                {/* Liste der verfügbaren Kategorien */}
+                <div className="space-y-3">
+                  <h4 className="text-xs font-semibold uppercase tracking-wider text-[#A3C9A8]/70 mb-3">
+                    Aktive Kategorien ({availableCategories.length})
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {availableCategories.map((cat) => (
+                      <div
+                        key={cat}
+                        className="p-3.5 rounded-2xl bg-[#050B08]/80 border border-[#2D5A3C]/40 flex items-center justify-between gap-3 group hover:border-[#D9A05B]/50 transition-colors"
+                      >
+                        <span className="font-medium text-sm text-white flex items-center gap-2">
+                          <span className="w-2 h-2 rounded-full bg-[#D9A05B]" />
+                          {cat}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => handleDeleteCategory(cat)}
+                          className="p-1.5 rounded-lg text-red-400 hover:bg-red-950/60 opacity-60 group-hover:opacity-100 transition-all cursor-pointer"
+                          title="Kategorie löschen"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : loading ? (
               <div className="flex-1 flex items-center justify-center py-20">
                 <RefreshCw className="w-8 h-8 text-[#D9A05B] animate-spin" />
               </div>
@@ -745,16 +903,31 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-semibold uppercase tracking-wider text-[#A3C9A8] mb-1">
-                        Kategorien <span className="text-[#A3C9A8]/60 font-normal">(kommagetrennt, z.B. Natur, DIY Kosmetik)</span>
+                      <label className="block text-[11px] font-semibold uppercase tracking-wider text-[#A3C9A8] mb-1.5 flex items-center justify-between">
+                        <span>Kategorien auswählen <span className="text-[#A3C9A8]/60 font-normal">(Multi-Select Dropdown/Pills)</span></span>
+                        <span className="text-xs text-[#D9A05B] font-mono">{metaCategories ? metaCategories.split(",").filter(Boolean).length : 0} markiert</span>
                       </label>
-                      <input
-                        type="text"
-                        value={metaCategories}
-                        onChange={(e) => setMetaCategories(e.target.value)}
-                        placeholder="Natur, DIY Kosmetik, Entfaltung"
-                        className="w-full bg-[#050B08] border border-[#2D5A3C]/40 rounded-xl px-3.5 py-2 text-xs text-[#E8F0EB] font-mono focus:outline-none focus:border-[#D9A05B] transition-colors shadow-inner"
-                      />
+                      <div className="flex flex-wrap gap-1.5 p-2 bg-[#050B08] border border-[#2D5A3C]/40 rounded-xl max-h-28 overflow-y-auto">
+                        {availableCategories.map((cat) => {
+                          const selectedCats = metaCategories.split(",").map((c) => c.trim()).filter(Boolean);
+                          const isSelected = selectedCats.includes(cat);
+                          return (
+                            <button
+                              key={cat}
+                              type="button"
+                              onClick={() => toggleCategorySelection(cat)}
+                              className={`px-3 py-1 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer border ${
+                                isSelected
+                                  ? "bg-[#2D5A3C] text-white border-[#D9A05B] shadow-sm shadow-[#D9A05B]/20"
+                                  : "bg-[#0A140F] text-[#A3C9A8]/70 border-[#2D5A3C]/30 hover:border-[#4E8752] hover:text-white"
+                              }`}
+                            >
+                              <span className={`w-1.5 h-1.5 rounded-full ${isSelected ? "bg-[#D9A05B]" : "bg-transparent border border-[#A3C9A8]/50"}`} />
+                              {cat}
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
 

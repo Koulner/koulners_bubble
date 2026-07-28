@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Trees, BookOpen, HeartPulse, Sparkles, LayoutGrid, Utensils, Waves, Activity, Flame, Library } from "lucide-react";
+import SearchOverlay from "./SearchOverlay";
 
 interface NavigationProps {
   categories: string[];
@@ -45,11 +46,14 @@ export default function Navigation({
 
   return (
     <nav className="w-full max-w-5xl mx-auto px-6 py-10">
-      <div className="flex flex-col items-center mb-6">
-        <span className="text-xs font-sans tracking-[0.25em] text-text-muted uppercase mb-2">
-          Sanft navigieren
-        </span>
-        <div className="w-12 h-[1px] bg-sage/40" />
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 pb-4 border-b border-border-warm/40">
+        <div className="flex flex-col items-center sm:items-start">
+          <span className="text-xs font-sans tracking-[0.25em] text-text-muted uppercase mb-1">
+            Sanft navigieren & filtern
+          </span>
+          <div className="w-12 h-[1px] bg-sage/40" />
+        </div>
+        <SearchOverlay />
       </div>
 
       <div className="flex flex-wrap items-center justify-center gap-2.5 md:gap-4">

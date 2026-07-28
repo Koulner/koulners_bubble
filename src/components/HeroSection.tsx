@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { HERO_EXPERIENCES, HeroExperience } from "@/data/heroExperiences";
 import AmbientAudioPlayer from "./AmbientAudioPlayer";
+import SearchOverlay from "./SearchOverlay";
 import { ChevronDown, Sparkles, Feather } from "lucide-react";
 
 interface HeroSectionProps {
@@ -94,9 +95,12 @@ export default function HeroSection({ onScrollToBlog }: HeroSectionProps) {
           </span>
         </div>
 
-        <div className="hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/50 backdrop-blur-sm border border-white/40 text-xs font-sans text-text-muted">
-          <Feather className="w-3.5 h-3.5 text-terracotta" />
-          <span>Heilung • Ruhe • Zuneigung</span>
+        <div className="flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/50 backdrop-blur-sm border border-white/40 text-xs font-sans text-text-muted">
+            <Feather className="w-3.5 h-3.5 text-terracotta" />
+            <span>Heilung • Ruhe • Zuneigung</span>
+          </div>
+          <SearchOverlay />
         </div>
       </motion.div>
 
