@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "Das Gold des Waldes: Die antimikrobielle Heilkraft von Baumharz und das Rezept für traditionelle Pechsalbe"
 category: "Wilde Apotheke & Waldnahrung"
 level: "Deep Dive"

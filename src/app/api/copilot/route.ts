@@ -38,7 +38,7 @@ STRIKTE REGELN:
     if (process.env.OPENROUTER_API_KEY) {
       console.log(`[COPILOT] Generating revision for user ${session.user.name || session.user.email}...`);
       const result = await generateText({
-        model: openrouter.chat("openai/gpt-4o-mini"), // Oder ein zuverlässiges Modell in OpenRouter
+        model: openrouter.chat("openai/gpt-oss-20b:free"), // Oder ein zuverlässiges Modell in OpenRouter
         system: systemPrompt,
         messages: [
           {

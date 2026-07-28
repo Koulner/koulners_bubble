@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "Bruce Lee: Warum die Philosophie des »Be Water« das ultimative Neuro-Training für deine Selbstentfaltung ist"
 category: "Bücher"
 level: "Praxis"

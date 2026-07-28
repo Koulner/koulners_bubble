@@ -20,7 +20,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ post });
   }
 
-  // Holt alle Artikel (inklusive Entwürfe / drafts)
-  const posts = getAllPosts(true);
+  // Holt alle Artikel (inklusive Entwürfe / drafts und archivierte Beiträge)
+  const posts = getAllPosts(true, true);
   return NextResponse.json({ posts });
 }

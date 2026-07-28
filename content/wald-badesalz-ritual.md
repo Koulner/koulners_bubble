@@ -1,4 +1,6 @@
 ---
+
+draft: true
 title: "Das Wald-Badesalz Ritual: Magnesium, Zirbe & Fichtennadeln als somatisches Bad der Entschleunigung"
 category: "DIY Kosmetik"
 level: "Praxis"
@@ -72,7 +74,7 @@ Um die maximale Wirkung auf deinen Vagusnerv zu erzielen, gestalte dein Bad als 
 
 1. **Die ideale Temperatur:** Lass dein Badewasser auf sanfte **37 bis 38 °C** einlaufen. Zu heißes Wasser (über 39 °C) würde deinen Kreislauf stressen und das Herz antreiben – wir wollen jedoch Ruhe stiften.
 2. **Die goldene Dosierung:** Gib **vier bis fünf gehäufte Esslöffel** deines Wald-Badesalzes direkt in das einlaufende Wasser. Verwirkle das Wasser mit der Hand, bis sich die Salze ganz aufgelöst haben.
-3. **Die visuelle Ruhe:** Schalte das grelle Deckenlicht im Badezimmer konsequent aus. Zünde stattdessen zwei oder drei Kerzen an. Grelle Beleuchtung signalisiert dem Gehirn "Mittagssonne und Leistung", während warmes Kerzenlicht die körpereigene Melatonin-Produktion für den Schlaf einläutet.
+3. **Die visuelle Ruhe:** Schalte das grelle Deckenlicht im Badezimmer konsequent aus. Zünde stattdessen zwei oder three Kerzen an. Grelle Beleuchtung signalisiert dem Gehirn "Mittagssonne und Leistung", während warmes Kerzenlicht die körpereigene Melatonin-Produktion für den Schlaf einläutet.
 4. **Das Eintauchen (20 Minuten):** Gleite langsam in das warme Wasser. Schließe die Augen. Lass deinen Hinterkopf sanft auf dem Wannenrand oder einem Handtuch ruhen. Atme den aufsteigenden Zirben- und Fichtendampf tief durch die Nase ein und lange, geräuschvoll durch den Mund wieder aus. Bleibe für genau **20 bis 25 Minuten** im Bad – das ist die ideale Zeit, in der die Magnesium-Absorption ihr Optimum erreicht.
 5. **Die Nachruhe:** Steige nach dem Bad vorsichtig aus der Wanne (Achtung: durch die Entspannung und das Öl kann der Boden rutschig sein!). Rubbel dich nicht wild ab, sondern tupfe deine Haut mit einem weichen Handtuch nur sanft trocken – das Trägeröl bleibt als zarter Schutzfilm auf der Haut zurück. Zieh dir sofort einen warmen Bademantel oder dicke Socken an, lege dich für mindestens 30 Minuten aufs Sofa oder ins Bett und spüre nach, wie die tiefe, unerschütterliche Stille des Waldes durch jede Zelle deines Körpers pulsiert.
 

@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "Die heilende Kraft der Stille: Neurobiologie der Ruhe und 3 somatische Alltagsübungen"
 category: "Ganzheitliche Gesundheit"
 level: "Deep Dive"
@@ -71,7 +72,7 @@ Stille ist keine leere Hülle, die man mit Tun füllen müsste. Sie ist eine leb
 
 ## Wissenschaftliche Quellen & Studien
 
-[1] B. S. McEwen, "Neurobiological and systemic effects of chronic stress," Chronic Stress, vol. 1, p. 2470547017692328, 2017, doi: 10.1177/2470547017692328.
-[2] I. Kirste et al., "Is silence golden? Effects of auditory stimuli and their absence on adult hippocampal neurogenesis," Brain Struct. Funct., vol. 220, no. 2, pp. 1221–1232, 2015, doi: 10.1007/s00429-013-0679-3.
-[3] J. J. Iliff et al., "A paravascular pathway facilitates CSF flow through the brain parenchyma and the clearance of interstitial solutes, including amyloid β," Sci. Transl. Med., vol. 4, no. 147, p. 147ra111, 2012, doi: 10.1126/scitranslmed.3003748.
-[4] J. F. Thayer et al., "A meta-analysis of heart rate variability and neuroimaging studies: implications for heart rate variability as a marker of stress and health," Neurosci. Biobehav. Rev., vol. 36, no. 2, pp. 747–756, 2012, doi: 10.1016/j.neubiorev.2011.11.009.
+- [1] B. S. McEwen, "Neurobiological and systemic effects of chronic stress," Chronic Stress, vol. 1, p. 2470547017692328, 2017, doi: 10.1177/2470547017692328.
+- [2] I. Kirste et al., "Is silence golden? Effects of auditory stimuli and their absence on adult hippocampal neurogenesis," Brain Struct. Funct., vol. 220, no. 2, pp. 1221–1232, 2015, doi: 10.1007/s00429-013-0679-3.
+- [3] J. J. Iliff et al., "A paravascular pathway facilitates CSF flow through the brain parenchyma and the clearance of interstitial solutes, including amyloid β," Sci. Transl. Med., vol. 4, no. 147, p. 147ra111, 2012, doi: 10.1126/scitranslmed.3003748.
+- [4] J. F. Thayer et al., "A meta-analysis of heart rate variability and neuroimaging studies: implications for heart rate variability as a marker of stress and health," Neurosci. Biobehav. Rev., vol. 36, no. 2, pp. 747–756, 2012, doi: 10.1016/j.neubiorev.2011.11.009.

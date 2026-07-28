@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "Tapas & Tejas: Wie du dein inneres Feuer entfachst und die Erwartungen der Welt verbrennst"
 category: "Entfaltung"
 level: "Basic"
@@ -22,7 +23,7 @@ Das Ergebnis dieser lebenslangen Konditionierung ist eine schleichende spirituel
 
 ## Die alte Weisheit des Feuers: Tapas und Tejas entmystifiziert
 
-In den jahrtausendealten Schriften des Yoga, insbesondere in den *Yogasutren* des Patanjali und der ayurvedischen Alchemie, begegnen uns zwei faszinierende, eng miteinander verwobene Konzepte: **Tapas** und **Tejas**. In unserer westlichen Kultur wird Tapas häufig fälschlicherweise als starre Kasteiung oder gnadenlose Selbstdisziplin übersetzt – ein Missverständnis, das exakt in die toxische „Hustle Culture“ unserem modernen Leistungsgesellschaft passt. Doch wahres Tapas hat absolut nichts mit Selbstbestrafung, Burnout oder dem zwanghaften Abarbeiten von Optimierungslisten zu tun.
+In den jahrtausendealten Schriften des Yoga, insbesondere in den *Yogasutren* des Patanjali und der ayurvedischen Alchemie, begegnen uns zwei faszinierende, eng miteinander verwobene Konzepte: **Tapas** und **Tejas**. In unserer westlichen Kultur wird Tapas häufig fälschlicherweise als starre Kasteiung oder gnadenlose Selbstdisziplin übersetzt – ein Missverständnis, das exakt in die toxische „Hustle Culture“ unseres modernen Leistungsgesellschaft passt. Doch wahres Tapas hat absolut nichts mit Selbstbestrafung, Burnout oder dem zwanghaften Abarbeiten von Optimierungslisten zu tun.
 
 ### 1. Tapas: Die innere Reibung der Wahrheit
 Das Sanskritwort *Tapas* leitet sich von der Wurzel *tap* ab, was so viel bedeutet wie „wärmen“, „erhitzen“ oder „brennen“. Es beschreibt das gezielte, bewusste Erzeugen von spiritueller und mentaler Hitze durch transformierende Reibung. Tapas entsteht genau in dem Moment, in dem du aufhörst, den bequemen Weg des geringsten Widerstands zu gehen. Es ist die heilige Disziplin, deiner eigenen Wahrheit absolut treu zu bleiben, selbst wenn es unbequem wird. Wenn du den Mut aufbringst, in einem Raum voller Erwartungen „Nein“ zu sagen, um zu dir selbst „Ja“ zu sagen, erzeugst du Tapas. Diese Hitze verbrennt die Schlacken (auf Sanskrit *Agni*-Blockaden) von Angst, Selbstzweifeln und fremden Dogmen in deinem Geist.

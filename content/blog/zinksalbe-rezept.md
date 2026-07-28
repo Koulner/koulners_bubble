@@ -1,4 +1,6 @@
 ---
+
+draft: true
 title: "DIY Zinksalbe Rezept: Die Alchemie der Wundheilung für gereizte Haut"
 category: "DIY Kosmetik"
 level: "Deep Dive"

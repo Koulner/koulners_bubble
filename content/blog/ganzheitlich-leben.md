@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "Was bedeutet ganzheitliches Leben wirklich? Die heilende Architektur von Körper, Geist und Seele"
 category: "Philosophie"
 level: "Deep Dive"

@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "Bruce Lee: Warum die Philosophie des »Be Water« das ultimative Neuro-Training für deine Selbstentfaltung ist"
 category: "Bücher"
 level: "Praxis"
@@ -42,7 +43,7 @@ Dieser Ansatz ist die reinste Definition von echter **Selbstentfaltung**. Wie of
 > „Es ist nicht ein tägliches Zunehmen, sondern ein tägliches Abnehmen. Hacke alles Unwesentliche gnadenlos weg. Die wahre Kunst liegt im Weglassen des Ballasts.“  
 > – Bruce Lee, *Tao of Jeet Kune Do*
 
-![Ein meditative Krieger steht in vollkommener Ruhe und Stille inmitten eines rauschenden, goldenen Wasserfalls](https://image.pollinations.ai/prompt/aesthetic%20cinematic%20photography%20of%20meditative%20warrior%20standing%20in%20rushing%20golden%20waterfall%20warm%20healing%20light?width=1200&height=600&nologo=true)
+![Ein meditativer Krieger steht in vollkommener Ruhe und Stille inmitten eines rauschenden, goldenen Wasserfalls](https://image.pollinations.ai/prompt/aesthetic%20cinematic%20photography%20of%20meditative%20warrior%20standing%20in%20rushing%20golden%20waterfall%20warm%20healing%20light?width=1200&height=600&nologo=true)
 
 ---
 

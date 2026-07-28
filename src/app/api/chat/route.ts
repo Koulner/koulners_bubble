@@ -38,6 +38,8 @@ function loadArticles(): ArticleKnowledge[] {
 
       const raw = fs.readFileSync(path.join(dir, file), "utf8");
       const { data, content } = matter(raw);
+      if (data.draft || data.archived) continue;
+
       const title = data.title || slug;
       const rawCategory = data.category || "Allgemein";
       const category = Array.isArray(rawCategory) ? rawCategory.join(", ") : String(rawCategory);

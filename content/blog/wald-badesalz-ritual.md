@@ -1,4 +1,6 @@
 ---
+
+draft: true
 title: "Das Wald-Badesalz Ritual: Magnesium, Zirbe & Fichtennadeln als somatisches Bad der Entschleunigung"
 category: "DIY Kosmetik"
 level: "Praxis"

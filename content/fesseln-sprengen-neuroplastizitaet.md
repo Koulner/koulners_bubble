@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "Fesseln sprengen: Die Neurobiologie der Freiheit und warum sich Ausbrechen anfangs wie Chaos anfühlt"
 category: "Entfaltung"
 level: "Praxis"

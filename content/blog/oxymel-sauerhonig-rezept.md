@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "Oxymel (Sauerhonig): Das vergessene Elixier aus Apfelessig, Honig & Wildkräutern für deine Verdauung"
 category: "Ernährung"
 level: "Praxis"

@@ -18,6 +18,10 @@ import {
   RefreshCw,
   AlertCircle,
   Wand2,
+  Archive,
+  Trash2,
+  CheckSquare,
+  Square,
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import ReactMarkdown from "react-markdown";
@@ -30,6 +34,7 @@ interface ArticleMeta {
   category: string[];
   excerpt: string;
   draft?: boolean;
+  archived?: boolean;
 }
 
 interface StudioDashboardProps {
@@ -43,7 +48,11 @@ interface StudioDashboardProps {
 export default function StudioDashboard({ user }: StudioDashboardProps) {
   const [articles, setArticles] = useState<ArticleMeta[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"drafts" | "published">("published");
+  const [activeTab, setActiveTab] = useState<"drafts" | "published" | "archived">("published");
+
+  // Bulk Actions Selection State
+  const [selectedSlugs, setSelectedSlugs] = useState<string[]>([]);
+  const [bulkLoading, setBulkLoading] = useState<boolean>(false);
 
   // Editor State
   const [editingSlug, setEditingSlug] = useState<string | null>(null);
@@ -52,6 +61,10 @@ export default function StudioDashboard({ user }: StudioDashboardProps) {
   const [saveStatus, setSaveStatus] = useState<{ type: "idle" | "saving" | "success" | "error"; message?: string }>({
     type: "idle",
   });
+
+  // Frontmatter Felder (Titel & Kategorien)
+  const [metaTitle, setMetaTitle] = useState<string>("");
+  const [metaCategories, setMetaCategories] = useState<string>("");
 
   // Co-Pilot State
   const [copilotOpen, setCopilotOpen] = useState(false);
@@ -87,7 +100,13 @@ export default function StudioDashboard({ user }: StudioDashboardProps) {
       const res = await fetch(`/api/studio/articles?slug=${slug}`);
       if (res.ok) {
         const data = await res.json();
-        setRawContent(data.post.rawContent || "");
+        const content = data.post.rawContent || "";
+        setRawContent(content);
+        setMetaTitle(data.post.title || "");
+        const cats = Array.isArray(data.post.category)
+          ? data.post.category.join(", ")
+          : String(data.post.category || "");
+        setMetaCategories(cats);
       }
     } catch (err) {
       console.error("Fehler beim Laden des Artikels:", err);
@@ -99,9 +118,11 @@ export default function StudioDashboard({ user }: StudioDashboardProps) {
   // Neuen Artikel (Entwurf) anlegen
   const createNewArticle = () => {
     const newSlug = `neuer-artikel-${Date.now()}`;
+    const defaultTitle = "Neuer inspirierender Artikel";
+    const defaultCats = "Entfaltung";
     const defaultContent = `---
-title: "Neuer inspirierender Artikel"
-category: "Entfaltung"
+title: "${defaultTitle}"
+category: "${defaultCats}"
 level: "Praxis"
 date: "${new Date().toISOString().split("T")[0]}"
 description: "Eine kurze Beschreibung für das SEO-Meta-Tag und die Blogkarte."
@@ -124,18 +145,43 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
 `;
     setEditingSlug(newSlug);
     setRawContent(defaultContent);
+    setMetaTitle(defaultTitle);
+    setMetaCategories(defaultCats);
     setSaveStatus({ type: "idle" });
   };
 
-  // Speichern & GitOps Push
+  // Speichern & GitOps Push mit Frontmatter-Aktualisierung
   const handleSave = async () => {
     if (!editingSlug) return;
-    setSaveStatus({ type: "saving", message: "Speichere lokal & pushe via GitOps..." });
+    setSaveStatus({ type: "saving", message: "Aktualisiere Frontmatter & pushe via GitOps..." });
+
     try {
+      const catArray = metaCategories.split(",").map((s) => s.trim()).filter(Boolean);
+      const formattedCat = catArray.length > 1
+        ? `[${catArray.map((c) => `"${c}"`).join(", ")}]`
+        : `"${catArray[0] || "Allgemein"}"`;
+
+      let updatedContent = rawContent;
+      const cleanTitle = metaTitle.replace(/"/g, '\\"');
+
+      if (/^title:\s*.+/m.test(updatedContent)) {
+        updatedContent = updatedContent.replace(/^title:\s*.+/m, `title: "${cleanTitle}"`);
+      } else {
+        updatedContent = updatedContent.replace(/^---(\r?\n)/, `---$1title: "${cleanTitle}"$1`);
+      }
+
+      if (/^category:\s*.+/m.test(updatedContent)) {
+        updatedContent = updatedContent.replace(/^category:\s*.+/m, `category: ${formattedCat}`);
+      } else {
+        updatedContent = updatedContent.replace(/^---(\r?\n)/, `---$1category: ${formattedCat}$1`);
+      }
+
+      setRawContent(updatedContent);
+
       const res = await fetch("/api/save-content", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slug: editingSlug, rawContent }),
+        body: JSON.stringify({ slug: editingSlug, rawContent: updatedContent }),
       });
       const data = await res.json();
       if (res.ok && data.success) {
@@ -167,7 +213,18 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
       });
       const data = await res.json();
       if (res.ok && data.revisedContent) {
-        setRawContent(data.revisedContent);
+        const newContent = data.revisedContent;
+        setRawContent(newContent);
+
+        const titleMatch = newContent.match(/^title:\s*(?:["'](.+?)["']|(.+))$/m);
+        if (titleMatch) setMetaTitle((titleMatch[1] || titleMatch[2]).trim());
+
+        const catMatch = newContent.match(/^category:\s*(?:["'](.+?)["']|\[(.+?)\]|(.+))$/m);
+        if (catMatch) {
+          const rawCat = catMatch[1] || catMatch[2] || catMatch[3];
+          if (rawCat) setMetaCategories(rawCat.replace(/["']/g, "").trim());
+        }
+
         setCopilotOpen(false);
         setCopilotPrompt("");
         setSaveStatus({ type: "success", message: "Mit Bubble Guide erfolgreich überarbeitet!" });
@@ -189,15 +246,67 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
     } else if (rawContent.includes("draft: false")) {
       setRawContent(rawContent.replace("draft: false", "draft: true"));
     } else {
-      // Füge draft: true nach dem title ein
       setRawContent(rawContent.replace(/---(\r?\n)/, "---\n$1draft: true\n"));
+    }
+  };
+
+  // Bulk Actions Handler
+  const handleBulkAction = async (action: "draft" | "publish" | "archive" | "delete") => {
+    if (selectedSlugs.length === 0) return;
+    if (action === "delete" && !confirm(`Möchtest du wirklich ${selectedSlugs.length} Artikel endgültig löschen?`)) {
+      return;
+    }
+
+    setBulkLoading(true);
+    setSaveStatus({ type: "saving", message: `Führe Bulk-Action "${action}" für ${selectedSlugs.length} Artikel aus...` });
+    try {
+      const res = await fetch("/api/bulk-actions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slugs: selectedSlugs, action }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSaveStatus({
+          type: "success",
+          message: `${data.message} ${data.gitOps ? "(via GitOps gepusht)" : "(lokal synchronisiert)"}`,
+        });
+        setSelectedSlugs([]);
+        fetchArticles();
+      } else {
+        setSaveStatus({ type: "error", message: data.error || "Bulk-Action Fehler." });
+      }
+    } catch (err: any) {
+      setSaveStatus({ type: "error", message: err?.message || "Netzwerkfehler bei Bulk-Action." });
+    } finally {
+      setBulkLoading(false);
     }
   };
 
   const isDraft = rawContent.includes("draft: true");
 
-  const draftsList = articles.filter((a) => a.draft === true);
-  const publishedList = articles.filter((a) => !a.draft);
+  const draftsList = articles.filter((a) => a.draft === true && !a.archived);
+  const archivedList = articles.filter((a) => a.archived === true);
+  const publishedList = articles.filter((a) => !a.draft && !a.archived);
+
+  const currentList = activeTab === "published" ? publishedList : activeTab === "drafts" ? draftsList : archivedList;
+  const isAllSelected = currentList.length > 0 && currentList.every((art) => selectedSlugs.includes(art.slug));
+
+  const toggleSelectAll = () => {
+    if (isAllSelected) {
+      setSelectedSlugs((prev) => prev.filter((slug) => !currentList.some((art) => art.slug === slug)));
+    } else {
+      const newSlugs = new Set([...selectedSlugs, ...currentList.map((art) => art.slug)]);
+      setSelectedSlugs(Array.from(newSlugs));
+    }
+  };
+
+  const toggleSelectOne = (slug: string, e: React.SyntheticEvent) => {
+    e.stopPropagation();
+    setSelectedSlugs((prev) =>
+      prev.includes(slug) ? prev.filter((s) => s !== slug) : [...prev, slug]
+    );
+  };
 
   return (
     <div className="min-h-screen bg-[#050B08] text-[#E8F0EB] flex flex-col font-sans selection:bg-[#2D5A3C] selection:text-white">
@@ -262,29 +371,132 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
               </button>
             </div>
 
-            {/* Tabs Selector */}
-            <div className="flex items-center gap-2 border-b border-[#2D5A3C]/30 mb-6">
-              <button
-                onClick={() => setActiveTab("published")}
-                className={`py-3 px-6 font-medium text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer ${
-                  activeTab === "published"
-                    ? "border-[#D9A05B] text-[#D9A05B]"
-                    : "border-transparent text-[#A3C9A8]/70 hover:text-white"
+            {/* Save / Status Toast */}
+            {saveStatus.type !== "idle" && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`mb-6 p-4 rounded-2xl border text-sm font-medium flex items-center gap-3 shadow-lg ${
+                  saveStatus.type === "success"
+                    ? "bg-emerald-950/80 border-emerald-500/40 text-emerald-200"
+                    : saveStatus.type === "error"
+                    ? "bg-red-950/80 border-red-500/40 text-red-200"
+                    : "bg-blue-950/80 border-blue-500/40 text-blue-200"
                 }`}
               >
-                <CheckCircle2 className="w-4 h-4" /> Veröffentlicht ({publishedList.length})
-              </button>
-              <button
-                onClick={() => setActiveTab("drafts")}
-                className={`py-3 px-6 font-medium text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer ${
-                  activeTab === "drafts"
-                    ? "border-[#D9A05B] text-[#D9A05B]"
-                    : "border-transparent text-[#A3C9A8]/70 hover:text-white"
-                }`}
-              >
-                <Clock className="w-4 h-4" /> Entwürfe ({draftsList.length})
-              </button>
+                {saveStatus.type === "saving" && <RefreshCw className="w-5 h-5 animate-spin shrink-0 text-[#D9A05B]" />}
+                {saveStatus.type === "success" && <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />}
+                {saveStatus.type === "error" && <AlertCircle className="w-5 h-5 text-red-400 shrink-0" />}
+                <span>{saveStatus.message}</span>
+              </motion.div>
+            )}
+
+            {/* Tabs & Select All Header */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#2D5A3C]/30 mb-6 pb-2">
+              <div className="flex items-center gap-2 overflow-x-auto">
+                <button
+                  onClick={() => { setActiveTab("published"); setSelectedSlugs([]); }}
+                  className={`py-2.5 px-5 font-medium text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer shrink-0 ${
+                    activeTab === "published"
+                      ? "border-[#D9A05B] text-[#D9A05B]"
+                      : "border-transparent text-[#A3C9A8]/70 hover:text-white"
+                  }`}
+                >
+                  <CheckCircle2 className="w-4 h-4" /> Veröffentlicht ({publishedList.length})
+                </button>
+                <button
+                  onClick={() => { setActiveTab("drafts"); setSelectedSlugs([]); }}
+                  className={`py-2.5 px-5 font-medium text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer shrink-0 ${
+                    activeTab === "drafts"
+                      ? "border-[#D9A05B] text-[#D9A05B]"
+                      : "border-transparent text-[#A3C9A8]/70 hover:text-white"
+                  }`}
+                >
+                  <Clock className="w-4 h-4" /> Entwürfe ({draftsList.length})
+                </button>
+                <button
+                  onClick={() => { setActiveTab("archived"); setSelectedSlugs([]); }}
+                  className={`py-2.5 px-5 font-medium text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer shrink-0 ${
+                    activeTab === "archived"
+                      ? "border-[#D9A05B] text-[#D9A05B]"
+                      : "border-transparent text-[#A3C9A8]/70 hover:text-white"
+                  }`}
+                >
+                  <Archive className="w-4 h-4" /> Archiviert ({archivedList.length})
+                </button>
+              </div>
+
+              {/* "Alle auswählen"-Checkbox */}
+              {currentList.length > 0 && (
+                <label className="flex items-center gap-2 text-xs font-semibold text-[#A3C9A8] hover:text-white cursor-pointer select-none px-3.5 py-2 rounded-xl bg-[#0F1B15]/80 border border-[#2D5A3C]/40 shrink-0 shadow-sm transition-colors">
+                  <input
+                    type="checkbox"
+                    checked={isAllSelected}
+                    onChange={toggleSelectAll}
+                    className="w-4 h-4 rounded border-[#4E8752] text-[#2D5A3C] focus:ring-[#D9A05B] focus:ring-offset-0 bg-[#050B08] cursor-pointer accent-[#D9A05B]"
+                  />
+                  <span>Alle auswählen ({currentList.length})</span>
+                </label>
+              )}
             </div>
+
+            {/* Dynamische Action Bar (nur sichtbar wenn >= 1 Artikel markiert) */}
+            <AnimatePresence>
+              {selectedSlugs.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: -15, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -15, scale: 0.98 }}
+                  className="p-4 rounded-2xl bg-gradient-to-r from-[#1A3825] via-[#2D5A3C] to-[#1A3825] border border-[#D9A05B]/50 shadow-2xl mb-6 flex flex-wrap items-center justify-between gap-4 sticky top-20 z-30 backdrop-blur-xl"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 rounded-full bg-[#D9A05B] text-[#050B08] font-bold text-xs flex items-center justify-center shadow-md">
+                      {selectedSlugs.length}
+                    </span>
+                    <span className="text-sm font-semibold text-white">
+                      Artikel ausgewählt
+                    </span>
+                    <button
+                      onClick={() => setSelectedSlugs([])}
+                      className="text-xs text-[#A3C9A8] hover:text-white underline ml-2 cursor-pointer font-medium"
+                    >
+                      Auswahl aufheben
+                    </button>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2">
+                    <button
+                      onClick={() => handleBulkAction("draft")}
+                      disabled={bulkLoading}
+                      className="py-2 px-3.5 rounded-xl bg-[#0F1B15]/90 hover:bg-[#0F1B15] text-[#A3C9A8] hover:text-white border border-[#4E8752]/50 text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow disabled:opacity-50"
+                    >
+                      <Clock className="w-3.5 h-3.5 text-amber-400" /> Als Entwurf
+                    </button>
+                    <button
+                      onClick={() => handleBulkAction("publish")}
+                      disabled={bulkLoading}
+                      className="py-2 px-3.5 rounded-xl bg-[#0F1B15]/90 hover:bg-[#0F1B15] text-[#A3C9A8] hover:text-white border border-[#4E8752]/50 text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow disabled:opacity-50"
+                    >
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Veröffentlichen
+                    </button>
+                    <button
+                      onClick={() => handleBulkAction("archive")}
+                      disabled={bulkLoading}
+                      className="py-2 px-3.5 rounded-xl bg-[#0F1B15]/90 hover:bg-[#0F1B15] text-[#A3C9A8] hover:text-white border border-[#4E8752]/50 text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow disabled:opacity-50"
+                    >
+                      <Archive className="w-3.5 h-3.5 text-blue-400" /> Archivieren
+                    </button>
+                    <button
+                      onClick={() => handleBulkAction("delete")}
+                      disabled={bulkLoading}
+                      className="py-2 px-3.5 rounded-xl bg-red-950/90 hover:bg-red-900 text-red-200 hover:text-white border border-red-500/50 text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow disabled:opacity-50"
+                    >
+                      <Trash2 className="w-3.5 h-3.5 text-red-400" /> Löschen
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* Artikel Grid */}
             {loading ? (
@@ -293,44 +505,60 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {(activeTab === "published" ? publishedList : draftsList).map((art) => (
-                  <motion.div
-                    key={art.slug}
-                    layout
-                    initial={{ opacity: 0, scale: 0.98 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="bg-[#0F1B15]/80 border border-[#2D5A3C]/40 rounded-3xl p-6 flex flex-col justify-between hover:border-[#4E8752]/70 transition-all shadow-lg group"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className="px-2.5 py-1 rounded-full bg-[#2D5A3C]/30 text-[#A3C9A8] text-xs font-medium">
-                          {Array.isArray(art.category) ? art.category.join(", ") : art.category}
-                        </span>
-                        <span className="text-xs text-[#A3C9A8]/60">{art.date}</span>
+                {currentList.map((art) => {
+                  const isChecked = selectedSlugs.includes(art.slug);
+                  return (
+                    <motion.div
+                      key={art.slug}
+                      layout
+                      initial={{ opacity: 0, scale: 0.98 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      onClick={() => openEditor(art.slug)}
+                      className={`bg-[#0F1B15]/80 border rounded-3xl p-6 flex flex-col justify-between transition-all shadow-lg group relative cursor-pointer ${
+                        isChecked
+                          ? "border-[#D9A05B] bg-[#1A3825]/40 shadow-[#D9A05B]/10"
+                          : "border-[#2D5A3C]/40 hover:border-[#4E8752]/70"
+                      }`}
+                    >
+                      <div>
+                        {/* Checkbox vor jedem Artikel */}
+                        <div className="flex items-center justify-between gap-2 mb-3">
+                          <div className="flex items-center gap-2.5">
+                            <input
+                              type="checkbox"
+                              checked={isChecked}
+                              onChange={(e) => toggleSelectOne(art.slug, e)}
+                              onClick={(e) => e.stopPropagation()}
+                              className="w-4 h-4 rounded border-[#4E8752] text-[#2D5A3C] focus:ring-[#D9A05B] focus:ring-offset-0 bg-[#050B08] cursor-pointer accent-[#D9A05B]"
+                            />
+                            <span className="px-2.5 py-1 rounded-full bg-[#2D5A3C]/30 text-[#A3C9A8] text-xs font-medium truncate max-w-[140px]">
+                              {Array.isArray(art.category) ? art.category.join(", ") : art.category}
+                            </span>
+                          </div>
+                          <span className="text-xs text-[#A3C9A8]/60">{art.date}</span>
+                        </div>
+
+                        <h3 className="text-lg font-bold text-white group-hover:text-[#D9A05B] transition-colors line-clamp-2 mb-2">
+                          {art.title}
+                        </h3>
+                        <p className="text-sm text-[#A3C9A8]/80 line-clamp-3 mb-6">{art.excerpt}</p>
                       </div>
-                      <h3 className="text-lg font-bold text-white group-hover:text-[#D9A05B] transition-colors line-clamp-2 mb-2">
-                        {art.title}
-                      </h3>
-                      <p className="text-sm text-[#A3C9A8]/80 line-clamp-3 mb-6">{art.excerpt}</p>
-                    </div>
 
-                    <div className="pt-4 border-t border-[#2D5A3C]/20 flex items-center justify-between">
-                      <span className="text-xs font-mono text-[#A3C9A8]/50 truncate max-w-[150px]">/{art.slug}</span>
-                      <button
-                        onClick={() => openEditor(art.slug)}
-                        className="py-2 px-4 rounded-xl bg-[#2D5A3C]/30 hover:bg-[#2D5A3C] text-white text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer border border-[#4E8752]/40"
-                      >
-                        <FileText className="w-3.5 h-3.5 text-[#D9A05B]" /> Im Editor bearbeiten
-                      </button>
-                    </div>
-                  </motion.div>
-                ))}
+                      <div className="pt-4 border-t border-[#2D5A3C]/20 flex items-center justify-between">
+                        <span className="text-xs font-mono text-[#A3C9A8]/50 truncate max-w-[150px]">/{art.slug}</span>
+                        <span className="py-1.5 px-3 rounded-xl bg-[#2D5A3C]/30 group-hover:bg-[#2D5A3C] text-white text-xs font-semibold transition-all flex items-center gap-1.5 border border-[#4E8752]/40">
+                          <FileText className="w-3.5 h-3.5 text-[#D9A05B]" /> Editor
+                        </span>
+                      </div>
+                    </motion.div>
+                  );
+                })}
 
-                {(activeTab === "published" ? publishedList : draftsList).length === 0 && (
+                {currentList.length === 0 && (
                   <div className="col-span-full py-16 text-center border border-dashed border-[#2D5A3C]/30 rounded-3xl bg-[#0F1B15]/30">
                     <AlertCircle className="w-10 h-10 text-[#A3C9A8]/40 mx-auto mb-3" />
                     <p className="text-[#A3C9A8]">
-                      Keine {activeTab === "published" ? "veröffentlichten Artikel" : "Entwürfe"} vorhanden.
+                      Keine Artikel in der Kategorie "{activeTab === "published" ? "Veröffentlicht" : activeTab === "drafts" ? "Entwürfe" : "Archiviert"}" vorhanden.
                     </p>
                   </div>
                 )}
@@ -443,7 +671,7 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
               </div>
             ) : (
               <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4 min-h-0">
-                {/* Linker Split: Raw Markdown Editor */}
+                {/* Linker Split: Raw Markdown Editor mit Metadaten-Feldern */}
                 <div className="flex flex-col bg-[#0F1B15]/90 border border-[#2D5A3C]/40 rounded-3xl overflow-hidden shadow-xl">
                   <div className="px-5 py-3 border-b border-[#2D5A3C]/30 bg-[#050B08]/60 flex items-center justify-between text-xs font-mono text-[#A3C9A8]/80">
                     <span className="flex items-center gap-1.5 font-semibold">
@@ -451,6 +679,35 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
                     </span>
                     <span>{rawContent.length} Zeichen</span>
                   </div>
+
+                  {/* UI-Anpassung im Editor: Eingabefelder für Titel und Kategorien */}
+                  <div className="p-4 border-b border-[#2D5A3C]/30 bg-[#0A140F]/90 space-y-3">
+                    <div>
+                      <label className="block text-[11px] font-semibold uppercase tracking-wider text-[#A3C9A8] mb-1">
+                        Artikel-Titel
+                      </label>
+                      <input
+                        type="text"
+                        value={metaTitle}
+                        onChange={(e) => setMetaTitle(e.target.value)}
+                        placeholder="Titel des Artikels..."
+                        className="w-full bg-[#050B08] border border-[#2D5A3C]/40 rounded-xl px-3.5 py-2 text-sm text-white font-medium focus:outline-none focus:border-[#D9A05B] transition-colors shadow-inner"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold uppercase tracking-wider text-[#A3C9A8] mb-1">
+                        Kategorien <span className="text-[#A3C9A8]/60 font-normal">(kommagetrennt, z.B. Natur, DIY Kosmetik)</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={metaCategories}
+                        onChange={(e) => setMetaCategories(e.target.value)}
+                        placeholder="Natur, DIY Kosmetik, Entfaltung"
+                        className="w-full bg-[#050B08] border border-[#2D5A3C]/40 rounded-xl px-3.5 py-2 text-xs text-[#E8F0EB] font-mono focus:outline-none focus:border-[#D9A05B] transition-colors shadow-inner"
+                      />
+                    </div>
+                  </div>
+
                   <textarea
                     value={rawContent}
                     onChange={(e) => setRawContent(e.target.value)}

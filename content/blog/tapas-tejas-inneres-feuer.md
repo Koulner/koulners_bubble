@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "Tapas & Tejas: Wie du dein inneres Feuer entfachst und die Erwartungen der Welt verbrennst"
 category: "Entfaltung"
 level: "Basic"

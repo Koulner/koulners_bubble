@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "Achtsame Wildsammlung (Foraging): Die Kunst des respektvollen Erntens & 3 sichere Einsteiger-Pflanzen"
 category: "Wilde Apotheke & Waldnahrung"
 level: "Praxis"

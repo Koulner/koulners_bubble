@@ -12,11 +12,12 @@ export default auth((req) => {
     }
   }
 
-  // Geschützte API-Routen: /api/copilot, /api/save-content, /api/studio
+  // Geschützte API-Routen: /api/copilot, /api/save-content, /api/studio, /api/bulk-actions
   if (
     pathname.startsWith("/api/copilot") ||
     pathname.startsWith("/api/save-content") ||
-    pathname.startsWith("/api/studio")
+    pathname.startsWith("/api/studio") ||
+    pathname.startsWith("/api/bulk-actions")
   ) {
     if (!req.auth) {
       return NextResponse.json(
@@ -35,5 +36,6 @@ export const config = {
     "/api/copilot/:path*",
     "/api/save-content/:path*",
     "/api/studio/:path*",
+    "/api/bulk-actions/:path*",
   ],
 };

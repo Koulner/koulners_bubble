@@ -21,6 +21,7 @@ export interface BlogPostMeta {
   readTime: string;
   author: string;
   draft?: boolean;
+  archived?: boolean;
 }
 
 export interface BlogPostFull extends BlogPostMeta {
@@ -34,9 +35,9 @@ export interface BlogPostRaw extends BlogPostMeta {
 
 /**
  * Holt alle Blog-Artikel Metadaten aus /content/blog, sortiert nach Datum.
- * Filtert standardmäßig alle Entwürfe (draft: true) heraus!
+ * Filtert standardmäßig alle Entwürfe (draft: true) und archivierten Artikel (archived: true) heraus!
  */
-export function getAllPosts(includeDrafts = false): BlogPostMeta[] {
+export function getAllPosts(includeDrafts = false, includeArchived = false): BlogPostMeta[] {
   if (!fs.existsSync(contentDirectory)) {
     return [];
   }
@@ -57,10 +58,11 @@ export function getAllPosts(includeDrafts = false): BlogPostMeta[] {
         slug,
         ...data,
         draft: Boolean(data.draft),
+        archived: Boolean(data.archived),
         category: normalizeCategories(data.category),
       };
     })
-    .filter((post) => includeDrafts || !post.draft);
+    .filter((post) => (includeDrafts || !post.draft) && (includeArchived || !post.archived));
 
   // Sortiere nach Datum absteigend
   return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
@@ -68,9 +70,9 @@ export function getAllPosts(includeDrafts = false): BlogPostMeta[] {
 
 /**
  * Holt einen einzelnen Blogpost nach Slug inklusive konvertiertem HTML.
- * Blockiert Entwürfe bei öffentlichen Abfragen (wenn includeDrafts false ist).
+ * Blockiert Entwürfe und archivierte Beiträge bei öffentlichen Abfragen.
  */
-export async function getPostBySlug(slug: string, includeDrafts = false): Promise<BlogPostFull | null> {
+export async function getPostBySlug(slug: string, includeDrafts = false, includeArchived = false): Promise<BlogPostFull | null> {
   const mdPath = path.join(contentDirectory, `${slug}.md`);
   const mdxPath = path.join(contentDirectory, `${slug}.mdx`);
 
@@ -87,7 +89,7 @@ export async function getPostBySlug(slug: string, includeDrafts = false): Promis
   const matterResult = matter(fileContents);
   const data = matterResult.data as Omit<BlogPostMeta, "slug">;
 
-  if (!includeDrafts && data.draft === true) {
+  if ((!includeDrafts && data.draft === true) || (!includeArchived && data.archived === true)) {
     return null;
   }
 
@@ -103,6 +105,7 @@ export async function getPostBySlug(slug: string, includeDrafts = false): Promis
     contentHtml,
     ...data,
     draft: Boolean(data.draft),
+    archived: Boolean(data.archived),
     category: normalizeCategories(data.category),
   };
 }
@@ -133,6 +136,7 @@ export function getRawPostBySlug(slug: string): BlogPostRaw | null {
     body: matterResult.content,
     ...data,
     draft: Boolean(data.draft),
+    archived: Boolean(data.archived),
     category: normalizeCategories(data.category),
   };
 }

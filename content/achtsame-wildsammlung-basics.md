@@ -1,4 +1,5 @@
 ---
+draft: true
 title: "Achtsame Wildsammlung (Foraging): Die Kunst des respektvollen Erntens & 3 sichere Einsteiger-Pflanzen"
 category: "Wilde Apotheke & Waldnahrung"
 level: "Praxis"
@@ -90,7 +91,7 @@ Wenn du dich bei einer Wanderung leicht an einem Dorn kratzt, dich eine Brennnes
 
 ## Dein Einstieg in die Wilde Apotheke
 
-Beginne deine Reise in die Wildsammlung nicht mit dem ehrgeizigen Ziel, sofort dreißig verschiedene Kräuter bestimmen zu wollen. Gehe nach draußen und freunde dich zunächst nur mit diesen drei Pflanzen an. Setze dich neben sie ins Gras, betrachte die Blattmaserung, schmecke ihre Nuancen. 
+Beginne deine Reise in die Wildsammlung nicht mit dem ehrgeizigen Ziel, sofort dreißig verschiedene Kräuter bestimmen zu wollen. Gehe nach draußen und freunde dich zunächst nur mit diesen three Pflanzen an. Setze dich neben sie ins Gras, betrachte die Blattmaserung, schmecke ihre Nuancen. 
 
 Wenn wir uns der wilden Pflanzenwelt auf diese feinfühlige, achtsame Weise nähern, verwandelt sich die Natur von einer bloßen Umgebung in ein vertrautes Zuhause. Du gehst nicht mehr durch eine fremde Wildnis – du spazierst durch den lebendigen, nährenden Kräutergarten einer Erde, die unentwegt dafür sorgt, dass es uns gut geht.
 
