@@ -32,11 +32,14 @@ import {
   Layout,
   Table as TableIcon,
   Tag,
+  Upload,
+  ListTree,
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+import rehypeSlug from "rehype-slug";
 import { mdxComponents } from "@/components/mdx/MDXComponents";
 
 interface ArticleMeta {
@@ -86,6 +89,9 @@ export default function StudioDashboard({ user }: StudioDashboardProps) {
   const [metaCategories, setMetaCategories] = useState<string>("");
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   // Hilfsfunktion zum Einfügen von Snippets an der Caret-Position (Cursor-Logik)
   const insertSnippet = (prefix: string, suffix: string = "", defaultText: string = "") => {
@@ -109,6 +115,65 @@ export default function StudioDashboard({ user }: StudioDashboardProps) {
         selectedText ? start + prefix.length + textToInsert.length : newCursorPos
       );
     }, 0);
+  };
+
+  // S3-konforme Bildupload & Einfüge-Logik
+  const uploadAndInsertImage = async (file: File) => {
+    setUploadingImage(true);
+    setSaveStatus({ type: "saving", message: `Lade ${file.name} auf S3 hoch...` });
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        const publicUrl = data.url;
+        const altText = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
+        insertSnippet(`\n<CustomImage alt="${altText}" src="${publicUrl}" />\n`);
+        setSaveStatus({ type: "success", message: "Bild erfolgreich über S3 hochgeladen und eingefügt!" });
+      } else {
+        setSaveStatus({ type: "error", message: data.error || "Fehler beim Upload des Bildes." });
+      }
+    } catch (err: any) {
+      setSaveStatus({ type: "error", message: err?.message || "Netzwerkfehler beim Bildupload." });
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = async (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+
+    const files = e.dataTransfer.files;
+    if (!files || files.length === 0) return;
+
+    const file = files[0];
+    if (!file.type.startsWith("image/")) {
+      setSaveStatus({ type: "error", message: "Bitte nur Bilder per Drag & Drop hochladen (.png, .jpg, .webp)." });
+      return;
+    }
+
+    await uploadAndInsertImage(file);
   };
 
   // Co-Pilot State
@@ -978,7 +1043,23 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
                     </div>
 
                     {/* Magic MDX & Media Buttons */}
-                    <div className="flex items-center gap-1 pl-2">
+                    <div className="flex items-center gap-1 pl-2 flex-wrap">
+                      <input
+                        type="file"
+                        ref={fileInputRef}
+                        onChange={(e) => e.target.files?.[0] && uploadAndInsertImage(e.target.files[0])}
+                        accept="image/png,image/jpeg,image/jpg,image/webp,image/gif"
+                        className="hidden"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => fileInputRef.current?.click()}
+                        title="Bild hochladen (S3 Drag & Drop oder Klick)"
+                        className="flex items-center gap-1 px-2 py-1 rounded-lg bg-[#2D5A3C]/30 hover:bg-[#2D5A3C]/60 text-white font-medium transition-colors border border-[#D9A05B]/40 shadow-sm"
+                      >
+                        <Upload className="w-3.5 h-3.5 text-[#D9A05B]" />
+                        <span className="hidden sm:inline">Upload</span>
+                      </button>
                       <button
                         type="button"
                         onClick={() =>
@@ -990,7 +1071,7 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
                         className="flex items-center gap-1 px-2 py-1 rounded-lg bg-[#2D5A3C]/20 hover:bg-[#2D5A3C]/40 text-[#D9A05B] font-medium transition-colors border border-[#D9A05B]/20"
                       >
                         <ImageIcon className="w-3.5 h-3.5" />
-                        <span className="hidden sm:inline">Bild</span>
+                        <span className="hidden sm:inline">Bild URL</span>
                       </button>
                       <button
                         type="button"
@@ -1027,17 +1108,48 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
                         <TableIcon className="w-3.5 h-3.5" />
                         <span className="hidden sm:inline">Tabelle</span>
                       </button>
+                      <button
+                        type="button"
+                        onClick={() => insertSnippet("\n<TableOfContents />\n\n")}
+                        title="Inhaltsverzeichnis (<TableOfContents />)"
+                        className="flex items-center gap-1 px-2 py-1 rounded-lg bg-[#2D5A3C]/20 hover:bg-[#2D5A3C]/40 text-[#D9A05B] font-medium transition-colors border border-[#D9A05B]/20"
+                      >
+                        <ListTree className="w-3.5 h-3.5" />
+                        <span className="hidden sm:inline">TOC</span>
+                      </button>
                     </div>
                   </div>
 
-                  <textarea
-                    ref={textareaRef}
-                    value={rawContent}
-                    onChange={(e) => setRawContent(e.target.value)}
-                    placeholder="Schreibe oder paste hier deinen Markdown-Inhalt..."
-                    className="flex-1 p-5 bg-transparent text-sm font-mono text-[#E8F0EB] focus:outline-none resize-none leading-relaxed overflow-y-auto"
-                    spellCheck={false}
-                  />
+                  <div
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    onDrop={handleDrop}
+                    className={`flex-1 flex flex-col relative transition-all duration-200 ${
+                      isDragging ? "bg-[#2D5A3C]/25 border-2 border-dashed border-[#D9A05B] rounded-2xl m-2" : ""
+                    }`}
+                  >
+                    {isDragging && (
+                      <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-[#050B08]/85 backdrop-blur-sm pointer-events-none rounded-2xl">
+                        <Upload className="w-12 h-12 text-[#D9A05B] animate-bounce mb-3" />
+                        <span className="text-base font-bold text-white tracking-wide">Bild hier ablegen für S3-Upload</span>
+                        <span className="text-xs text-[#A3C9A8] mt-1 font-mono">(.png, .jpg, .webp wird sofort hochgeladen und eingefügt)</span>
+                      </div>
+                    )}
+                    {uploadingImage && (
+                      <div className="absolute top-3 right-3 z-20 flex items-center gap-2 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#2D5A3C] to-[#1e3e29] text-white text-xs font-semibold shadow-xl border border-[#D9A05B]/40 animate-pulse">
+                        <RefreshCw className="w-4 h-4 animate-spin text-[#D9A05B]" />
+                        Lade Bild auf S3-Speicher hoch...
+                      </div>
+                    )}
+                    <textarea
+                      ref={textareaRef}
+                      value={rawContent}
+                      onChange={(e) => setRawContent(e.target.value)}
+                      placeholder="Schreibe oder paste hier deinen Markdown-Inhalt... (💡 Tipp: Bilder einfach per Drag & Drop auf diesen Bereich ziehen!)"
+                      className="flex-1 p-5 bg-transparent text-sm font-mono text-[#E8F0EB] focus:outline-none resize-none leading-relaxed overflow-y-auto"
+                      spellCheck={false}
+                    />
+                  </div>
                 </div>
 
                 {/* Rechter Split: Live Markdown Preview */}
@@ -1051,7 +1163,7 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
                   <div className="flex-1 p-6 overflow-y-auto prose prose-invert max-w-none prose-headings:text-white prose-p:text-[#E8F0EB]/90 prose-a:text-[#D9A05B] prose-blockquote:border-[#D9A05B] prose-blockquote:bg-[#2D5A3C]/10 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-xl">
                     <ReactMarkdown
                       remarkPlugins={[remarkGfm]}
-                      rehypePlugins={[rehypeRaw]}
+                      rehypePlugins={[rehypeRaw, rehypeSlug]}
                       components={mdxComponents as any}
                     >
                       {rawContent.replace(/^---[\s\S]+?---(\r?\n)/, "") || "*Vorschau des Artikels...*"}

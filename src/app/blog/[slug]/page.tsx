@@ -4,6 +4,7 @@ import BlogPostClient from "@/components/BlogPostClient";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
+import rehypeSlug from "rehype-slug";
 import { mdxComponents } from "@/components/mdx/MDXComponents";
 
 interface Props {
@@ -54,6 +55,7 @@ export default async function BlogPostPage({ params }: Props) {
       options={{
         mdxOptions: {
           remarkPlugins: [remarkGfm],
+          rehypePlugins: [rehypeSlug],
         },
       }}
     />

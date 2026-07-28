@@ -2,6 +2,9 @@
 
 import React from "react";
 import Image from "next/image";
+import { TableOfContents } from "@/components/mdx/TableOfContents";
+
+export { TableOfContents };
 
 // 1. CustomImage Komponente (Weiche abgerundete Ecken & Schatten)
 export function CustomImage({
@@ -66,10 +69,10 @@ const hasBlockElement = (children: React.ReactNode): boolean => {
     const type = child.type as any;
     const typeName = typeof type === "string" ? type : type?.name || type?.displayName || "";
     if (
-      ["img", "figure", "div", "customimage", "youtube", "grid", "iframe"].includes(
+      ["img", "figure", "div", "customimage", "youtube", "grid", "iframe", "tableofcontents", "toc", "nav"].includes(
         typeName.toLowerCase()
       ) ||
-      ["CustomImage", "YouTube", "Grid"].includes(typeName)
+      ["CustomImage", "YouTube", "Grid", "TableOfContents"].includes(typeName)
     ) {
       found = true;
     }
@@ -89,7 +92,7 @@ const hasAstBlockElement = (node: any): boolean => {
   return node.children.some((child: any) => {
     if (child.type === "element") {
       const tag = (child.tagName || "").toLowerCase();
-      if (["img", "figure", "div", "customimage", "youtube", "grid", "iframe"].includes(tag)) {
+      if (["img", "figure", "div", "customimage", "youtube", "grid", "iframe", "tableofcontents", "toc", "nav"].includes(tag)) {
         return true;
       }
       if (hasAstBlockElement(child)) return true;
@@ -103,6 +106,7 @@ export const mdxComponents = {
   CustomImage,
   YouTube,
   Grid,
+  TableOfContents,
   // Intelligenter Absatz-Renderer zur Vermeidung von HTML-Nesting-Fehlern (div/figure in p)
   p: ({ children, node, ...props }: any) => {
     const isBlock = hasAstBlockElement(node) || hasBlockElement(children);
@@ -123,6 +127,8 @@ export const mdxComponents = {
   customimage: ({ src, alt, caption }: any) => <CustomImage src={src} alt={alt} caption={caption} />,
   youtube: ({ id }: any) => <YouTube id={id} />,
   grid: ({ children }: any) => <Grid>{children}</Grid>,
+  tableofcontents: ({ markdown }: any) => <TableOfContents markdown={markdown} />,
+  toc: ({ markdown }: any) => <TableOfContents markdown={markdown} />,
   // Fallback-Wrapper für Standard <img /> in Markdown/MDX
   img: ({ src, alt }: { src?: string; alt?: string }) => (
     <CustomImage src={src} alt={alt} />
