@@ -135,7 +135,7 @@ export default function StudioDashboard({ user }: StudioDashboardProps) {
       if (res.ok && data.success) {
         const publicUrl = data.url;
         const altText = file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, " ");
-        insertSnippet(`\n<CustomImage alt="${altText}" src="${publicUrl}" />\n`);
+        insertSnippet(`\n![${altText}](${publicUrl})\n`);
         setSaveStatus({ type: "success", message: "Bild erfolgreich über S3 hochgeladen und eingefügt!" });
       } else {
         setSaveStatus({ type: "error", message: data.error || "Fehler beim Upload des Bildes." });
@@ -1064,10 +1064,10 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
                         type="button"
                         onClick={() =>
                           insertSnippet(
-                            '\n<CustomImage alt="Beschreibung" caption="Bildunterschrift" src="https://image.pollinations.ai/prompt/calm%20nature%20forest?width=800&height=450&nologo=true" />\n'
+                            '\n![Beschreibung](https://image.pollinations.ai/prompt/calm%20nature%20forest?width=800&height=450&nologo=true)\n'
                           )
                         }
-                        title="Bild einfügen (<CustomImage />)"
+                        title="Bild einfügen (![Alt](URL))"
                         className="flex items-center gap-1 px-2 py-1 rounded-lg bg-[#2D5A3C]/20 hover:bg-[#2D5A3C]/40 text-[#D9A05B] font-medium transition-colors border border-[#D9A05B]/20"
                       >
                         <ImageIcon className="w-3.5 h-3.5" />
