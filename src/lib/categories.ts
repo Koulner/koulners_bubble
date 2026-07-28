@@ -1,4 +1,4 @@
-export type CategoryType = "Natur" | "Philosophie" | "Ganzheitliche Gesundheit" | "DIY Kosmetik" | "Ernährung" | "Frequenzen" | "Funktionelles Training" | "Entfaltung" | string;
+export type CategoryType = "Natur" | "Philosophie" | "Ganzheitliche Gesundheit" | "DIY Kosmetik" | "Ernährung" | "Frequenzen" | "Funktionelles Training" | "Entfaltung" | "Bücher" | string;
 
 /**
  * Normalisiert die Kategorie(n) zu einem sauberen String-Array.

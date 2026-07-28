@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Trees, BookOpen, HeartPulse, Sparkles, LayoutGrid, Utensils, Waves, Activity, Flame } from "lucide-react";
+import { Trees, BookOpen, HeartPulse, Sparkles, LayoutGrid, Utensils, Waves, Activity, Flame, Library } from "lucide-react";
 
 interface NavigationProps {
   categories: string[];
@@ -36,6 +36,8 @@ export default function Navigation({
         return <Activity className="w-4 h-4" />;
       case "Entfaltung":
         return <Flame className="w-4 h-4" />;
+      case "Bücher":
+        return <Library className="w-4 h-4" />;
       default:
         return <LayoutGrid className="w-4 h-4" />;
     }
