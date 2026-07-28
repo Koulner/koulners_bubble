@@ -3,7 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { BlogPostFull, BlogPostMeta } from "@/lib/content";
+import type { BlogPostFull, BlogPostMeta } from "@/lib/content";
+import { normalizeCategories } from "@/lib/categories";
 import { ArrowLeft, Clock, Calendar, User, Sparkles, Share2, Heart } from "lucide-react";
 import RelatedArticles from "./RelatedArticles";
 
@@ -45,11 +46,16 @@ export default function BlogPostClient({ post, relatedPosts }: BlogPostClientPro
           transition={{ duration: 0.8 }}
           className="flex flex-col items-start mb-10"
         >
-          <div className="flex flex-wrap items-center gap-3 mb-6">
-            <span className="px-4 py-1.5 rounded-full bg-sage-light text-sage-dark font-sans text-xs uppercase tracking-widest font-medium border border-sage/20">
-              {post.category}
-            </span>
-            <span className="flex items-center gap-1.5 text-xs text-text-muted font-sans">
+          <div className="flex flex-wrap items-center gap-2.5 mb-6">
+            {normalizeCategories(post.category).map((cat, idx) => (
+              <span
+                key={idx}
+                className="px-4 py-1.5 rounded-full bg-sage-light text-sage-dark font-sans text-xs uppercase tracking-widest font-medium border border-sage/20"
+              >
+                {cat}
+              </span>
+            ))}
+            <span className="flex items-center gap-1.5 text-xs text-text-muted font-sans ml-1">
               <Clock className="w-3.5 h-3.5 text-sage" />
               {post.readTime || "4 Min. Lesezeit"}
             </span>

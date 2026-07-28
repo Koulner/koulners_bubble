@@ -7,18 +7,20 @@ import remarkGfm from "remark-gfm";
 
 const contentDirectory = path.join(process.cwd(), "content/blog");
 
+import { CategoryType, normalizeCategories } from "./categories";
+export { type CategoryType, normalizeCategories };
+
 export interface BlogPostMeta {
   slug: string;
   title: string;
   date: string;
-  category: "Natur" | "Philosophie" | "Ganzheitliche Gesundheit" | "DIY Kosmetik" | "Ernährung" | "Frequenzen" | "Funktionelles Training" | string;
+  category: CategoryType | CategoryType[];
   excerpt: string;
   description?: string;
   image: string;
   readTime: string;
   author: string;
 }
-
 
 export interface BlogPostFull extends BlogPostMeta {
   contentHtml: string;
@@ -42,10 +44,12 @@ export function getAllPosts(): BlogPostMeta[] {
 
       // Nutze gray-matter zum Auslesen des YAML-Frontmatters
       const matterResult = matter(fileContents);
+      const data = matterResult.data as Omit<BlogPostMeta, "slug">;
 
       return {
         slug,
-        ...(matterResult.data as Omit<BlogPostMeta, "slug">),
+        ...data,
+        category: normalizeCategories(data.category),
       };
     });
 
@@ -78,11 +82,13 @@ export async function getPostBySlug(slug: string): Promise<BlogPostFull | null> 
     .use(html, { sanitize: false })
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
+  const data = matterResult.data as Omit<BlogPostMeta, "slug">;
 
   return {
     slug,
     contentHtml,
-    ...(matterResult.data as Omit<BlogPostMeta, "slug">),
+    ...data,
+    category: normalizeCategories(data.category),
   };
 }
 
@@ -93,21 +99,23 @@ export function getAllCategories(): string[] {
   const posts = getAllPosts();
   const categories = new Set<string>();
   posts.forEach((post) => {
-    if (post.category) {
-      categories.add(post.category);
-    }
+    const cats = normalizeCategories(post.category);
+    cats.forEach((c) => categories.add(c));
   });
   return Array.from(categories);
 }
 
 /**
- * Holt verwandte Artikel derselben Kategorie, schließt den aktuellen Artikel aus.
+ * Holt verwandte Artikel derselben Kategorie(n), schließt den aktuellen Artikel aus.
  */
-export function getRelatedPosts(currentSlug: string, category: string, limit = 3): BlogPostMeta[] {
+export function getRelatedPosts(currentSlug: string, category: CategoryType | CategoryType[], limit = 3): BlogPostMeta[] {
+  const currentCats = normalizeCategories(category);
   const allPosts = getAllPosts();
-  const related = allPosts.filter(
-    (post) => post.category === category && post.slug !== currentSlug
-  );
+  const related = allPosts.filter((post) => {
+    if (post.slug === currentSlug) return false;
+    const postCats = normalizeCategories(post.category);
+    return postCats.some((c) => currentCats.includes(c));
+  });
   if (related.length < limit) {
     const others = allPosts.filter(
       (post) => post.slug !== currentSlug && !related.some((r) => r.slug === post.slug)

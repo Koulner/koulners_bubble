@@ -39,7 +39,8 @@ function loadArticles(): ArticleKnowledge[] {
       const raw = fs.readFileSync(path.join(dir, file), "utf8");
       const { data, content } = matter(raw);
       const title = data.title || slug;
-      const category = data.category || "Allgemein";
+      const rawCategory = data.category || "Allgemein";
+      const category = Array.isArray(rawCategory) ? rawCategory.join(", ") : String(rawCategory);
       const description = data.description || data.excerpt || "";
       const cleanContent = content.replace(/\r?\n+/g, " ").trim();
       const shortSummary = description || (cleanContent.length > 250 ? cleanContent.substring(0, 250) + "..." : cleanContent);

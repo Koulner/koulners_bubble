@@ -3,7 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { BlogPostMeta } from "@/lib/content";
+import type { BlogPostMeta } from "@/lib/content";
+import { normalizeCategories } from "@/lib/categories";
 import { Clock, ArrowUpRight, Sparkles } from "lucide-react";
 
 interface BlogGridProps {
@@ -15,7 +16,10 @@ export default function BlogGrid({ posts, activeCategory }: BlogGridProps) {
   const filteredPosts =
     activeCategory === "Alle"
       ? posts
-      : posts.filter((post) => post.category === activeCategory);
+      : posts.filter((post) => {
+          const cats = normalizeCategories(post.category);
+          return cats.includes(activeCategory);
+        });
 
   return (
     <section className="w-full max-w-6xl mx-auto px-6 pb-24">
@@ -64,11 +68,16 @@ export default function BlogGrid({ posts, activeCategory }: BlogGridProps) {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
                   
-                  {/* Kategorie Badge auf dem Bild */}
-                  <div className="absolute top-5 left-5 z-10">
-                    <span className="px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-text-dark font-sans text-xs tracking-wider font-medium shadow-sm border border-white/60">
-                      {post.category}
-                    </span>
+                  {/* Kategorie Badges auf dem Bild */}
+                  <div className="absolute top-5 left-5 z-10 flex flex-wrap gap-1.5 max-w-[80%]">
+                    {normalizeCategories(post.category).map((cat, idx) => (
+                      <span
+                        key={idx}
+                        className="px-3.5 py-1 rounded-full bg-white/90 backdrop-blur-md text-text-dark font-sans text-xs tracking-wider font-medium shadow-sm border border-white/60"
+                      >
+                        {cat}
+                      </span>
+                    ))}
                   </div>
 
                   {/* Lesezeit unten rechts im Bild */}

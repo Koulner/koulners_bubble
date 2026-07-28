@@ -3,7 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { BlogPostMeta } from "@/lib/content";
+import type { BlogPostMeta } from "@/lib/content";
+import { normalizeCategories } from "@/lib/categories";
 import { Clock, ArrowRight, BookOpen } from "lucide-react";
 
 interface RelatedArticlesProps {
@@ -50,17 +51,27 @@ export default function RelatedArticles({ posts }: RelatedArticlesProps) {
                       alt={post.title}
                       className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
-                    <div className="absolute top-3 left-3">
-                      <span className="px-3 py-1 rounded-full bg-bg-cream/95 backdrop-blur-xs text-sage-dark font-sans text-[10px] font-semibold uppercase tracking-wider shadow-2xs border border-border-warm/50">
-                        {post.category}
-                      </span>
+                    <div className="absolute top-3 left-3 flex flex-wrap gap-1 max-w-[85%]">
+                      {normalizeCategories(post.category).map((cat, i) => (
+                        <span
+                          key={i}
+                          className="px-3 py-1 rounded-full bg-bg-cream/95 backdrop-blur-xs text-sage-dark font-sans text-[10px] font-semibold uppercase tracking-wider shadow-2xs border border-border-warm/50"
+                        >
+                          {cat}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 ) : (
-                  <div className="p-4 pb-0">
-                    <span className="px-3 py-1 rounded-full bg-sage-light text-sage-dark font-sans text-[10px] font-semibold uppercase tracking-wider">
-                      {post.category}
-                    </span>
+                  <div className="p-4 pb-0 flex flex-wrap gap-1">
+                    {normalizeCategories(post.category).map((cat, i) => (
+                      <span
+                        key={i}
+                        className="px-3 py-1 rounded-full bg-sage-light text-sage-dark font-sans text-[10px] font-semibold uppercase tracking-wider"
+                      >
+                        {cat}
+                      </span>
+                    ))}
                   </div>
                 )}
 

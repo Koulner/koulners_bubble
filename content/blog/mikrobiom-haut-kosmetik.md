@@ -1,6 +1,6 @@
 ---
 title: "Das Mikrobiom deiner Haut: Wie Pflanzenöle die Schutzbarriere heilen und aufatmen lassen"
-category: "DIY Kosmetik"
+category: ["DIY Kosmetik", "Ganzheitliche Gesundheit"]
 level: "Deep Dive"
 date: "2026-07-28"
 description: "Ein wissenschaftlicher und zugleich sinnlicher Einblick in das komplexe Mikrobiom deiner Haut. Warum aggressive Reinigungsmittel Schaden anrichten und wie reine Pflanzenöle die natürliche Balance wiederherstellen."
