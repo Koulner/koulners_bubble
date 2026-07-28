@@ -170,8 +170,6 @@ author: "${user.name || "Guide"}"
 draft: true
 ---
 
-![Bildbeschreibung](https://image.pollinations.ai/prompt/aesthetic%20cinematic%20photography%20of%20calm%20nature%20forest%20warm%20healing%20light?width=1200&height=600&nologo=true)
-
 Beginne hier mit deiner inspirierenden Einleitung...
 
 > Ein markantes Zitat, das die Kernbotschaft zusammenfasst.

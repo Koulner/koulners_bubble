@@ -94,17 +94,43 @@ export async function getPostBySlug(slug: string, includeDrafts = false, include
     return null;
   }
 
+  // Entferne ein führendes Bild am Anfang des Markdown-Inhalts, falls es identisch zum Hero-Bild im Frontmatter ist
+  const stripLeadingImage = (content: string, heroImageUrl?: string): string => {
+    if (!content || !heroImageUrl) return content;
+    const trimmed = content.trimStart();
+
+    const mdImgMatch = trimmed.match(/^!\[.*?\]\((.*?)\)\s*/);
+    if (mdImgMatch) {
+      const imgUrl = mdImgMatch[1];
+      if (imgUrl === heroImageUrl || heroImageUrl.includes(imgUrl) || imgUrl.includes(heroImageUrl) || mdImgMatch[0].includes("pollinations.ai")) {
+        return trimmed.slice(mdImgMatch[0].length).trimStart();
+      }
+    }
+
+    const mdxImgMatch = trimmed.match(/^<(CustomImage|img)\s+[^>]*?src=["'](.*?)["'][^>]*?\/>\s*/i);
+    if (mdxImgMatch) {
+      const imgUrl = mdxImgMatch[2];
+      if (imgUrl === heroImageUrl || heroImageUrl.includes(imgUrl) || imgUrl.includes(heroImageUrl) || mdxImgMatch[0].includes("pollinations.ai")) {
+        return trimmed.slice(mdxImgMatch[0].length).trimStart();
+      }
+    }
+
+    return content;
+  };
+
+  const cleanBody = stripLeadingImage(matterResult.content, data.image);
+
   // Konvertiere Markdown zu HTML string
   const processedContent = await remark()
     .use(remarkGfm)
     .use(html, { sanitize: false })
-    .process(matterResult.content);
+    .process(cleanBody);
   const contentHtml = processedContent.toString();
 
   return {
     slug,
     contentHtml,
-    body: matterResult.content,
+    body: cleanBody,
     ...data,
     draft: Boolean(data.draft),
     archived: Boolean(data.archived),
