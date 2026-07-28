@@ -63,3 +63,79 @@ body {
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
+
+/* Styling für Tabellen im Bubble-Vibe */
+.prose table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 2rem 0;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--color-border-warm);
+  background: var(--color-bg-card);
+  box-shadow: 0 4px 20px -2px rgba(44, 39, 35, 0.05);
+}
+
+.prose thead {
+  background: var(--color-bg-sand);
+}
+
+.prose th {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-dark);
+  border-bottom: 2px solid var(--color-border-warm);
+}
+
+.prose tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.prose tbody tr:hover {
+  background: rgba(243, 236, 225, 0.5);
+}
+
+.prose tbody tr:not(:last-child) td {
+  border-bottom: 1px solid rgba(230, 220, 208, 0.6);
+}
+
+.prose td {
+  padding: 1rem 1.25rem;
+  font-size: 0.95rem;
+  color: var(--color-text-dark);
+  vertical-align: top;
+}
+
+/* Tabellen im Dark-Mode / Studio (prose-invert) */
+.prose-invert table {
+  border-color: rgba(45, 90, 60, 0.4);
+  background: rgba(15, 27, 21, 0.8);
+  box-shadow: 0 4px 25px -2px rgba(0, 0, 0, 0.4);
+}
+
+.prose-invert thead {
+  background: rgba(26, 56, 37, 0.6);
+}
+
+.prose-invert th {
+  color: #E8F0EB;
+  border-bottom: 2px solid rgba(78, 135, 82, 0.5);
+}
+
+.prose-invert tbody tr:hover {
+  background: rgba(45, 90, 60, 0.25);
+}
+
+.prose-invert tbody tr:not(:last-child) td {
+  border-bottom: 1px solid rgba(45, 90, 60, 0.3);
+}
+
+.prose-invert td {
+  color: rgba(232, 240, 235, 0.9);
+}

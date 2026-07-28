@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FileText,
@@ -22,10 +22,21 @@ import {
   Trash2,
   CheckSquare,
   Square,
+  Bold,
+  Italic,
+  Heading2,
+  Quote,
+  List,
+  Image as ImageIcon,
+  Video,
+  Layout,
+  Table as TableIcon,
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+import { mdxComponents } from "@/components/mdx/MDXComponents";
 
 interface ArticleMeta {
   slug: string;
@@ -65,6 +76,32 @@ export default function StudioDashboard({ user }: StudioDashboardProps) {
   // Frontmatter Felder (Titel & Kategorien)
   const [metaTitle, setMetaTitle] = useState<string>("");
   const [metaCategories, setMetaCategories] = useState<string>("");
+
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Hilfsfunktion zum Einfügen von Snippets an der Caret-Position (Cursor-Logik)
+  const insertSnippet = (prefix: string, suffix: string = "", defaultText: string = "") => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selectedText = rawContent.substring(start, end);
+    const textToInsert = selectedText || defaultText;
+    const replacement = `${prefix}${textToInsert}${suffix}`;
+
+    const newContent = rawContent.substring(0, start) + replacement + rawContent.substring(end);
+    setRawContent(newContent);
+
+    setTimeout(() => {
+      textarea.focus();
+      const newCursorPos = start + prefix.length + textToInsert.length + suffix.length;
+      textarea.setSelectionRange(
+        selectedText ? start + prefix.length : newCursorPos,
+        selectedText ? start + prefix.length + textToInsert.length : newCursorPos
+      );
+    }, 0);
+  };
 
   // Co-Pilot State
   const [copilotOpen, setCopilotOpen] = useState(false);
@@ -142,6 +179,21 @@ Beginne hier mit deiner inspirierenden Einleitung...
 ## Die erste Hauptüberschrift
 
 Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
+
+<Grid>
+  <div>
+    ### Links im Raster
+    Sanfte Impulse für die Seele und das Nervensystem.
+  </div>
+  <div>
+    ### Rechts im Raster
+    Wissenschaftlich gestützte Erkenntnisse für ganzheitliche Balance.
+  </div>
+</Grid>
+
+### Rich Media Beispiel
+
+<CustomImage src="https://image.pollinations.ai/prompt/serene%20forest%20sunlight%20mist?width=800&height=450&nologo=true" alt="Sanfter Wald" caption="Die beruhigende Atmosphäre eines morgendlichen Waldes." />
 `;
     setEditingSlug(newSlug);
     setRawContent(defaultContent);
@@ -708,7 +760,107 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
                     </div>
                   </div>
 
+                  {/* Interaktive Formatierungs-Toolbar (Sticky über der Textarea) */}
+                  <div className="sticky top-0 z-10 flex items-center gap-1 p-2 bg-[#050B08]/95 backdrop-blur-md border-b border-[#2D5A3C]/40 overflow-x-auto selection:bg-transparent text-xs text-[#A3C9A8]">
+                    {/* Standard Markdown Buttons */}
+                    <div className="flex items-center gap-0.5 pr-2 border-r border-[#2D5A3C]/30">
+                      <button
+                        type="button"
+                        onClick={() => insertSnippet("**", "**", "fetter text")}
+                        title="Fett (**text**)"
+                        className="p-1.5 rounded-lg hover:bg-[#2D5A3C]/40 hover:text-white transition-colors"
+                      >
+                        <Bold className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => insertSnippet("*", "*", "kursiver text")}
+                        title="Kursiv (*text*)"
+                        className="p-1.5 rounded-lg hover:bg-[#2D5A3C]/40 hover:text-white transition-colors"
+                      >
+                        <Italic className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => insertSnippet("## ", "", "Überschrift 2")}
+                        title="Überschrift 2 (## )"
+                        className="p-1.5 rounded-lg hover:bg-[#2D5A3C]/40 hover:text-white transition-colors"
+                      >
+                        <Heading2 className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => insertSnippet("\n> ", "", "Zitat-Text...")}
+                        title="Zitat (> )"
+                        className="p-1.5 rounded-lg hover:bg-[#2D5A3C]/40 hover:text-white transition-colors"
+                      >
+                        <Quote className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => insertSnippet("\n- ", "", "Listenpunkt")}
+                        title="Aufzählungsliste (- )"
+                        className="p-1.5 rounded-lg hover:bg-[#2D5A3C]/40 hover:text-white transition-colors"
+                      >
+                        <List className="w-4 h-4" />
+                      </button>
+                    </div>
+
+                    {/* Magic MDX & Media Buttons */}
+                    <div className="flex items-center gap-1 pl-2">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          insertSnippet(
+                            '\n<CustomImage alt="Beschreibung" caption="Bildunterschrift" src="https://image.pollinations.ai/prompt/calm%20nature%20forest?width=800&height=450&nologo=true" />\n'
+                          )
+                        }
+                        title="Bild einfügen (<CustomImage />)"
+                        className="flex items-center gap-1 px-2 py-1 rounded-lg bg-[#2D5A3C]/20 hover:bg-[#2D5A3C]/40 text-[#D9A05B] font-medium transition-colors border border-[#D9A05B]/20"
+                      >
+                        <ImageIcon className="w-3.5 h-3.5" />
+                        <span className="hidden sm:inline">Bild</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => insertSnippet('\n<YouTube id="dQw4w9WgXcQ" />\n')}
+                        title="Video einfügen (<YouTube />)"
+                        className="flex items-center gap-1 px-2 py-1 rounded-lg bg-[#2D5A3C]/20 hover:bg-[#2D5A3C]/40 text-[#D9A05B] font-medium transition-colors border border-[#D9A05B]/20"
+                      >
+                        <Video className="w-3.5 h-3.5" />
+                        <span className="hidden sm:inline">Video</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          insertSnippet(
+                            '\n<Grid>\n  <div>\n    ### Spalte 1\n    Füge hier Element 1 ein\n  </div>\n  <div>\n    ### Spalte 2\n    Füge hier Element 2 ein\n  </div>\n</Grid>\n'
+                          )
+                        }
+                        title="Layout Grid (<Grid />)"
+                        className="flex items-center gap-1 px-2 py-1 rounded-lg bg-[#2D5A3C]/20 hover:bg-[#2D5A3C]/40 text-[#D9A05B] font-medium transition-colors border border-[#D9A05B]/20"
+                      >
+                        <Layout className="w-3.5 h-3.5" />
+                        <span className="hidden sm:inline">Grid</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          insertSnippet(
+                            '\n| Spalte 1 | Spalte 2 |\n| --- | --- |\n| Wert 1 | Wert 2 |\n| Wert 3 | Wert 4 |\n'
+                          )
+                        }
+                        title="Tabelle (2x2)"
+                        className="flex items-center gap-1 px-2 py-1 rounded-lg bg-[#2D5A3C]/20 hover:bg-[#2D5A3C]/40 text-[#D9A05B] font-medium transition-colors border border-[#D9A05B]/20"
+                      >
+                        <TableIcon className="w-3.5 h-3.5" />
+                        <span className="hidden sm:inline">Tabelle</span>
+                      </button>
+                    </div>
+                  </div>
+
                   <textarea
+                    ref={textareaRef}
                     value={rawContent}
                     onChange={(e) => setRawContent(e.target.value)}
                     placeholder="Schreibe oder paste hier deinen Markdown-Inhalt..."
@@ -726,7 +878,11 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
                     <span>Koulners Bubble Rendering</span>
                   </div>
                   <div className="flex-1 p-6 overflow-y-auto prose prose-invert max-w-none prose-headings:text-white prose-p:text-[#E8F0EB]/90 prose-a:text-[#D9A05B] prose-blockquote:border-[#D9A05B] prose-blockquote:bg-[#2D5A3C]/10 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-xl">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      rehypePlugins={[rehypeRaw]}
+                      components={mdxComponents as any}
+                    >
                       {rawContent.replace(/^---[\s\S]+?---(\r?\n)/, "") || "*Vorschau des Artikels...*"}
                     </ReactMarkdown>
                   </div>

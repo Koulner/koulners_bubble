@@ -26,6 +26,7 @@ export interface BlogPostMeta {
 
 export interface BlogPostFull extends BlogPostMeta {
   contentHtml: string;
+  body: string;
 }
 
 export interface BlogPostRaw extends BlogPostMeta {
@@ -103,6 +104,7 @@ export async function getPostBySlug(slug: string, includeDrafts = false, include
   return {
     slug,
     contentHtml,
+    body: matterResult.content,
     ...data,
     draft: Boolean(data.draft),
     archived: Boolean(data.archived),
@@ -142,14 +144,22 @@ export function getRawPostBySlug(slug: string): BlogPostRaw | null {
 }
 
 /**
- * Speichert eine Markdown-Datei lokal synchron (als Fallback oder Ergänzung zu GitOps)
+ * Speichert eine Markdown- oder MDX-Datei lokal synchron (als Fallback oder Ergänzung zu GitOps)
  */
 export function saveLocalPost(slug: string, rawContent: string): void {
   const mdPath = path.join(contentDirectory, `${slug}.md`);
-  const rootPath = path.join(process.cwd(), "content", `${slug}.md`);
-  fs.writeFileSync(mdPath, rawContent, "utf8");
-  if (fs.existsSync(path.dirname(rootPath))) {
-    fs.writeFileSync(rootPath, rawContent, "utf8");
+  const mdxPath = path.join(contentDirectory, `${slug}.mdx`);
+  const rootMdPath = path.join(process.cwd(), "content", `${slug}.md`);
+  const rootMdxPath = path.join(process.cwd(), "content", `${slug}.mdx`);
+
+  const existsMd = fs.existsSync(mdPath) || fs.existsSync(rootMdPath);
+  const targetExt = existsMd ? "md" : "mdx";
+  const targetPath = path.join(contentDirectory, `${slug}.${targetExt}`);
+  const targetRootPath = path.join(process.cwd(), "content", `${slug}.${targetExt}`);
+
+  fs.writeFileSync(targetPath, rawContent, "utf8");
+  if (fs.existsSync(path.dirname(targetRootPath))) {
+    fs.writeFileSync(targetRootPath, rawContent, "utf8");
   }
 }
 

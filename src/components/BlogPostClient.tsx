@@ -11,9 +11,10 @@ import RelatedArticles from "./RelatedArticles";
 interface BlogPostClientProps {
   post: BlogPostFull;
   relatedPosts?: BlogPostMeta[];
+  children?: React.ReactNode;
 }
 
-export default function BlogPostClient({ post, relatedPosts }: BlogPostClientProps) {
+export default function BlogPostClient({ post, relatedPosts, children }: BlogPostClientProps) {
   return (
     <div className="min-h-screen bg-bg-cream text-text-dark pb-24 selection:bg-sage-light">
       {/* 1. Softe Navigation oben */}
@@ -126,8 +127,9 @@ export default function BlogPostClient({ post, relatedPosts }: BlogPostClientPro
             prose-ul:list-disc prose-ul:pl-6 prose-ul:space-y-2
             prose-ol:list-decimal prose-ol:pl-6 prose-ol:space-y-3
             prose-strong:font-semibold prose-strong:text-text-dark"
-          dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-        />
+        >
+          {children ? children : <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />}
+        </motion.article>
 
         {/* 4.5 Verwandte Artikel (Related Articles) */}
         {relatedPosts && relatedPosts.length > 0 && (
