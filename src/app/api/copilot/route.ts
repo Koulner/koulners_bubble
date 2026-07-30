@@ -11,7 +11,7 @@ const openrouter = createOpenAI({
 export async function POST(req: Request) {
   // 1. Enterprise-Grade Security Check (Crucial Whitelist Session Verification)
   const session = await auth();
-  if (!session?.user) {
+  if (!session?.user || session.user.email !== process.env.ALLOWED_GITHUB_USER) {
     console.warn("[COPILOT BLOCKED] Unauthorized attempt without valid whitelist session.");
     return NextResponse.json(
       { error: "Unauthorized: Active whitelisted session required for AI Co-Pilot." },

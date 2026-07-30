@@ -14,7 +14,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const session = await auth();
-  if (!session?.user) {
+  if (!session?.user || session.user.email !== process.env.ALLOWED_GITHUB_USER) {
     return NextResponse.json(
       { error: "Unauthorized: Active whitelisted session required." },
       { status: 401 }

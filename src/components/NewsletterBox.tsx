@@ -3,11 +3,13 @@
 import React, { useState, useEffect } from "react";
 import { Send, CheckCircle2, AlertCircle, Settings2, Tag, Clock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 export default function NewsletterBox() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   const [showPreferences, setShowPreferences] = useState(false);
   const [availableCategories, setAvailableCategories] = useState<string[]>([]);
@@ -47,7 +49,8 @@ export default function NewsletterBox() {
       const payload = {
         email,
         categories: selectedCategories,
-        frequency
+        frequency,
+        turnstileToken
       };
 
       const res = await fetch("/api/newsletter", {
@@ -198,6 +201,15 @@ export default function NewsletterBox() {
                 </motion.div>
               )}
             </AnimatePresence>
+            
+            {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && (
+              <div className="hidden">
+                <Turnstile
+                  siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                  onSuccess={(token) => setTurnstileToken(token)}
+                />
+              </div>
+            )}
 
           </form>
         )}

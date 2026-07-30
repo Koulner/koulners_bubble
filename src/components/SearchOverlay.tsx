@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, X, Tag, BookOpen, Sparkles, ArrowRight, Clock, CheckCircle2, SlidersHorizontal } from "lucide-react";
 import Link from "next/link";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 interface SearchResultItem {
   slug: string;
@@ -29,6 +30,7 @@ export default function SearchOverlay() {
   const [categories, setCategories] = useState<string[]>(["Alle"]);
   const [results, setResults] = useState<SearchResultItem[]>([]);
   const [loading, setLoading] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -78,11 +80,15 @@ export default function SearchOverlay() {
   }, [isOpen]);
 
   // Live-Suche über API
-  const performSearch = useCallback(async (q: string, cat: string) => {
+  const performSearch = useCallback(async (q: string, cat: string, token: string) => {
     setLoading(true);
     try {
       const url = `/api/search?q=${encodeURIComponent(q)}&category=${encodeURIComponent(cat === "Alle" ? "" : cat)}`;
-      const res = await fetch(url);
+      const res = await fetch(url, {
+        headers: {
+          "x-turnstile-token": token || "",
+        }
+      });
       if (res.ok) {
         const data = await res.json();
         setResults(data.results || []);
@@ -97,11 +103,11 @@ export default function SearchOverlay() {
   useEffect(() => {
     if (isOpen) {
       const timer = setTimeout(() => {
-        performSearch(query, categoryFilter);
+        performSearch(query, categoryFilter, turnstileToken);
       }, 150);
       return () => clearTimeout(timer);
     }
-  }, [query, categoryFilter, isOpen, performSearch]);
+  }, [query, categoryFilter, isOpen, turnstileToken, performSearch]);
 
   return (
     <>
@@ -265,6 +271,15 @@ export default function SearchOverlay() {
                       <span>Enterprise Search • Powered by Fuse.js</span>
                       <span>ESC zum Schließen</span>
                     </div>
+
+                    {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && (
+                      <div className="hidden">
+                        <Turnstile
+                          siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                          onSuccess={(token) => setTurnstileToken(token)}
+                        />
+                      </div>
+                    )}
                   </motion.div>
                 </motion.div>
               )}

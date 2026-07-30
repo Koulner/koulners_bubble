@@ -4,6 +4,12 @@ import path from "path";
 import matter from "gray-matter";
 import { createOpenAI } from "@ai-sdk/openai";
 import { streamText } from "ai";
+import rateLimit from "@/lib/rate-limit";
+
+const limiter = rateLimit({
+  interval: 60 * 1000,
+  uniqueTokenPerInterval: 500,
+});
 
 // Cache für das Blog-Wissen (RAG-Optimierung)
 interface ArticleKnowledge {
@@ -169,10 +175,29 @@ const openrouter = createOpenAI({
   apiKey: process.env.OPENROUTER_API_KEY || "",
 });
 
+import { verifyTurnstileToken } from "@/lib/turnstile";
+
 export async function POST(req: Request) {
   try {
+    const ip = req.headers.get("x-forwarded-for") || "unknown-ip";
+    try {
+      await limiter.check(10, ip); // 10 requests per IP per minute
+    } catch {
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        { status: 429 }
+      );
+    }
     const body = await req.json();
-    const { messages, pathname } = body;
+    const { messages, pathname, turnstileToken } = body;
+
+    const isHuman = await verifyTurnstileToken(turnstileToken);
+    if (!isHuman) {
+      return NextResponse.json(
+        { error: "Security check failed (Turnstile). Please try again." },
+        { status: 400 }
+      );
+    }
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
       return NextResponse.json({ error: "Keine Nachrichten erhalten" }, { status: 400 });

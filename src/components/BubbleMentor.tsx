@@ -7,6 +7,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, MessageCircleHeart, X, Send, Bot, User, Maximize2, Minimize2 } from "lucide-react";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 interface Message {
   role: "assistant" | "user";
@@ -17,6 +18,7 @@ export default function BubbleMentor() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -52,7 +54,7 @@ export default function BubbleMentor() {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: newMessages, pathname }),
+        body: JSON.stringify({ messages: newMessages, pathname, turnstileToken }),
       });
 
       if (!response.ok) {
@@ -293,6 +295,15 @@ export default function BubbleMentor() {
                   )}
                 </button>
               </div>
+              
+              {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && (
+                <div className="hidden">
+                  <Turnstile
+                    siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                    onSuccess={(token) => setTurnstileToken(token)}
+                  />
+                </div>
+              )}
             </form>
           </motion.div>
         )}
