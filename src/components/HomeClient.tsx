@@ -63,7 +63,7 @@ export default function HomeClient({ initialPosts, categories }: HomeClientProps
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-[#D9A05B] shadow-[0_0_10px_rgba(217,160,91,0.8)]" />
             <span className="font-serif text-xl font-medium text-white tracking-wide">
-              Koulners <span className="font-light italic text-[#D9A05B]">Bubble</span>
+              Koulners <span className="font-light italic text-[#D9A05B]">Bubbles</span>
             </span>
           </div>
 
