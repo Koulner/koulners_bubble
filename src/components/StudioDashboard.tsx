@@ -12,6 +12,7 @@ import {
   GitCommit,
   ArrowLeft,
   LogOut,
+  Music,
   ShieldCheck,
   Eye,
   Code,
@@ -38,9 +39,10 @@ import {
 import { signOut } from "next-auth/react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
 import rehypeSlug from "rehype-slug";
 import { mdxComponents } from "@/components/mdx/MDXComponents";
+import HeroEditor from "@/app/studio/components/HeroEditor";
+import SoundEditor from "@/app/studio/components/SoundEditor";
 
 interface ArticleMeta {
   slug: string;
@@ -63,7 +65,7 @@ interface StudioDashboardProps {
 export default function StudioDashboard({ user }: StudioDashboardProps) {
   const [articles, setArticles] = useState<ArticleMeta[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"drafts" | "published" | "archived" | "categories">("published");
+  const [activeTab, setActiveTab] = useState<"drafts" | "published" | "archived" | "categories" | "hero" | "sounds">("published");
 
   // Kategorien Management State
   const [availableCategories, setAvailableCategories] = useState<string[]>([]);
@@ -614,6 +616,24 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
                 >
                   <Tag className="w-4 h-4" /> Kategorien ({availableCategories.length})
                 </button>
+                <button
+                  onClick={() => { setActiveTab("hero"); setSelectedSlugs([]); }}
+                  className={`py-2.5 px-5 font-medium text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer shrink-0 ${activeTab === "hero"
+                    ? "border-[#D9A05B] text-[#D9A05B]"
+                    : "border-transparent text-[#A3C9A8]/70 hover:text-white"
+                    }`}
+                >
+                  <Sparkles className="w-4 h-4" /> Hero Settings
+                </button>
+                <button
+                  onClick={() => { setActiveTab("sounds"); setSelectedSlugs([]); }}
+                  className={`py-2.5 px-5 font-medium text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer shrink-0 ${activeTab === "sounds"
+                    ? "border-[#D9A05B] text-[#D9A05B]"
+                    : "border-transparent text-[#A3C9A8]/70 hover:text-white"
+                    }`}
+                >
+                  <Music className="w-4 h-4" /> Sound Settings
+                </button>
               </div>
 
               {/* "Alle auswählen"-Checkbox */}
@@ -689,7 +709,11 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
             </AnimatePresence>
 
             {/* Kategorie Management (Single Source of Truth) oder Artikel Grid */}
-            {activeTab === "categories" ? (
+            {activeTab === "hero" ? (
+              <HeroEditor />
+            ) : activeTab === "sounds" ? (
+              <SoundEditor />
+            ) : activeTab === "categories" ? (
               <div className="bg-[#0F1B15]/90 border border-[#2D5A3C]/40 rounded-3xl p-6 shadow-xl max-w-3xl">
                 <div className="flex items-center justify-between gap-4 pb-6 border-b border-[#2D5A3C]/30 mb-6">
                   <div>

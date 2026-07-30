@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import HeroSection from "./HeroSection";
+import DynamicHeroClient from "./hero/DynamicHeroClient";
+import { HeroEntry } from "./hero/DynamicHeroClient";
 import Navigation from "./Navigation";
 import BlogSection from "./BlogSection";
 import { BlogPostMeta } from "@/lib/content";
@@ -10,9 +11,11 @@ import { Sparkles, Heart, Bot, ShieldCheck } from "lucide-react";
 interface HomeClientProps {
   initialPosts: BlogPostMeta[];
   categories: string[];
+  heroEntries: any[]; // we use any here to avoid cyclic type dependencies if needed, or better HeroEntry[]
+  sounds: any[];
 }
 
-export default function HomeClient({ initialPosts, categories }: HomeClientProps) {
+export default function HomeClient({ initialPosts, categories, heroEntries, sounds }: HomeClientProps) {
   const [activeCategory, setActiveCategory] = useState<string>("Alle");
   const exploreRef = useRef<HTMLDivElement | null>(null);
 
@@ -23,7 +26,7 @@ export default function HomeClient({ initialPosts, categories }: HomeClientProps
   return (
     <main className="min-h-screen flex flex-col bg-[#050B08] selection:bg-[#2D5A3C] selection:text-white">
       {/* 1. Das dynamische 100vh Erlebnis */}
-      <HeroSection onScrollToBlog={scrollToBlog} />
+      <DynamicHeroClient entries={heroEntries} sounds={sounds} />
 
       {/* 2. Der Journal- & Artikel-Bereich (Magazin Glassmorphism Nebel) */}
       <div ref={exploreRef} className="relative z-10 bg-gradient-to-b from-[#050B08] via-[#0D1812] to-[#050B08] text-[#E8F0EB] pt-20 overflow-hidden">

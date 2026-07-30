@@ -1,0 +1,23 @@
+[
+  {
+    "id": "sound-1",
+    "title": "432 Hz Solfeggio Resonanz",
+    "type": "frequency",
+    "url": "https://cdn.pixabay.com/audio/2022/10/25/audio_2e2edc41b8.mp3",
+    "moods": ["Meditate", "Relax"]
+  },
+  {
+    "id": "sound-2",
+    "title": "Sanftes Waldrauschen",
+    "type": "nature",
+    "url": "https://cdn.pixabay.com/audio/2022/01/21/audio_51d2007f35.mp3",
+    "moods": ["Relax", "Focus"]
+  },
+  {
+    "id": "sound-3",
+    "title": "Weicher Wind in den Kiefern",
+    "type": "nature",
+    "url": "https://cdn.pixabay.com/audio/2021/08/04/audio_dc39b8bc78.mp3",
+    "moods": ["Focus", "Meditate"]
+  }
+]
