@@ -6,61 +6,56 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import { mdxComponents } from "@/components/mdx/MDXComponents";
-import { JsonLd } from "@/components/seo/JsonLd";
+import JsonLd from "@/components/seo/JsonLd";
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://koulnersbubble.de";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const post = await getPostBySlug(resolvedParams.slug);
   if (!post) {
     return {
-      title: "Artikel nicht gefunden | Koulners Bubble",
-      description: "Der angefragte Gedankenraum existiert nicht oder wurde verschoben.",
+      title: "Artikel nicht gefunden | Koulners Bubbles",
     };
   }
 
-  const articleUrl = `${siteUrl}/blog/${post.slug}`;
-  const ogImageUrl = `${siteUrl}/api/og?title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(
-    post.category
-  )}&author=${encodeURIComponent(post.author || "Koulner")}&date=${encodeURIComponent(post.date)}`;
-
-  const keywords = [
-    post.category,
-    "Koulners Bubble",
-    "Achtsamkeit",
-    "Holistische Gesundheit",
-    "Philosophie",
-    "Ruhe",
-    ...post.title.split(" ").filter((w) => w.length > 4),
-  ];
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://koulners-bubble.de";
+  const canonicalUrl = `${siteUrl.replace(/\/$/, "")}/blog/${post.slug}`;
+  const categoryStr = Array.isArray(post.category) ? post.category.join(", ") : post.category || "Journal";
+  const ogImage = `/api/og?title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(categoryStr)}&author=${encodeURIComponent(post.author || "Koulner")}`;
 
   return {
-    metadataBase: new URL(siteUrl),
-    title: `${post.title} | Koulners Bubble`,
-    description: post.excerpt,
-    keywords: keywords,
+    title: `${post.title} | Koulners Bubbles`,
+    description: post.excerpt || `${post.title} - Ein geschützter Gedankenraum auf Koulners Bubbles.`,
+    keywords: [
+      ...(Array.isArray(post.category) ? post.category : [post.category || "Journal"]),
+      "Koulners Bubbles",
+      "Heilung",
+      "Ruhe",
+      "Achtsamkeit",
+      post.author || "Koulner",
+    ],
+    authors: [{ name: post.author || "Koulner" }],
     alternates: {
-      canonical: articleUrl,
+      canonical: canonicalUrl,
     },
     openGraph: {
-      type: "article",
       title: post.title,
-      description: post.excerpt,
-      url: articleUrl,
-      siteName: "Koulners Bubble",
+      description: post.excerpt || `${post.title} - Ein geschützter Gedankenraum auf Koulners Bubbles.`,
+      url: canonicalUrl,
+      siteName: "Koulners Bubbles",
+      locale: "de_DE",
+      type: "article",
       publishedTime: post.date,
       authors: [post.author || "Koulner"],
       images: [
         {
-          url: ogImageUrl,
+          url: ogImage,
           width: 1200,
           height: 630,
-          alt: `${post.title} – Koulners Bubble`,
+          alt: post.title,
         },
       ],
     },
@@ -68,7 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title: post.title,
       description: post.excerpt,
-      images: [ogImageUrl],
+      images: [ogImage],
     },
   };
 }
@@ -89,7 +84,6 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   const relatedPosts = getRelatedPosts(post.slug, post.category, 3);
-  const articleUrl = `${siteUrl}/blog/${post.slug}`;
 
   const mdxContent = (
     <MDXRemote
@@ -106,7 +100,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
-      <JsonLd post={post} url={articleUrl} siteUrl={siteUrl} />
+      <JsonLd post={post} />
       <BlogPostClient post={post} relatedPosts={relatedPosts}>
         {mdxContent}
       </BlogPostClient>

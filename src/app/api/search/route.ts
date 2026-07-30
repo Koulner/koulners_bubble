@@ -2,11 +2,42 @@ import { NextResponse } from "next/server";
 import { getAllPostsForSearch, BlogPostSearchItem } from "@/lib/content";
 import Fuse from "fuse.js";
 
+import { z } from "zod";
+import rateLimit from "@/lib/rate-limit";
+
+const limiter = rateLimit({
+  interval: 60 * 1000,
+  uniqueTokenPerInterval: 500,
+});
+
+const searchParamsSchema = z.object({
+  q: z.string().max(100).optional().default(""),
+  category: z.string().max(50).optional().default(""),
+});
+
 export async function GET(req: Request) {
   try {
+    const ip = req.headers.get("x-forwarded-for") || "unknown-ip";
+    try {
+      await limiter.check(30, ip); // 30 requests per IP per minute
+    } catch {
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        { status: 429 }
+      );
+    }
+
     const { searchParams } = new URL(req.url);
-    const query = searchParams.get("q") || "";
-    const categoryFilter = searchParams.get("category") || "";
+    const rawQ = searchParams.get("q") || "";
+    const rawCategory = searchParams.get("category") || "";
+
+    const result = searchParamsSchema.safeParse({ q: rawQ, category: rawCategory });
+    if (!result.success) {
+      return NextResponse.json({ error: "Invalid search parameters" }, { status: 400 });
+    }
+
+    const query = result.data.q.replace(/[<>]/g, ""); // basic sanitization
+    const categoryFilter = result.data.category.replace(/[<>]/g, "");
 
     const allPosts = getAllPostsForSearch();
 

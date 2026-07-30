@@ -91,7 +91,7 @@ export default function HeroSection({ onScrollToBlog }: HeroSectionProps) {
         <div className="flex items-center gap-2.5">
           <span className="w-3 h-3 rounded-full bg-sage shadow-[0_0_12px_rgba(122,154,139,0.8)] animate-pulse" />
           <span className="font-serif text-lg md:text-xl font-medium tracking-wider text-text-dark">
-            Koulners <span className="font-light italic text-sage">Bubble</span>
+            Koulners <span className="font-light italic text-sage">Bubbles</span>
           </span>
         </div>
 

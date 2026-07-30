@@ -6,7 +6,7 @@ category: "Philosophie"
 excerpt: "Inmitten ständiger Erreichbarkeit bietet die stoische Kunst der inneren Burg einen unerschütterlichen Anker. Ein philosophischer Kompass für sanfte Stärke."
 image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80"
 readTime: "5 Min. Lesezeit"
-author: "Hermes & Koulners Bubble"
+author: "Hermes & Koulners Bubbles"
 ---
 
 Oft verwechseln wir Ruhe mit der Abwesenheit von Stürmen. Doch die alte Philosophie der Stoiker lehrt uns ein tieferes Geheimnis: **Wahre Gelassenheit entsteht nicht durch das Schweigen der Welt um uns herum, sondern durch die Stille in unserem eigenen Inneren.**
@@ -29,7 +29,7 @@ Marc Aurel, der römische Kaiser und Philosoph, verbrachte viele Jahre seines Le
 
 ## Die Errichtung der inneren Burg
 
-In Koulners Bubble betrachten wir den Stoizismus nicht als kühle Distanz, sondern als einen **warmen Schutzmantel**. Wenn du weißt, dass kein äußeres Ereignis deinen inneren Frieden berühren kann, ohne dass du ihm die Erlaubnis dazu gibst, fällt eine immense Last von deinen Schultern.
+In Koulners Bubbles betrachten wir den Stoizismus nicht als kühle Distanz, sondern als einen **warmen Schutzmantel**. Wenn du weißt, dass kein äußeres Ereignis deinen inneren Frieden berühren kann, ohne dass du ihm die Erlaubnis dazu gibst, fällt eine immense Last von deinen Schultern.
 
 Du musst nicht auf alles reagieren. Du musst nicht zu jedem Reiz eine Meinung haben oder sofort funktionieren.
 

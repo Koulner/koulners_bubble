@@ -37,6 +37,7 @@ body {
 /* Custom scrollbar for immersive feel */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
   background: #FAF7F2;
@@ -138,4 +139,27 @@ body {
 
 .prose-invert td {
   color: rgba(232, 240, 235, 0.9);
+}
+
+/* Safe Area & Mobile Ergonomie Utilities */
+.pb-safe {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 1rem);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+.min-touch {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Scrollbar verbergen für horizontale Listen */
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE und Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }

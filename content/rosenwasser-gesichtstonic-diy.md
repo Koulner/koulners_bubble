@@ -6,7 +6,7 @@ category: "DIY Kosmetik"
 excerpt: "Rose schenkt Feuchtigkeit und zärtliche Herzöffnung, während Hamamelis sanft klärt. Ein 3-Minuten-Rezept ohne Alkohol für strahlende Balance."
 image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1200&q=80"
 readTime: "3 Min. Lesezeit"
-author: "Hermes & Koulners Bubble"
+author: "Hermes & Koulners Bubbles"
 ---
 
 Ein Gesichtswasser ist oft der am meisten unterschätzte Schritt in der täglichen Pflege. In unserer Bubble verstehen wir das Aufsprühen eines kühlen Tonics nicht als Pflicht, sondern als kurzen, belebenden **Frische-Schauer für Gesicht und Seele** – besonders nach langen Stunden vor Bildschirmen oder an warmen Nachmittagen.

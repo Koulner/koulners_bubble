@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { TableOfContents } from "@/components/mdx/TableOfContents";
+import { ShieldAlert } from "lucide-react";
 
 export { TableOfContents };
 
@@ -36,9 +37,48 @@ export function CustomImage({
   );
 }
 
-// 2. YouTube Komponente (Responsiver 16:9 Container)
+// 2. YouTube Komponente (DSGVO-konform mit Consent-Blocker)
 export function YouTube({ id }: { id?: string }) {
+  const [consent, setConsent] = useState<string>("pending");
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    const checkConsent = () => setConsent(localStorage.getItem("cookie_consent") || "pending");
+    checkConsent();
+    window.addEventListener("cookie_consent_changed", checkConsent);
+    return () => window.removeEventListener("cookie_consent_changed", checkConsent);
+  }, []);
+
   if (!id) return null;
+
+  if (!isMounted) {
+    return <div className="my-8 w-full aspect-video rounded-2xl bg-bg-sand/40 animate-pulse border border-border-warm/40" />;
+  }
+
+  if (consent !== "accepted_all") {
+    return (
+      <div className="my-8 w-full overflow-hidden rounded-2xl shadow-sm border border-border-warm/60 bg-white/40 backdrop-blur-md aspect-video relative flex flex-col items-center justify-center p-6 text-center">
+        <div className="w-12 h-12 rounded-full bg-sage-light flex items-center justify-center mb-4 border border-sage/30">
+          <ShieldAlert className="w-5 h-5 text-sage-dark" />
+        </div>
+        <p className="text-text-dark font-serif text-lg mb-2">Externe Medien blockiert</p>
+        <p className="text-text-muted text-sm max-w-sm mb-5 font-sans leading-relaxed">
+          Bitte akzeptiere alle Cookies im Banner unten, um dieses YouTube-Video abzuspielen. Ohne deine Erlaubnis bauen wir keine Verbindung zu externen Servern auf.
+        </p>
+        <button 
+          onClick={() => {
+            localStorage.setItem("cookie_consent", "accepted_all");
+            window.dispatchEvent(new Event("cookie_consent_changed"));
+          }}
+          className="px-5 py-2.5 bg-sage hover:bg-sage-dark border border-sage/20 shadow-md rounded-lg text-xs font-sans tracking-wide uppercase text-white transition-all duration-300"
+        >
+          Externen Inhalt erlauben
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="my-8 w-full overflow-hidden rounded-2xl shadow-xl border border-border-warm/60 bg-bg-sand/30 aspect-video relative">
       <iframe
@@ -132,5 +172,11 @@ export const mdxComponents = {
   // Fallback-Wrapper für Standard <img /> in Markdown/MDX
   img: ({ src, alt }: { src?: string; alt?: string }) => (
     <CustomImage src={src} alt={alt} />
+  ),
+  // Responsive Tabellen auf Mobile
+  table: ({ children, ...props }: any) => (
+    <div className="w-full overflow-x-auto block whitespace-nowrap pb-2 min-touch">
+      <table {...props}>{children}</table>
+    </div>
   ),
 };

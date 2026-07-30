@@ -66,7 +66,7 @@ Du musst dein Leben nicht komplett umkrempeln oder aufs Land ziehen, um im Einkl
 2. **Koche saisonal und regional:** Unsere Darmflora verändert sich mit den Jahreszeiten. Wenn wir im kalten Januar süße Erdbeeren aus Gewächshäusern essen, senden wir unserem Körper eine verwirrende klimatische Fehlinformation. Speise im Winter Wurzeln, Kohl und Fermente; genieße im Sommer wässrige Beeren, Blätter und Gurken.
 3. **Schaffe kleine Jahreszeit-Altäre:** Lege auf ein kleines Tablett in deiner Wohnung Dinge, die du bei deinen Spaziergängen im Wald findest: im Frühling eine blühende Knospe, im Sommer eine Feder, im Herbst eine glänzende Kastanie, im Winter einen Kiefernzapfen und eine Bienenwachskerze. So erinnert dich dein Zuhause täglich an den Rhythmus, der dich trägt.
 
-Wenn wir aufhören, gegen den Winter zu kämpfen, verlieren wir die Angst vor der Dunkelheit. Wir erkennen, dass wir kein abgetrenntes Rad im Getriebe einer unerbittlichen Leistungsmaschine sind, sondern ein lebendiger, atmender Teil der Natur. In Koulners Bubble darfst du durchatmen: Du musst heute nicht wie ein Sommersonnentag strahlen, wenn deine Seele gerade den sanften Nebel des Herbstes braucht.
+Wenn wir aufhören, gegen den Winter zu kämpfen, verlieren wir die Angst vor der Dunkelheit. Wir erkennen, dass wir kein abgetrenntes Rad im Getriebe einer unerbittlichen Leistungsmaschine sind, sondern ein lebendiger, atmender Teil der Natur. In Koulners Bubbles darfst du durchatmen: Du musst heute nicht wie ein Sommersonnentag strahlen, wenn deine Seele gerade den sanften Nebel des Herbstes braucht.
 
 ## Wissenschaftliche Quellen & Studien
 

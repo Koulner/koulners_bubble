@@ -45,7 +45,7 @@ Das klinische Resultat nennt sich **Fototoxizität** (oder *Dermatitis bullosa s
 
 > "Ein Tropfen Bergamotte in der Nachtcreme ist ein königlicher Heiler. Am sonnigen Sommermorgen aufgetragen, wird er zum Architekten schwerer Hautschäden."
 
-*(Praxis-Tipp für Koulners Bubble: Achte bei der Verwendung von Bergamottöl für Tagesprodukte zwingend auf die Kennzeichnung **FCF** – furanocoumarin-free / furocumarinfrei!)*
+*(Praxis-Tipp für Koulners Bubbles: Achte bei der Verwendung von Bergamottöl für Tagesprodukte zwingend auf die Kennzeichnung **FCF** – furanocoumarin-free / furocumarinfrei!)*
 
 ## 2. Minzöl (Menthol): Neurologische Kühlung vs. Schleimhautreizung
 

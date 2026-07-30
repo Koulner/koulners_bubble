@@ -6,7 +6,7 @@ category: "DIY Kosmetik"
 excerpt: "Wenn du Pflege mit deinen eigenen Händen herstellst, fließt deine achtsame Energie direkt in die Zutaten. Ein 4-Zutaten-Rezept für samtweiche Geborgenheit."
 image: "https://images.unsplash.com/photo-1508615039623-a25605d2b022?auto=format&fit=crop&w=1200&q=80"
 readTime: "5 Min. Lesezeit"
-author: "Hermes & Koulners Bubble"
+author: "Hermes & Koulners Bubbles"
 ---
 
 Es hat etwas zutiefst Magisches und Erdendes, seine eigene Hautpflege herzustellen. In einer Zeit der anonymen Massenprodukte ist die Zubereitung eines Balsams wie ein feierliches Alchemie-Ritual in der eigenen Küche. Wenn wir reine Pflanzenfette mit ätherischen Duftnoten verschmelzen lassen, entsteht ein Pflegeprodukt, das unberührt ist von synthetischen Zusatzstoffen oder Eile.

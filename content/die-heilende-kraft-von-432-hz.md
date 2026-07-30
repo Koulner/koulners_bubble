@@ -6,7 +6,7 @@ category: "Frequenzen"
 excerpt: "432 Hz gilt als die natürliche Schwingungsfrequenz der Erde und des Universums. Wie solfeggio-Klaenge unsere Zellen harmonisieren und tiefste Ruhe auslösen."
 image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80"
 readTime: "5 Min. Lesezeit"
-author: "Hermes & Koulners Bubble"
+author: "Hermes & Koulners Bubbles"
 ---
 
 Alles im Universum ist in Bewegung. Wenn wir auf mikroskopischer Ebene in unsere Zellen, in die Natur oder in die fernen Sterne blicken, finden wir eine universelle Sprache: **Vibration und Frequenz**. 
@@ -35,6 +35,6 @@ Neben den 432 Hz gibt es in der traditionellen Klangheilung eine Reihe heiliger 
 
 ## Wie du Frequenzen in deinen Alltag integrierst
 
-In Koulners Bubble haben wir in unseren Ambient-Player eine synthetische 432-Hz-Schwingung integriert. Du kannst diese Schwingung nutzen, indem du:
+In Koulners Bubbles haben wir in unseren Ambient-Player eine synthetische 432-Hz-Schwingung integriert. Du kannst diese Schwingung nutzen, indem du:
 - Sie abends beim Lesen oder bei der Yoga-Praxis leise im Hintergrund laufen lässt.
 - Kopfhörer aufsetzt, die Augen schließt und dir vorstellst, wie die Schallwellen jede Zelle deines Körpers in goldenes Licht tauchen.

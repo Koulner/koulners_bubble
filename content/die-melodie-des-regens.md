@@ -6,7 +6,7 @@ category: "Natur"
 excerpt: "Petrichor und weißes Rauschen: Ein sanfter Schauer über dem Wald wäscht nicht nur die Blätter rein, sondern klärt auch unseren überfüllten Geist."
 image: "https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?auto=format&fit=crop&w=1200&q=80"
 readTime: "4 Min. Lesezeit"
-author: "Hermes & Koulners Bubble"
+author: "Hermes & Koulners Bubbles"
 ---
 
 Es gibt kaum ein Geräusch, das uns schneller in einen Zustand sanfter Melancholie und innerer Geborgenheit versetzt als das gleichmäßige Prasseln von Regen gegen die Fensterscheibe oder auf das Blätterdach eines Waldes.

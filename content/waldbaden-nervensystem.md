@@ -6,7 +6,7 @@ category: "Natur"
 excerpt: "Sobald wir das Blätterdach eines Waldes betreten, sinkt der Cortisolspiegel innerhalb weniger Minuten. Eine achtsame Einladung in die heilende Atmosphäre des Waldes."
 image: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80"
 readTime: "4 Min. Lesezeit"
-author: "Hermes & Koulners Bubble"
+author: "Hermes & Koulners Bubbles"
 ---
 
 In unserer hochvernetzten, oft reizüberfluteten Welt sehnt sich unser Nervensystem nach einem Zustand der ursprünglichen Ruhe. In Japan ist diese Heilmethode seit den 1980er Jahren als **Shinrin-Yoku** – das *Waldbaden* – offizieller Bestandteil der Gesundheitsvorsorge.

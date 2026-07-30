@@ -5,7 +5,7 @@ import StudioDashboard from "@/components/StudioDashboard";
 
 export const metadata = {
   title: "Bubble Studio | Enterprise CMS & GitOps",
-  description: "Geschütztes Headless-CMS Dashboard für Koulners Bubble",
+  description: "Geschütztes Headless-CMS Dashboard für Koulners Bubbles",
 };
 
 export default async function StudioPage() {

@@ -1,14 +1,15 @@
-import { MetadataRoute } from "next";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://koulnersbubble.de";
+import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://koulners-bubble.de";
+  const baseUrl = siteUrl.replace(/\/$/, "");
+
   return {
     rules: {
       userAgent: "*",
-      allow: ["/", "/api/og", "/api/search"],
-      disallow: ["/studio", "/api/*"],
+      allow: "/",
+      disallow: ["/studio", "/api/"],
     },
-    sitemap: `${siteUrl}/sitemap.xml`,
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }

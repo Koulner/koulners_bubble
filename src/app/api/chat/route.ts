@@ -4,6 +4,12 @@ import path from "path";
 import matter from "gray-matter";
 import { createOpenAI } from "@ai-sdk/openai";
 import { streamText } from "ai";
+import rateLimit from "@/lib/rate-limit";
+
+const limiter = rateLimit({
+  interval: 60 * 1000,
+  uniqueTokenPerInterval: 500,
+});
 
 // Cache für das Blog-Wissen (RAG-Optimierung)
 interface ArticleKnowledge {
@@ -109,9 +115,9 @@ function generateFallbackResponse(userMessage: string, knowledgeText: string, ac
     const paragraphs = activeArticle.fullContent.split(/\n\s*\n/).filter((p) => p.trim().length > 40 && !p.startsWith("#"));
     const bestQuote = paragraphs.find((p) => query.split(" ").some((w) => w.length > 3 && p.toLowerCase().includes(w))) || paragraphs[0] || activeArticle.description;
 
-    return `Hallo du, schön, dass du in Koulners Bubble verweilst. 🌿
+    return `Hallo du, schön, dass du in Koulners Bubbles verweilst. 🌿
 
-Wie Koulners Bubble im Artikel **[${activeArticle.title}](/blog/${activeArticle.slug})** beschreibt:
+Wie Koulners Bubbles im Artikel **[${activeArticle.title}](/blog/${activeArticle.slug})** beschreibt:
 
 > ${bestQuote.replace(/\n/g, " ")}
 
@@ -140,9 +146,9 @@ Ich bin hier, um dich sanft auf deiner Reise zu begleiten. Was möchtest du noch
   }
 
   if (bestMatchTitle) {
-    return `Hallo du, schön, dass du in Koulners Bubble verweilst. 🌿
+    return `Hallo du, schön, dass du in Koulners Bubbles verweilst. 🌿
 
-Wie Koulners Bubble im Artikel **[${bestMatchTitle}](/blog/${bestMatchSlug})** beschreibt:
+Wie Koulners Bubbles im Artikel **[${bestMatchTitle}](/blog/${bestMatchSlug})** beschreibt:
 
 > ${bestMatchExcerpt}
 
@@ -151,7 +157,7 @@ Wenn du möchtest, kannst du dir diesen Beitrag direkt in unserer Ruhe-Oase durc
 *(Hinweis: Um freie LLM-Antworten zu erhalten, hinterlege einfach deinen \`GROQ_API_KEY\` oder \`OPENROUTER_API_KEY\` in der \`.env.local\` Datei deines Projekts.)*`;
   }
 
-  return `Herzlich willkommen in Koulners Bubble! ✨ Ich bin dein sanfter Bubble Guide. 
+  return `Herzlich willkommen in Koulners Bubbles! ✨ Ich bin dein sanfter Bubble Guide. 
 
 Ich kenne all unsere ${articles.length} Artikel zu Natur, Philosophie, Gesundheit, Kosmetik, Ernährung, Frequenzen und Funktionellem Training. Frag mich gerne nach Tipps für dein Nervensystem, nach einem Rezept wie unserem **[Oxymel Sauerhonig Rezept](/blog/oxymel-sauerhonig-rezept)** oder nach Übungen für **[Stille im Alltag](/blog/stille-im-alltag)**!
 
@@ -171,6 +177,16 @@ const openrouter = createOpenAI({
 
 export async function POST(req: Request) {
   try {
+    const ip = req.headers.get("x-forwarded-for") || "unknown-ip";
+    try {
+      await limiter.check(10, ip); // 10 requests per IP per minute
+    } catch {
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        { status: 429 }
+      );
+    }
+
     const body = await req.json();
     const { messages, pathname } = body;
 
@@ -182,11 +198,11 @@ export async function POST(req: Request) {
     const { knowledgeText, activeArticle } = getHybridBlogKnowledge(pathname);
 
     // 3. Der neue System-Prompt (Personality Upgrade & tiefgündiges Zitieren & Klickbare Links)
-    const systemPrompt = `Du bist der 'Bubble Guide', ein weiser, empathischer und heilsamer Begleiter auf der Website 'Koulners Bubble'. Du hilfst Besuchern bei Fragen zu Natur, Philosophie, Gesundheit und Kosmetik. Dir liegt als Kontext das Wissen der Blog-Artikel vor. Beachte besonders den Artikel, den der Nutzer gerade liest (vollständiger Text im Kontext).
+    const systemPrompt = `Du bist der 'Bubble Guide', ein weiser, empathischer und heilsamer Begleiter auf der Website 'Koulners Bubbles'. Du hilfst Besuchern bei Fragen zu Natur, Philosophie, Gesundheit und Kosmetik. Dir liegt als Kontext das Wissen der Blog-Artikel vor. Beachte besonders den Artikel, den der Nutzer gerade liest (vollständiger Text im Kontext).
 Deine Vorgaben:
 - Strahle Ruhe und Zuneigung aus. Nutze eine erdende, bildhafte Sprache.
 - Wenn du Wissen aus den Artikeln nutzt, zitiere die schönsten und wichtigsten Sätze wörtlich, indem du Markdown-Blockzitate (>) verwendest.
-- Nenne immer den Titel des Artikels, auf den du dich beziehst (z.B. 'Wie Koulners Bubble im Artikel [Titel](/blog/slug) beschreibt...').
+- Nenne immer den Titel des Artikels, auf den du dich beziehst (z.B. 'Wie Koulners Bubbles im Artikel [Titel](/blog/slug) beschreibt...').
 - WICHTIG: Wenn du einen Artikel aus deinem Kontext empfiehlst oder auf ihn verweist, gib seinen Titel zwingend als klickbaren Markdown-Link im Format [Titel des Artikels](/blog/dateiname-ohne-md) aus. Beispiel: Wenn du den Artikel über Erdung erwähnst, schreibe: [Grounding: Die Kraft der Erde](/blog/grounding-erdung-nervensystem).
 - Antworte präzise, aber tiefgründig. Vermeide KI-Floskeln.
 

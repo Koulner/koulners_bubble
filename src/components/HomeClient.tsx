@@ -63,7 +63,7 @@ export default function HomeClient({ initialPosts, categories }: HomeClientProps
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-[#D9A05B] shadow-[0_0_10px_rgba(217,160,91,0.8)]" />
             <span className="font-serif text-xl font-medium text-white tracking-wide">
-              Koulners <span className="font-light italic text-[#D9A05B]">Bubble</span>
+              Koulners <span className="font-light italic text-[#D9A05B]">Bubbles</span>
             </span>
           </div>
 
@@ -90,7 +90,7 @@ export default function HomeClient({ initialPosts, categories }: HomeClientProps
           </div>
 
           <div className="flex flex-wrap justify-center items-center gap-6 text-xs font-sans text-white/50 pt-4">
-            <span>© {new Date().getFullYear()} Koulners Bubble</span>
+            <span>© {new Date().getFullYear()} Koulners Bubbles</span>
             <span>•</span>
             <span className="flex items-center gap-1">
               Mit <Heart className="w-3 h-3 text-[#D9A05B] inline fill-[#D9A05B]/20" /> und Ruhe gestaltet

@@ -6,7 +6,7 @@ category: "Ernährung"
 excerpt: "Warum ein warmes Frühstück das Verdauungsfeuer sanft entfacht und uns geerdet, konzentriert und ohne Heißhunger durch den Tag führt."
 image: "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?auto=format&fit=crop&w=1200&q=80"
 readTime: "5 Min. Lesezeit"
-author: "Hermes & Koulners Bubble"
+author: "Hermes & Koulners Bubbles"
 ---
 
 In unserer hastigen Moderne greifen viele morgens nur schnell zu einem kalten Joghurt, einem Smoothie aus dem Kühlschrank oder einer Tasse Kaffee auf leeren Magen. Doch aus der Sicht ganzheitlicher Ernährungslehren wie dem Ayurveda oder der Traditionellen Chinesischen Medizin (TCM) ist genau dies ein Schock für unser empfindliches Verdauungssystem.

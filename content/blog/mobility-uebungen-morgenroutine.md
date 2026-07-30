@@ -6,10 +6,10 @@ category: "Funktionelles Training"
 excerpt: "Wahre Stärke beginnt in der Geschmeidigkeit. Wie langsames, funktionelles Mobility-Training unsere Faszien befreit und morgendliche Steifheit einfach auflöst."
 image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80"
 readTime: "5 Min. Lesezeit"
-author: "Hermes & Koulners Bubble"
+author: "Hermes & Koulners Bubbles"
 ---
 
-Oft verstehen wir unter Training ein hartes, schweißtreibendes Auspumpen des Körpers. In Koulners Bubble betrachten wir **funktionelles Training** jedoch aus einem sanfteren, klügeren Blickwinkel: Es geht darum, unserem Körper genau die Bewegungsfreiheit zurückzugeben, für die er von Natur aus geschaffen wurde.
+Oft verstehen wir unter Training ein hartes, schweißtreibendes Auspumpen des Körpers. In Koulners Bubbles betrachten wir **funktionelles Training** jedoch aus einem sanfteren, klügeren Blickwinkel: Es geht darum, unserem Körper genau die Bewegungsfreiheit zurückzugeben, für die er von Natur aus geschaffen wurde.
 
 ## Warum Mobilität vor reiner Kraft kommt
 

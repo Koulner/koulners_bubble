@@ -7,7 +7,7 @@ category: "Frequenzen"
 excerpt: "Wenn zwei leicht unterschiedliche Töne im Gehirn zu einer heilenden Schwebung verschmelzen. Wie binaurale Klänge unser Unterbewusstsein in die Regeneration führen."
 image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80"
 readTime: "5 Min. Lesezeit"
-author: "Hermes & Koulners Bubble"
+author: "Hermes & Koulners Bubbles"
 ---
 
 Manchmal ist der Kopf abends so voll mit den Eindrücken des Tages, dass einfache Stille nicht mehr ausreicht, um das Gedankenkarussell zu stoppen. Genau hier setzt eine faszinierende neuroakustische Entdeckung an: **Binaurale Beats** (zweiohrige Schwebungen).
