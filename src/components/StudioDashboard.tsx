@@ -287,7 +287,7 @@ category: "${defaultCats}"
 level: "Praxis"
 date: "${new Date().toISOString().split("T")[0]}"
 description: "Eine kurze Beschreibung für das SEO-Meta-Tag und die Blogkarte."
-excerpt: "Der kurze Auszug für die Übersicht in Koulners Bubble."
+excerpt: "Der kurze Auszug für die Übersicht in Koulners Bubbles."
 image: "https://image.pollinations.ai/prompt/aesthetic%20cinematic%20photography%20of%20calm%20nature%20forest%20warm%20healing%20light?width=1200&height=600&nologo=true"
 readTime: "5 Min. Lesezeit"
 author: "${user.name || "Guide"}"
@@ -561,13 +561,12 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`mb-6 p-4 rounded-2xl border text-sm font-medium flex items-center gap-3 shadow-lg ${
-                  saveStatus.type === "success"
-                    ? "bg-emerald-950/80 border-emerald-500/40 text-emerald-200"
-                    : saveStatus.type === "error"
+                className={`mb-6 p-4 rounded-2xl border text-sm font-medium flex items-center gap-3 shadow-lg ${saveStatus.type === "success"
+                  ? "bg-emerald-950/80 border-emerald-500/40 text-emerald-200"
+                  : saveStatus.type === "error"
                     ? "bg-red-950/80 border-red-500/40 text-red-200"
                     : "bg-blue-950/80 border-blue-500/40 text-blue-200"
-                }`}
+                  }`}
               >
                 {saveStatus.type === "saving" && <RefreshCw className="w-5 h-5 animate-spin shrink-0 text-[#D9A05B]" />}
                 {saveStatus.type === "success" && <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />}
@@ -581,41 +580,37 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
               <div className="flex items-center gap-2 overflow-x-auto">
                 <button
                   onClick={() => { setActiveTab("published"); setSelectedSlugs([]); }}
-                  className={`py-2.5 px-5 font-medium text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer shrink-0 ${
-                    activeTab === "published"
-                      ? "border-[#D9A05B] text-[#D9A05B]"
-                      : "border-transparent text-[#A3C9A8]/70 hover:text-white"
-                  }`}
+                  className={`py-2.5 px-5 font-medium text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer shrink-0 ${activeTab === "published"
+                    ? "border-[#D9A05B] text-[#D9A05B]"
+                    : "border-transparent text-[#A3C9A8]/70 hover:text-white"
+                    }`}
                 >
                   <CheckCircle2 className="w-4 h-4" /> Veröffentlicht ({publishedList.length})
                 </button>
                 <button
                   onClick={() => { setActiveTab("drafts"); setSelectedSlugs([]); }}
-                  className={`py-2.5 px-5 font-medium text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer shrink-0 ${
-                    activeTab === "drafts"
-                      ? "border-[#D9A05B] text-[#D9A05B]"
-                      : "border-transparent text-[#A3C9A8]/70 hover:text-white"
-                  }`}
+                  className={`py-2.5 px-5 font-medium text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer shrink-0 ${activeTab === "drafts"
+                    ? "border-[#D9A05B] text-[#D9A05B]"
+                    : "border-transparent text-[#A3C9A8]/70 hover:text-white"
+                    }`}
                 >
                   <Clock className="w-4 h-4" /> Entwürfe ({draftsList.length})
                 </button>
                 <button
                   onClick={() => { setActiveTab("archived"); setSelectedSlugs([]); }}
-                  className={`py-2.5 px-5 font-medium text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer shrink-0 ${
-                    activeTab === "archived"
-                      ? "border-[#D9A05B] text-[#D9A05B]"
-                      : "border-transparent text-[#A3C9A8]/70 hover:text-white"
-                  }`}
+                  className={`py-2.5 px-5 font-medium text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer shrink-0 ${activeTab === "archived"
+                    ? "border-[#D9A05B] text-[#D9A05B]"
+                    : "border-transparent text-[#A3C9A8]/70 hover:text-white"
+                    }`}
                 >
                   <Archive className="w-4 h-4" /> Archiviert ({archivedList.length})
                 </button>
                 <button
                   onClick={() => { setActiveTab("categories"); setSelectedSlugs([]); }}
-                  className={`py-2.5 px-5 font-medium text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer shrink-0 ${
-                    activeTab === "categories"
-                      ? "border-[#D9A05B] text-[#D9A05B]"
-                      : "border-transparent text-[#A3C9A8]/70 hover:text-white"
-                  }`}
+                  className={`py-2.5 px-5 font-medium text-sm border-b-2 transition-all flex items-center gap-2 cursor-pointer shrink-0 ${activeTab === "categories"
+                    ? "border-[#D9A05B] text-[#D9A05B]"
+                    : "border-transparent text-[#A3C9A8]/70 hover:text-white"
+                    }`}
                 >
                   <Tag className="w-4 h-4" /> Kategorien ({availableCategories.length})
                 </button>
@@ -709,13 +704,12 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
 
                 {catSaveStatus.type !== "idle" && (
                   <div
-                    className={`p-4 rounded-2xl border text-sm font-medium mb-6 flex items-center gap-3 shadow-lg ${
-                      catSaveStatus.type === "success"
-                        ? "bg-emerald-950/80 border-emerald-500/40 text-emerald-200"
-                        : catSaveStatus.type === "error"
+                    className={`p-4 rounded-2xl border text-sm font-medium mb-6 flex items-center gap-3 shadow-lg ${catSaveStatus.type === "success"
+                      ? "bg-emerald-950/80 border-emerald-500/40 text-emerald-200"
+                      : catSaveStatus.type === "error"
                         ? "bg-red-950/80 border-red-500/40 text-red-200"
                         : "bg-blue-950/80 border-blue-500/40 text-blue-200"
-                    }`}
+                      }`}
                   >
                     {catSaveStatus.type === "saving" && <RefreshCw className="w-5 h-5 animate-spin text-[#D9A05B]" />}
                     {catSaveStatus.type === "success" && <CheckCircle2 className="w-5 h-5 text-emerald-400" />}
@@ -787,11 +781,10 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
                       initial={{ opacity: 0, scale: 0.98 }}
                       animate={{ opacity: 1, scale: 1 }}
                       onClick={() => openEditor(art.slug)}
-                      className={`bg-[#0F1B15]/80 border rounded-3xl p-6 flex flex-col justify-between transition-all shadow-lg group relative cursor-pointer ${
-                        isChecked
-                          ? "border-[#D9A05B] bg-[#1A3825]/40 shadow-[#D9A05B]/10"
-                          : "border-[#2D5A3C]/40 hover:border-[#4E8752]/70"
-                      }`}
+                      className={`bg-[#0F1B15]/80 border rounded-3xl p-6 flex flex-col justify-between transition-all shadow-lg group relative cursor-pointer ${isChecked
+                        ? "border-[#D9A05B] bg-[#1A3825]/40 shadow-[#D9A05B]/10"
+                        : "border-[#2D5A3C]/40 hover:border-[#4E8752]/70"
+                        }`}
                     >
                       <div>
                         {/* Checkbox vor jedem Artikel */}
@@ -849,11 +842,10 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
                 </span>
                 <button
                   onClick={toggleDraftInContent}
-                  className={`py-1.5 px-3 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer border ${
-                    isDraft
-                      ? "bg-amber-950/60 text-amber-300 border-amber-500/40 hover:bg-amber-900/60"
-                      : "bg-emerald-950/60 text-emerald-300 border-emerald-500/40 hover:bg-emerald-900/60"
-                  }`}
+                  className={`py-1.5 px-3 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer border ${isDraft
+                    ? "bg-amber-950/60 text-amber-300 border-amber-500/40 hover:bg-amber-900/60"
+                    : "bg-emerald-950/60 text-emerald-300 border-emerald-500/40 hover:bg-emerald-900/60"
+                    }`}
                 >
                   {isDraft ? <Clock className="w-3.5 h-3.5 text-amber-400" /> : <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />}
                   Status: {isDraft ? "Entwurf (Draft)" : "Veröffentlicht"}
@@ -892,13 +884,12 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`mb-4 p-3 rounded-xl border text-xs font-medium flex items-center gap-2 ${
-                  saveStatus.type === "success"
-                    ? "bg-emerald-950/80 border-emerald-500/40 text-emerald-200"
-                    : saveStatus.type === "error"
+                className={`mb-4 p-3 rounded-xl border text-xs font-medium flex items-center gap-2 ${saveStatus.type === "success"
+                  ? "bg-emerald-950/80 border-emerald-500/40 text-emerald-200"
+                  : saveStatus.type === "error"
                     ? "bg-red-950/80 border-red-500/40 text-red-200"
                     : "bg-blue-950/80 border-blue-500/40 text-blue-200"
-                }`}
+                  }`}
               >
                 {saveStatus.type === "saving" && <RefreshCw className="w-4 h-4 animate-spin shrink-0" />}
                 {saveStatus.type === "success" && <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />}
@@ -981,11 +972,10 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
                               key={cat}
                               type="button"
                               onClick={() => toggleCategorySelection(cat)}
-                              className={`px-3 py-1 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer border ${
-                                isSelected
-                                  ? "bg-[#2D5A3C] text-white border-[#D9A05B] shadow-sm shadow-[#D9A05B]/20"
-                                  : "bg-[#0A140F] text-[#A3C9A8]/70 border-[#2D5A3C]/30 hover:border-[#4E8752] hover:text-white"
-                              }`}
+                              className={`px-3 py-1 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer border ${isSelected
+                                ? "bg-[#2D5A3C] text-white border-[#D9A05B] shadow-sm shadow-[#D9A05B]/20"
+                                : "bg-[#0A140F] text-[#A3C9A8]/70 border-[#2D5A3C]/30 hover:border-[#4E8752] hover:text-white"
+                                }`}
                             >
                               <span className={`w-1.5 h-1.5 rounded-full ${isSelected ? "bg-[#D9A05B]" : "bg-transparent border border-[#A3C9A8]/50"}`} />
                               {cat}
@@ -1124,9 +1114,8 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
                     onDrop={handleDrop}
-                    className={`flex-1 flex flex-col relative transition-all duration-200 ${
-                      isDragging ? "bg-[#2D5A3C]/25 border-2 border-dashed border-[#D9A05B] rounded-2xl m-2" : ""
-                    }`}
+                    className={`flex-1 flex flex-col relative transition-all duration-200 ${isDragging ? "bg-[#2D5A3C]/25 border-2 border-dashed border-[#D9A05B] rounded-2xl m-2" : ""
+                      }`}
                   >
                     {isDragging && (
                       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-[#050B08]/85 backdrop-blur-sm pointer-events-none rounded-2xl">
@@ -1158,7 +1147,7 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
                     <span className="flex items-center gap-1.5 font-semibold">
                       <Eye className="w-4 h-4 text-[#D9A05B]" /> Live Vorschau
                     </span>
-                    <span>Koulners Bubble Rendering</span>
+                    <span>Koulners Bubbles Rendering</span>
                   </div>
                   <div className="flex-1 p-6 overflow-y-auto prose prose-invert max-w-none prose-headings:text-white prose-p:text-[#E8F0EB]/90 prose-a:text-[#D9A05B] prose-blockquote:border-[#D9A05B] prose-blockquote:bg-[#2D5A3C]/10 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-xl">
                     <ReactMarkdown

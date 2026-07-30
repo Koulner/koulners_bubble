@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug(resolvedParams.slug);
   if (!post) {
     return {
-      title: "Artikel nicht gefunden | Koulners Bubble",
+      title: "Artikel nicht gefunden | Koulners Bubbles",
     };
   }
 
@@ -27,11 +27,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const ogImage = `/api/og?title=${encodeURIComponent(post.title)}&category=${encodeURIComponent(categoryStr)}&author=${encodeURIComponent(post.author || "Koulner")}`;
 
   return {
-    title: `${post.title} | Koulners Bubble`,
-    description: post.excerpt || `${post.title} - Ein geschützter Gedankenraum auf Koulners Bubble.`,
+    title: `${post.title} | Koulners Bubbles`,
+    description: post.excerpt || `${post.title} - Ein geschützter Gedankenraum auf Koulners Bubbles.`,
     keywords: [
       ...(Array.isArray(post.category) ? post.category : [post.category || "Journal"]),
-      "Koulners Bubble",
+      "Koulners Bubbles",
       "Heilung",
       "Ruhe",
       "Achtsamkeit",
@@ -43,9 +43,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     openGraph: {
       title: post.title,
-      description: post.excerpt || `${post.title} - Ein geschützter Gedankenraum auf Koulners Bubble.`,
+      description: post.excerpt || `${post.title} - Ein geschützter Gedankenraum auf Koulners Bubbles.`,
       url: canonicalUrl,
-      siteName: "Koulners Bubble",
+      siteName: "Koulners Bubbles",
       locale: "de_DE",
       type: "article",
       publishedTime: post.date,

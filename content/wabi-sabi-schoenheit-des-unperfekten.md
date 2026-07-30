@@ -6,7 +6,7 @@ category: "Philosophie"
 excerpt: "Warum uns die alte japanische Ästhetik des Wabi-Sabi lehrt, unsere Narben mit Gold zu füllen und den Zwang zur Makellosigkeit loszulassen."
 image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=80"
 readTime: "5 Min. Lesezeit"
-author: "Hermes & Koulners Bubble"
+author: "Hermes & Koulners Bubbles"
 ---
 
 Wir leben in einer Gesellschaft, die ständig nach Optimierung strebt: Makellose Gesichter auf Bildschirmen, perfekt organisierte Zeitpläne und der stetige Druck, fehlerfrei zu funktionieren. In dieser rastlosen Jagd ist **Wabi-Sabi** wie ein tiefer, befreiender Seufzer der Erleichterung.

@@ -6,7 +6,9 @@ import { Octokit } from "@octokit/rest";
 export async function POST(req: Request) {
   // 1. Enterprise-Grade Security Check (Crucial Whitelist Session Verification)
   const session = await auth();
-  if (!session?.user) {
+  const allowedUser = process.env.ALLOWED_GITHUB_USER;
+  const allowedEmail = process.env.ALLOWED_GITHUB_EMAIL;
+  if (!session?.user || (session.user.name !== allowedUser && session.user.email !== allowedUser && session.user.email !== allowedEmail)) {
     console.warn("[GITOPS BLOCKED] Unauthorized save attempt without valid whitelist session.");
     return NextResponse.json(
       { error: "Unauthorized: Active whitelisted session required for GitOps saving." },

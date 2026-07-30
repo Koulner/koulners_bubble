@@ -5,7 +5,9 @@ import { getAllPosts, getRawPostBySlug } from "@/lib/content";
 export async function GET(req: Request) {
   // Enterprise-Grade Security Check (Server-side Session Verify)
   const session = await auth();
-  if (!session?.user) {
+  const allowedUser = process.env.ALLOWED_GITHUB_USER;
+  const allowedEmail = process.env.ALLOWED_GITHUB_EMAIL;
+  if (!session?.user || (session.user.name !== allowedUser && session.user.email !== allowedUser && session.user.email !== allowedEmail)) {
     return NextResponse.json({ error: "Unauthorized: Active whitelisted session required." }, { status: 401 });
   }
 

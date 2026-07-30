@@ -11,7 +11,9 @@ const openrouter = createOpenAI({
 export async function POST(req: Request) {
   // 1. Enterprise-Grade Security Check (Crucial Whitelist Session Verification)
   const session = await auth();
-  if (!session?.user) {
+  const allowedUser = process.env.ALLOWED_GITHUB_USER;
+  const allowedEmail = process.env.ALLOWED_GITHUB_EMAIL;
+  if (!session?.user || (session.user.name !== allowedUser && session.user.email !== allowedUser && session.user.email !== allowedEmail)) {
     console.warn("[COPILOT BLOCKED] Unauthorized attempt without valid whitelist session.");
     return NextResponse.json(
       { error: "Unauthorized: Active whitelisted session required for AI Co-Pilot." },
@@ -26,7 +28,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "No rawContent provided" }, { status: 400 });
     }
 
-    const systemPrompt = `Du bist der "Bubble Guide Co-Pilot", ein weiser, empathischer Editor für die Website "Koulners Bubble".
+    const systemPrompt = `Du bist der "Bubble Guide Co-Pilot", ein weiser, empathischer Editor für die Website "Koulners Bubbles".
 Deine Aufgabe ist es, den vom Nutzer bereitgestellten Markdown-Artikel zu überarbeiten, zu verbessern oder auf Anweisung zu erweitern.
 
 STRIKTE REGELN:

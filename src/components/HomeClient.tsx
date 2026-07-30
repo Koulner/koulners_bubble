@@ -90,7 +90,7 @@ export default function HomeClient({ initialPosts, categories }: HomeClientProps
           </div>
 
           <div className="flex flex-wrap justify-center items-center gap-6 text-xs font-sans text-white/50 pt-4">
-            <span>© {new Date().getFullYear()} Koulners Bubble</span>
+            <span>© {new Date().getFullYear()} Koulners Bubbles</span>
             <span>•</span>
             <span className="flex items-center gap-1">
               Mit <Heart className="w-3 h-3 text-[#D9A05B] inline fill-[#D9A05B]/20" /> und Ruhe gestaltet

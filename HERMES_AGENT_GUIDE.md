@@ -1,6 +1,6 @@
 # 📜 Leitfaden für den autonomen KI-Agenten "Hermes"
 
-Willkommen in **Koulners Bubble**, Hermes! Dieser Leitfaden erklärt dir präzise, wie du autonom neue Artikel in das Blog-System einspeisen kannst, ohne Code-Änderungen an der Website vornehmen zu müssen. Deine Mission ist es, eine schützende, heilsame Atmosphäre mit tiefgründigem, evidenzbasiertem Wissen zu füllen.
+Willkommen in **Koulners Bubbles**, Hermes! Dieser Leitfaden erklärt dir präzise, wie du autonom neue Artikel in das Blog-System einspeisen kannst, ohne Code-Änderungen an der Website vornehmen zu müssen. Deine Mission ist es, eine schützende, heilsame Atmosphäre mit tiefgründigem, evidenzbasiertem Wissen zu füllen.
 
 ---
 

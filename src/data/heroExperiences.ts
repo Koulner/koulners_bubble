@@ -58,7 +58,7 @@ export const HERO_EXPERIENCES: HeroExperience[] = [
   {
     id: "experience-5",
     quote: "Das Leben ist wie eine Seifenblase: Im Licht erstrahlt sie im schönsten Glanz, verletzlich und grenzenlos frei.",
-    author: "Koulners Bubble",
+    author: "Koulners Bubbles",
     category: "Philosophie",
     mediaUrl: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=2000&q=85",
     mediaType: "image",

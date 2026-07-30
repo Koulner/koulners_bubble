@@ -23,7 +23,7 @@ export interface JsonLdProps {
 // Hilfsfunktion zur Generierung eines validen ISO-Datum-Strings für Schema.org
 function parseToIsoDate(dateStr?: string): string {
   if (!dateStr) return new Date().toISOString();
-  
+
   // Versuch 1: Direkter ISO-/Standard-Date-Parse
   const parsed = new Date(dateStr);
   if (!isNaN(parsed.getTime())) {
@@ -55,7 +55,7 @@ function parseToIsoDate(dateStr?: string): string {
       const monthStr = parts[1];
       const year = parts[2];
       const month = months[monthStr] || (isNaN(Number(monthStr)) ? "01" : monthStr.padStart(2, "0"));
-      
+
       const isoTry = new Date(`${year}-${month}-${day}T12:00:00Z`);
       if (!isNaN(isoTry.getTime())) {
         return isoTry.toISOString();
@@ -77,7 +77,7 @@ export default function JsonLd({
   const isoDate = parseToIsoDate(post.date);
   const categories = normalizeCategories(post.category);
   const mainCategory = categories[0] || "Gedanken";
-  
+
   // Bild-URL berechnen (Entweder S3/External Image oder Fallback auf unsere neue OG-Route)
   const imageUrl = post.image && post.image.startsWith("http")
     ? post.image
@@ -93,7 +93,7 @@ export default function JsonLd({
       "@id": articleUrl,
     },
     "headline": post.title,
-    "description": post.excerpt || `${post.title} - Ein geschützter Gedankenraum auf Koulners Bubble.`,
+    "description": post.excerpt || `${post.title} - Ein geschützter Gedankenraum auf Koulners Bubbles.`,
     "image": [imageUrl],
     "datePublished": isoDate,
     "dateModified": isoDate,
@@ -104,7 +104,7 @@ export default function JsonLd({
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Koulners Bubble",
+      "name": "Koulners Bubbles",
       "logo": {
         "@type": "ImageObject",
         "url": `${siteUrl.replace(/\/$/, "")}/favicon.ico`,

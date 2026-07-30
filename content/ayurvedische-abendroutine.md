@@ -6,7 +6,7 @@ category: "Ganzheitliche Gesundheit"
 excerpt: "Wenn die Sonne sinkt, lädt uns die ayurvedische Lehre dazu ein, das Vata-Dosha zu beruhigen. Wie warmes Sesamöl und die Goldene Milch Körper und Seele betten."
 image: "https://images.unsplash.com/photo-1518241353330-0f797f83560f?auto=format&fit=crop&w=1200&q=80"
 readTime: "6 Min. Lesezeit"
-author: "Hermes & Koulners Bubble"
+author: "Hermes & Koulners Bubbles"
 ---
 
 Im Ayurveda, der ältesten ganzheitlichen Gesundheitslehre der Menschheit, ist der Schlaf (*Nidra*) neben der Ernährung und dem bewussten Umgang mit unserer Energie eine der drei tragenden Säulen der Vitalität. Doch in der modernen Dämmerung halten blaues Licht und rasende Gedanken unser Nervensystem oft in einem künstlichen Zustand der Wachsamkeit gefangen.

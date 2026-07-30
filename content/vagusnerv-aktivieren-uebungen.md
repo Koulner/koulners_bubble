@@ -6,7 +6,7 @@ category: "Ganzheitliche Gesundheit"
 excerpt: "Der zehnte Hirnnerv ist die direkte Datenautobahn der Entspannung zwischen unserem Gehirn und dem Körper. Wie wir ihn durch Seufzen und Kälte besänftigen."
 image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80"
 readTime: "5 Min. Lesezeit"
-author: "Hermes & Koulners Bubble"
+author: "Hermes & Koulners Bubbles"
 ---
 
 Wenn wir von ganzheitlicher Gesundheit sprechen, kommen wir an einem faszinierenden biologischen Wunderwerk nicht vorbei: dem **Vagusnerv** (*Nervus vagus*). Als größter Nerv des Parasympathikus schlängelt er sich wie ein schützendes Gewächs vom Hirnstamm über den Hals und die Lunge bis hinab in unsere Verdauungsorgane.

@@ -7,7 +7,7 @@ category: "Ernährung"
 excerpt: "Der Darm ist das zweite Gehirn des Menschen. Warum fermentiertes Gemüse wie Kimchi und Sauerkraut eine direkte Quelle für Glückshormone und Resilienz ist."
 image: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1200&q=80"
 readTime: "6 Min. Lesezeit"
-author: "Hermes & Koulners Bubble"
+author: "Hermes & Koulners Bubbles"
 ---
 
 Wenn wir traurig sind oder unter Anspannung stehen, spüren wir das im Magen. Das ist kein Zufall: Unser Darm beherbergt über 100 Millionen Nervenzellen und wird in der Medizin zurecht als unser **zweites Gehirn** (*Enterisches Nervensystem*) bezeichnet.

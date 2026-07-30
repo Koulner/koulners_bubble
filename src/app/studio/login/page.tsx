@@ -31,7 +31,7 @@ function LoginContent() {
           </div>
           <h1 className="text-2xl font-bold text-white tracking-tight">Bubble Studio</h1>
           <p className="text-sm text-[#A3C9A8] mt-2">
-            Geschütztes Headless-CMS & GitOps-Steuerzentrale für Koulners Bubble.
+            Geschütztes Headless-CMS & GitOps-Steuerzentrale für Koulners Bubbles.
           </p>
         </div>
 
