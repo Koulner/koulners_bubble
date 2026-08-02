@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { Plus, Save, Trash2, Music, Loader2, Play, Pause } from "lucide-react";
-import { SoundTrack } from "@/components/hero/SoundscapeWidget";
+import { AmbientSound } from "@/components/hero/SoundscapeMixer";
 
 export default function SoundEditor() {
-  const [sounds, setSounds] = useState<SoundTrack[]>([]);
+  const [sounds, setSounds] = useState<AmbientSound[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [status, setStatus] = useState<{ type: "idle" | "success" | "error"; message?: string }>({ type: "idle" });
@@ -58,22 +58,16 @@ export default function SoundEditor() {
     }
   };
 
-  const updateSound = (id: string, field: keyof SoundTrack, value: any) => {
+  const updateSound = (id: string, field: keyof AmbientSound, value: any) => {
     setSounds(sounds.map(s => (s.id === id ? { ...s, [field]: value } : s)));
   };
 
-  const updateMoods = (id: string, moodsString: string) => {
-    const moodsArray = moodsString.split(",").map(m => m.trim()).filter(Boolean);
-    updateSound(id, "moods", moodsArray);
-  };
-
   const addSound = () => {
-    const newSound: SoundTrack = {
+    const newSound: AmbientSound = {
       id: `sound-${Date.now()}`,
       title: "Neuer Sound",
-      type: "nature",
-      url: "",
-      moods: ["Relax"],
+      category: "nature",
+      url: ""
     };
     setSounds([...sounds, newSound]);
   };
@@ -137,15 +131,19 @@ export default function SoundEditor() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-text-muted mb-1 uppercase tracking-wider">Typ</label>
+                  <label className="block text-xs font-medium text-text-muted mb-1 uppercase tracking-wider">Kategorie</label>
                   <select
-                    value={sound.type}
-                    onChange={(e) => updateSound(sound.id, "type", e.target.value)}
+                    value={sound.category}
+                    onChange={(e) => updateSound(sound.id, "category", e.target.value)}
                     className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-sage"
                   >
-                    <option value="nature">Nature</option>
-                    <option value="frequency">Frequency</option>
-                    <option value="melody">Melody</option>
+                    <option value="frequency">Frequenzen</option>
+                    <option value="binaural">Binaurale Beats</option>
+                    <option value="percussion">Trommeln & Klangschalen</option>
+                    <option value="flute">Flöten</option>
+                    <option value="voice">Stimmen & Mantren</option>
+                    <option value="nature">Naturgeräusche</option>
+                    <option value="ambient">Atmosphäre & Rauschen</option>
                   </select>
                 </div>
               </div>
@@ -169,16 +167,6 @@ export default function SoundEditor() {
                       {previewTrack === sound.url ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
                     </button>
                   </div>
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-text-muted mb-1 uppercase tracking-wider">Stimmungen (kommagetrennt)</label>
-                  <input 
-                    type="text" 
-                    value={sound.moods.join(", ")} 
-                    onChange={(e) => updateMoods(sound.id, e.target.value)}
-                    placeholder="Focus, Relax, Meditate..."
-                    className="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-sage text-sm"
-                  />
                 </div>
               </div>
             </div>

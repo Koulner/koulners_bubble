@@ -43,7 +43,7 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import { mdxComponents } from "@/components/mdx/MDXComponents";
 import HeroEditor from "@/app/studio/components/HeroEditor";
-import SoundEditor from "@/app/studio/components/SoundEditor";
+import SoundManager from "@/app/studio/components/SoundManager";
 import BubbleConfigEditor from "@/app/studio/components/BubbleConfigEditor";
 
 interface ArticleMeta {
@@ -723,7 +723,7 @@ Hier folgt das wissenschaftliche oder praktische Fundament deines Textes...
             {activeTab === "hero" ? (
               <HeroEditor />
             ) : activeTab === "sounds" ? (
-              <SoundEditor />
+              <SoundManager />
             ) : activeTab === "bubbleConfig" ? (
               <BubbleConfigEditor />
             ) : activeTab === "categories" ? (

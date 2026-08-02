@@ -1,23 +1,33 @@
 [
-  {
-    "id": "sound-1",
-    "title": "432 Hz Solfeggio Resonanz",
-    "type": "frequency",
-    "url": "https://cdn.pixabay.com/audio/2022/10/25/audio_2e2edc41b8.mp3",
-    "moods": ["Meditate", "Relax"]
-  },
-  {
-    "id": "sound-2",
-    "title": "Sanftes Waldrauschen",
-    "type": "nature",
-    "url": "https://cdn.pixabay.com/audio/2022/01/21/audio_51d2007f35.mp3",
-    "moods": ["Relax", "Focus"]
-  },
-  {
-    "id": "sound-3",
-    "title": "Weicher Wind in den Kiefern",
-    "type": "nature",
-    "url": "https://cdn.pixabay.com/audio/2021/08/04/audio_dc39b8bc78.mp3",
-    "moods": ["Focus", "Meditate"]
-  }
+  { "id": "freq-1", "title": "432 Hz (Tiefe Resonanz)", "category": "frequency", "enabled": true, "url": "/sounds/horse.mp3" },
+  { "id": "freq-2", "title": "528 Hz (Subtile Schwingung)", "category": "frequency", "enabled": true, "url": "/sounds/horse.mp3" },
+  { "id": "freq-3", "title": "396 Hz (Kraftfeld)", "category": "frequency", "enabled": true, "url": "/sounds/horse.mp3" },
+
+  { "id": "bin-1", "title": "Theta-Wellen (Tiefensphäre)", "category": "binaural", "enabled": true, "url": "/sounds/horse.mp3" },
+  { "id": "bin-2", "title": "Delta-Wellen (Ruhepuls / Brown Noise)", "category": "binaural", "enabled": true, "url": "/sounds/horse.mp3" },
+  { "id": "bin-3", "title": "Alpha-Wellen (Fokus-Rauschen)", "category": "binaural", "enabled": true, "url": "/sounds/horse.mp3" },
+  { "id": "bin-4", "title": "Gamma-Wellen (Aktivierung)", "category": "binaural", "enabled": true, "url": "/sounds/horse.mp3" },
+
+  { "id": "perc-1", "title": "Tibetischer Gong", "category": "percussion", "enabled": true, "url": "/sounds/trex.mp3" },
+  { "id": "perc-2", "title": "Schamanisches Trommeln", "category": "percussion", "enabled": true, "url": "/sounds/trex.mp3" },
+  { "id": "perc-3", "title": "Koshi Klangspiel (Metall)", "category": "percussion", "enabled": true, "url": "/sounds/trex.mp3" },
+  { "id": "perc-4", "title": "Tempelglocke", "category": "percussion", "enabled": true, "url": "/sounds/trex.mp3" },
+
+  { "id": "flute-1", "title": "Shakuhachi (Holzklang)", "category": "flute", "enabled": true, "url": "/sounds/horse.mp3" },
+  { "id": "flute-2", "title": "Bansuri (Windhauch)", "category": "flute", "enabled": true, "url": "/sounds/horse.mp3" },
+  { "id": "flute-3", "title": "Sphärische Flöte", "category": "flute", "enabled": true, "url": "/sounds/horse.mp3" },
+
+  { "id": "voice-1", "title": "Engelschor (Ethereal)", "category": "voice", "enabled": true, "url": "/sounds/trex.mp3" },
+  { "id": "voice-2", "title": "OM-Mantra (Tiefes Summen)", "category": "voice", "enabled": true, "url": "/sounds/trex.mp3" },
+  { "id": "voice-3", "title": "Sanftes Flüstern (Murmeln)", "category": "voice", "enabled": true, "url": "/sounds/trex.mp3" },
+  { "id": "voice-4", "title": "Kloster-Atmosphäre", "category": "voice", "enabled": true, "url": "/sounds/trex.mp3" },
+
+  { "id": "nature-1", "title": "Sanfter Regen auf dem Dach", "category": "nature", "enabled": true, "url": "/sounds/horse.mp3" },
+  { "id": "nature-2", "title": "Knisterndes Lagerfeuer", "category": "nature", "enabled": true, "url": "/sounds/horse.mp3" },
+  { "id": "nature-3", "title": "Morgendlicher Wald", "category": "nature", "enabled": true, "url": "/sounds/horse.mp3" },
+  { "id": "nature-4", "title": "Ozeanwellen an der Küste", "category": "nature", "enabled": true, "url": "/sounds/horse.mp3" },
+
+  { "id": "amb-1", "title": "Entspannter Café-Hintergrund", "category": "ambient", "enabled": true, "url": "/sounds/trex.mp3" },
+  { "id": "amb-2", "title": "Abendlicher Herbstwind", "category": "ambient", "enabled": true, "url": "/sounds/trex.mp3" },
+  { "id": "amb-3", "title": "Deep Space Pad (Synth)", "category": "ambient", "enabled": true, "url": "/sounds/trex.mp3" }
 ]

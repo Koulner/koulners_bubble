@@ -46,9 +46,8 @@ export default function Home() {
       {
         id: "sound-fallback",
         title: "Ambient Fallback",
-        type: "nature",
-        url: "https://cdn.pixabay.com/audio/2022/10/25/audio_2e2edc41b8.mp3",
-        moods: ["Relax"]
+        url: "/sounds/horse.mp3",
+        category: "nature"
       }
     ];
   }
@@ -65,3 +64,9 @@ export default function Home() {
 
   return <HomeClient initialPosts={posts} categories={categories} heroEntries={heroEntries} sounds={sounds} bubbleConfig={bubbleConfig} />;
 }
+// Force Turbopack reload
+ 
+ 
+ 
+ 
+ 

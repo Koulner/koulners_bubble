@@ -12,8 +12,8 @@ export interface HeroEntry {
   altText: string;
 }
 
-// Lazy Load des Soundscape Widgets für LCP-Optimierung
-const SoundscapeWidget = dynamic(() => import("./SoundscapeWidget"), { ssr: false });
+// Lazy Load des Soundscape Mixers für LCP-Optimierung
+const SoundscapeMixer = dynamic(() => import("./SoundscapeMixer"), { ssr: false });
 const SearchOverlay = dynamic(() => import("../SearchOverlay"), { ssr: false });
 
 interface DynamicHeroClientProps {
@@ -114,7 +114,7 @@ export default function DynamicHeroClient({ entries, sounds }: DynamicHeroClient
         
         <div className="flex items-center gap-3">
           <SearchOverlay />
-          <SoundscapeWidget sounds={sounds} />
+          <SoundscapeMixer sounds={sounds} />
         </div>
       </div>
 

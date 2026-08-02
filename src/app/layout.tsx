@@ -3,6 +3,7 @@ import { Playfair_Display, Outfit } from "next/font/google";
 import "./globals.css";
 import BubbleMentor from "@/components/BubbleMentor";
 import CookieConsent from "@/components/CookieConsent";
+import GlobalAudioProvider from "@/components/GlobalAudioProvider";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -40,6 +41,7 @@ export default function RootLayout({
         {children}
         <BubbleMentor />
         <CookieConsent />
+        <GlobalAudioProvider />
       </body>
     </html>
   );

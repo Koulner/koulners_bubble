@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { saveLocalPost } from "@/lib/content";
 import { Octokit } from "@octokit/rest";
+import { revalidatePath } from "next/cache";
 
 export async function POST(req: Request) {
   // 1. Enterprise-Grade Security Check (Crucial Whitelist Session Verification)
@@ -38,6 +39,11 @@ export async function POST(req: Request) {
 
     if (!token) {
       console.warn("[GITOPS] No GITHUB_PERSONAL_ACCESS_TOKEN present. Saved locally only.");
+      
+      // Revalidate cache to ensure changes reflect immediately
+      revalidatePath("/");
+      revalidatePath("/studio");
+      
       return NextResponse.json({
         success: true,
         gitOps: false,
@@ -87,6 +93,10 @@ export async function POST(req: Request) {
         console.error(`[GITOPS ERROR] Could not commit ${filePath}:`, err.message);
       }
     }
+
+    // Revalidate cache to ensure changes reflect immediately
+    revalidatePath("/");
+    revalidatePath("/studio");
 
     return NextResponse.json({
       success: true,

@@ -8,6 +8,9 @@ import { normalizeCategories } from "@/lib/categories";
 import { ArrowLeft, Clock, Calendar, User, Sparkles, Share2, Heart } from "lucide-react";
 import RelatedArticles from "./RelatedArticles";
 import NewsletterBox from "./NewsletterBox";
+import dynamic from "next/dynamic";
+
+const SoundscapeMixer = dynamic(() => import("./hero/SoundscapeMixer"), { ssr: false });
 
 interface BlogPostClientProps {
   post: BlogPostFull;
@@ -28,14 +31,17 @@ export default function BlogPostClient({ post, relatedPosts, children }: BlogPos
             <div className="w-8 h-8 rounded-full bg-bg-sand flex items-center justify-center group-hover:bg-sage group-hover:text-white transition-all duration-300">
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" />
             </div>
-            <span>Zurück in die Bubble</span>
+            <span>Zurück zur Bubbleübersicht</span>
           </Link>
 
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-sage animate-pulse" />
-            <span className="font-serif text-sm tracking-wide text-text-dark hidden sm:inline">
-              Koulners <span className="italic font-light text-sage-dark">Journal</span>
-            </span>
+          <div className="flex items-center gap-6">
+            <div className="hidden sm:flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-sage animate-pulse" />
+              <span className="font-serif text-sm tracking-wide text-text-dark">
+                Koulners <span className="italic font-light text-sage-dark">Journal</span>
+              </span>
+            </div>
+            <SoundscapeMixer />
           </div>
         </div>
       </nav>

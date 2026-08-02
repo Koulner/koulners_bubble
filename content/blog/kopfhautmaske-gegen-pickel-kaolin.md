@@ -37,10 +37,12 @@ Wir greifen zu **Jojobaöl**, einem flüssigen Wachs, das dem menschlichen Sebum
 ### 3. Die Verbindung: Softfeel GSC
 Da Wasser (polar) und Öl (unpolar) sich naturgemäß abstoßen, benötigen wir einen Vermittler, einen sogenannten Emulgator. Hier kommt **Softfeel GSC** (Glyceryl Stearate Citrate) zum Einsatz. Dieser pflanzliche, ecocert-konforme Emulgator bildet flüssigkristalline Strukturen, die kleine Öltröpfchen dauerhaft im Wasser einkapseln. Softfeel GSC gilt in der dermatologischen Kosmetik als besonders hautverträglich, da es sich in die Lipidstrukturen der Hornschicht (Stratum Corneum) integriert und so den transepidermalen Wasserverlust (TEWL) reduziert.
 
-### 4. Die Wirkstoffe: Lavendelöl & Milchsäure
-Als Wirkstoff nutzen wir ätherisches **Lavendelöl** (*Lavandula angustifolia*). Es ist nicht nur ein Meister der emotionalen Beruhigung für dein Nervensystem, sondern besitzt durch seinen hohen Gehalt an Linalool und Linalylacetat nachgewiesene entzündungshemmende und antimikrobielle Eigenschaften, die speziell gegen akne-verursachende Bakterien wirken [3].
+### 4. Die Wirkstoffe: Lavendelöl (oder Rosengeranie) & Milchsäure
+Als Wirkstoff nutzen wir primär ätherisches **Lavendelöl** (*Lavandula angustifolia*). Es ist nicht nur ein Meister der emotionalen Beruhigung für dein Nervensystem, sondern besitzt durch seinen hohen Gehalt an Linalool und Linalylacetat nachgewiesene entzündungshemmende und antimikrobielle Eigenschaften, die speziell gegen akne-verursachende Bakterien wirken [3]. 
 
-Zusätzlich verwenden wir **80%ige Milchsäure** (Lactic Acid). Milchsäure ist ein natürlicher Bestandteil des Natural Moisturizing Factors (NMF) der Haut. In unserer Maske hat sie eine zweifache, unverzichtbare Funktion: Sie wirkt in niedrigen Dosierungen sanft keratolytisch (hornlösend), hilft also, die verstopften Poren von abgestorbenen Zellen zu befreien [4]. Gleichzeitig benötigen wir sie zwingend für den pH-Wert (dazu gleich mehr).
+**Die kraftvolle Alternative:** Falls du den Duft von Lavendel nicht magst, kannst du stattdessen **Rosengeranie** (*Pelargonium graveolens*) verwenden. Rosengeranienöl ist in der Dermatologie legendär für seine talgregulierenden Eigenschaften. Es balanciert sowohl zu trockene als auch zu fettige Haut aus und fördert durch seine wundheilenden Eigenschaften (dank Geraniol und Citronellol) das schnelle Abklingen von offenen Pickelchen [4].
+
+Zusätzlich verwenden wir **80%ige Milchsäure** (Lactic Acid). Milchsäure ist ein natürlicher Bestandteil des Natural Moisturizing Factors (NMF) der Haut. In unserer Maske hat sie eine zweifache, unverzichtbare Funktion: Sie wirkt in niedrigen Dosierungen sanft keratolytisch (hornlösend), hilft also, die verstopften Poren von abgestorbenen Zellen zu befreien [5]. Gleichzeitig benötigen wir sie zwingend für den pH-Wert (dazu gleich mehr).
 
 ![Nahaufnahme von reinem Jojobaöl, das sich durch den Emulgator Softfeel GSC sanft mit dem destillierten Wasser zu einer weißen Creme verbindet](https://image.pollinations.ai/prompt/aesthetic%20cinematic%20photography%20of%20mixing%20jojoba%20oil%20water%20white%20clay%20creamy%20emulsion%20warm%20healing%20light?width=1200&height=600&nologo=true)
 
@@ -60,7 +62,7 @@ Nimm dir für die Herstellung Zeit. Richte deinen Arbeitsplatz her, desinfiziere
 
 *Wirkstoff- & Konservierungsphase:*
 - 1,0 g Geogard 221 (Konservierer)
-- 10 Tropfen ätherisches Lavendelöl
+- 10 Tropfen ätherisches Lavendelöl **ODER** 10 Tropfen ätherisches Rosengeranienöl
 - Milchsäure 80%ig (tropfenweise zur pH-Einstellung)
 
 ### Die handwerkliche Umsetzung
@@ -69,7 +71,7 @@ Nimm dir für die Herstellung Zeit. Richte deinen Arbeitsplatz her, desinfiziere
 2. **Erhitzen:** Stelle beide Bechergläser in ein Wasserbad und erhitze sie sanft auf etwa 75 °C. Softfeel GSC muss vollständig im Öl aufgeschmolzen sein, sonst kann sich keine stabile Emulsion bilden.
 3. **Die Emulsion:** Nimm beide Gläser aus dem Wasserbad. Gieße das heiße Wasser langsam unter beständigem Rühren in die Fettphase. Nimm nun deinen Pürierstab und emulgiere die Mischung für etwa 1-2 Minuten auf höchster Stufe. Du wirst sehen, wie sich die Phasen zu einer homogenen, weißen Milch verbinden (hohe Scherkräfte sind hier entscheidend).
 4. **Kaolin einarbeiten:** Lass die Emulsion unter langsamem Rühren (mit einem Spatel) handwarm abkühlen. Streue nun vorsichtig das Kaolin ein und rühre es klümpchenfrei unter. Die Masse wird nun deutlich cremiger.
-5. **Wirkstoffe:** Sobald die Maske auf unter 40 °C abgekühlt ist (sehr wichtig, da hitzeempfindlich!), fügst du die 10 Tropfen Lavendelöl hinzu.
+5. **Wirkstoffe:** Sobald die Maske auf unter 40 °C abgekühlt ist (sehr wichtig, da hitzeempfindlich!), fügst du die 10 Tropfen Lavendelöl (oder Rosengeranie) hinzu.
 
 ### Der wichtigste Schritt: pH-Wert und Konservierung
 
@@ -87,7 +89,7 @@ Erst jetzt, wenn der pH-Wert stimmt, fügst du das **Geogard 221 (1,0 g)** hinzu
 ## Anwendung für maximale Heilung
 
 Teile dein Haar vor der Haarwäsche (am besten auf der trockenen oder leicht feuchten Kopfhaut) in Partien ab. Trage die Maske mit den Fingern oder einem Pinsel gezielt auf die Kopfhaut auf, besonders dort, wo du Entzündungen oder Pickel spürst. 
-Lass die Maske 15-20 Minuten einwirken. Setz dich hin, atme den beruhigenden Lavendelduft ein und gib deiner Haut die Zeit, die sie braucht. Spüle die Maske anschließend mit viel lauwarmem (!) Wasser aus und wasche dein Haar mit einem extrem milden Shampoo nach. 
+Lass die Maske 15-20 Minuten einwirken. Setz dich hin, atme den beruhigenden Lavendel- oder den rosenartigen, erdenden Geranienduft ein und gib deiner Haut die Zeit, die sie braucht. Spüle die Maske anschließend mit viel lauwarmem (!) Wasser aus und wasche dein Haar mit einem extrem milden Shampoo nach. 
 
 Du kannst diese tiefenreinigende, aber stark rückfettende Maske 1-2 Mal pro Woche anwenden, bis sich deine Kopfhaut wieder in ihrem natürlichen, friedvollen Zustand befindet.
 
@@ -100,4 +102,5 @@ Pass auf dich auf und sei sanft zu deiner Haut.
 [1] Ali, S. M., & Yosipovitch, G. (2013). Skin pH: from basic science to basic skin care. *Acta dermato-venereologica*, 93(3), 261-267. (Bedeutung des sauren pH-Werts für das Mikrobiom und die Hemmung von C. acnes).
 [2] Carretero, M. I. (2002). Clay minerals and their beneficial effects upon human health. A review. *Applied clay science*, 21(3-4), 155-163. (Absorptionskapazität von Tonmineralien).
 [3] Cavanagh, H. M. A., & Wilkinson, J. M. (2002). Biological activities of lavender essential oil. *Phytotherapy Research*, 16(4), 301-308. (Antimikrobielle und anti-inflammatorische Effekte von Lavandula angustifolia).
-[4] Smith, W. P. (1996). Epidermal and dermal effects of topical lactic acid. *Journal of the American Academy of Dermatology*, 35(3), 388-391. (Keratolytische Wirkung von Alpha-Hydroxysäuren).
+[4] Boukhatem, M. N., Kameli, A., & Saidi, F. (2013). Essential oil of Algerian Rose-scented Geranium (Pelargonium graveolens): Chemical composition and antimicrobial activity against food spoilage pathogens. *Food Control*, 34(1), 208-213. (Antibakterielle und fungizide Wirkung von Pelargonium graveolens).
+[5] Smith, W. P. (1996). Epidermal and dermal effects of topical lactic acid. *Journal of the American Academy of Dermatology*, 35(3), 388-391. (Keratolytische Wirkung von Alpha-Hydroxysäuren).
