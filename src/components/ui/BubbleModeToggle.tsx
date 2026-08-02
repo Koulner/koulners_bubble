@@ -5,8 +5,12 @@ import { Sparkles, CircleDashed } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-export function BubbleModeToggle() {
-  const { isBubbleModeActive, toggleBubbleMode } = useBubbleStore();
+interface BubbleModeToggleProps {
+  requiredPops: number;
+}
+
+export function BubbleModeToggle({ requiredPops }: BubbleModeToggleProps) {
+  const { isBubbleModeActive, toggleBubbleMode, poppedCount } = useBubbleStore();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -15,10 +19,13 @@ export function BubbleModeToggle() {
 
   if (!mounted) return null;
 
+  // Render toggle only if user popped enough bubbles
+  if (poppedCount < requiredPops) return null;
+
   return (
     <button
       onClick={toggleBubbleMode}
-      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/80 hover:text-white hover:bg-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-white/50"
+      className="fixed bottom-6 left-6 z-50 flex items-center justify-center w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/80 hover:text-white hover:bg-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-white/50"
       aria-label="Toggle Bubble Mode"
       title="Toggle Bubble Mode"
     >

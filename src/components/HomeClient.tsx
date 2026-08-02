@@ -1,7 +1,10 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+import SearchOverlay from "@/components/SearchOverlay";
 import DynamicHeroClient from "./hero/DynamicHeroClient";
+import { BubbleBackground } from "@/components/ui/BubbleBackground";
+import { BubbleModeToggle } from "@/components/ui/BubbleModeToggle";
 import { HeroEntry } from "./hero/DynamicHeroClient";
 import Navigation from "./Navigation";
 import BlogSection from "./BlogSection";
@@ -13,9 +16,10 @@ interface HomeClientProps {
   categories: string[];
   heroEntries: any[]; // we use any here to avoid cyclic type dependencies if needed, or better HeroEntry[]
   sounds: any[];
+  bubbleConfig: { requiredPopsForMode: number };
 }
 
-export default function HomeClient({ initialPosts, categories, heroEntries, sounds }: HomeClientProps) {
+export default function HomeClient({ initialPosts, categories, heroEntries, sounds, bubbleConfig }: HomeClientProps) {
   const [activeCategory, setActiveCategory] = useState<string>("Alle");
   const exploreRef = useRef<HTMLDivElement | null>(null);
 
@@ -24,7 +28,10 @@ export default function HomeClient({ initialPosts, categories, heroEntries, soun
   };
 
   return (
-    <main className="min-h-screen flex flex-col bg-[#050B08] selection:bg-[#2D5A3C] selection:text-white">
+    <main className="min-h-screen flex flex-col bg-[#050B08] selection:bg-[#2D5A3C] selection:text-white relative">
+      <BubbleBackground />
+      <BubbleModeToggle requiredPops={bubbleConfig.requiredPopsForMode} />
+      
       {/* 1. Das dynamische 100vh Erlebnis */}
       <DynamicHeroClient entries={heroEntries} sounds={sounds} />
 

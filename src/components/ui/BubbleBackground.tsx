@@ -14,7 +14,7 @@ interface BubbleData {
 }
 
 export function BubbleBackground() {
-  const { isBubbleModeActive } = useBubbleStore();
+  const { isBubbleModeActive, incrementPoppedCount } = useBubbleStore();
   const [bubbles, setBubbles] = useState<BubbleData[]>([]);
   const [mounted, setMounted] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -60,13 +60,22 @@ export function BubbleBackground() {
   }, [isBubbleModeActive, mounted, prefersReducedMotion, bubbles.length, generateBubble]);
 
   const handlePop = useCallback((id: string) => {
-    setBubbles((current) => current.filter((b) => b.id !== id));
-  }, []);
+    incrementPoppedCount();
+    setBubbles((current) => {
+      return current.map(b => {
+        if (b.id === id) {
+          // Replace with a new bubble at the bottom so the density stays constant
+          return generateBubble();
+        }
+        return b;
+      });
+    });
+  }, [incrementPoppedCount, generateBubble]);
 
   if (!mounted) return null;
 
   return (
-    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+    <div className="fixed inset-0 z-40 overflow-hidden pointer-events-none">
       {bubbles.map((bubble) => (
         <Bubble
           key={bubble.id}

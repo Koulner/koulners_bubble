@@ -48,8 +48,6 @@ const BubbleComponent = ({ id, initialX, initialY, size, duration, delay, onPop 
     });
   };
 
-  if (popped) return null;
-
   return (
     <motion.div
       className="absolute rounded-full border border-white/20 bg-white/5 backdrop-blur-[2px]"

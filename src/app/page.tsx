@@ -53,5 +53,15 @@ export default function Home() {
     ];
   }
 
-  return <HomeClient initialPosts={posts} categories={categories} heroEntries={heroEntries} sounds={sounds} />;
+  let bubbleConfig = { requiredPopsForMode: 5 };
+  try {
+    const bubbleConfigPath = path.join(process.cwd(), "content", "bubble-config.json");
+    if (fs.existsSync(bubbleConfigPath)) {
+      bubbleConfig = JSON.parse(fs.readFileSync(bubbleConfigPath, "utf8"));
+    }
+  } catch (error) {
+    console.error("Error reading bubble-config.json:", error);
+  }
+
+  return <HomeClient initialPosts={posts} categories={categories} heroEntries={heroEntries} sounds={sounds} bubbleConfig={bubbleConfig} />;
 }
