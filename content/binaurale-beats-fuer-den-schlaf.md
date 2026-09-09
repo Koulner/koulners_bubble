@@ -1,6 +1,7 @@
 ---
+archived: true
 
-draft: true
+draft: false
 title: "Binaurale Beats & Delta-Wellen: Die unsichtbare Klangtherapie für tiefen Schlaf"
 date: "2026-07-18"
 category: "Frequenzen"

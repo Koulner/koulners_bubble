@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Heimische Beeren für dein Immunsystem: Warum Hagebutte und Holunder jedes exotische Superfood übertreffen"
 category: "Wilde Apotheke & Waldnahrung"
 level: "Praxis"

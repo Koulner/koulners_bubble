@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Wärmendes Morgen-Porridge mit Kardamom & Zimt: Balsam für deine innere Mitte"
 date: "2026-07-27"
 category: "Ernährung"

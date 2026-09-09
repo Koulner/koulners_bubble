@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Die Melodie des Regens: Warum das Rauschen der Tropfen unsere Gedanken beruhigt"
 date: "2026-07-26"
 category: "Natur"

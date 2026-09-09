@@ -11,9 +11,10 @@ interface BubbleProps {
   duration: number;
   delay: number;
   onPop?: (id: string) => void;
+  config?: { opacity?: number; blur?: number };
 }
 
-const BubbleComponent = ({ id, initialX, initialY, size, duration, delay, onPop }: BubbleProps) => {
+const BubbleComponent = ({ id, initialX, initialY, size, duration, delay, onPop, config }: BubbleProps) => {
   const [popped, setPopped] = useState(false);
   const controls = useAnimation();
 
@@ -48,9 +49,15 @@ const BubbleComponent = ({ id, initialX, initialY, size, duration, delay, onPop 
     });
   };
 
+  const opacityPercent = config?.opacity ?? 5; // Default 5%
+  const blurPx = config?.blur ?? 2; // Default 2px
+  const bgOpacity = opacityPercent / 100;
+  // Border is usually slightly more visible than bg. Let's make it 3x the bg opacity, capped at 1.
+  const borderOpacity = Math.min(bgOpacity * 3, 1);
+
   return (
     <motion.div
-      className="absolute rounded-full border border-white/20 bg-white/5 backdrop-blur-[2px]"
+      className="absolute rounded-full"
       style={{
         width: size,
         height: size,
@@ -58,6 +65,10 @@ const BubbleComponent = ({ id, initialX, initialY, size, duration, delay, onPop 
         top: 0,
         x: initialX,
         y: initialY,
+        backgroundColor: `rgba(255, 255, 255, ${bgOpacity})`,
+        border: `1px solid rgba(255, 255, 255, ${borderOpacity})`,
+        backdropFilter: `blur(${blurPx}px)`,
+        WebkitBackdropFilter: `blur(${blurPx}px)`,
       }}
       animate={controls}
     >

@@ -1,5 +1,5 @@
 ---
-archived: false
+archived: true
 draft: false
 title: "Die heilende Kraft der Stille: Neurobiologie der Ruhe und 3 somatische Alltagsübungen"
 category: "Ganzheitliche Gesundheit"

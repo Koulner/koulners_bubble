@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Die starke Mitte: Warum funktionelles Core-Training unsere äußere Haltung und innere Ruhe lenkt"
 date: "2026-07-25"
 category: "Funktionelles Training"

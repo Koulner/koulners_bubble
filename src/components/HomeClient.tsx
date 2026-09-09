@@ -16,7 +16,7 @@ interface HomeClientProps {
   categories: string[];
   heroEntries: any[]; // we use any here to avoid cyclic type dependencies if needed, or better HeroEntry[]
   sounds: any[];
-  bubbleConfig: { requiredPopsForMode: number };
+  bubbleConfig: { requiredPopsForMode: number; opacity?: number; blur?: number };
 }
 
 export default function HomeClient({ initialPosts, categories, heroEntries, sounds, bubbleConfig }: HomeClientProps) {
@@ -29,7 +29,7 @@ export default function HomeClient({ initialPosts, categories, heroEntries, soun
 
   return (
     <main className="min-h-screen flex flex-col bg-[#050B08] selection:bg-[#2D5A3C] selection:text-white relative">
-      <BubbleBackground />
+      <BubbleBackground config={{ opacity: bubbleConfig.opacity, blur: bubbleConfig.blur }} />
       <BubbleModeToggle requiredPops={bubbleConfig.requiredPopsForMode} />
       
       {/* 1. Das dynamische 100vh Erlebnis */}

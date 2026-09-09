@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Die Gelassenheit des Stoizismus: Wie alte Philosophie unsere Seele vor dem Lärm der Moderne schützt"
 date: "2026-07-25"
 category: "Philosophie"

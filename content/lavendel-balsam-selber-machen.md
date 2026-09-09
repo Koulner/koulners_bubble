@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Beruhigender Lavendel-Kamille-Balsam: Deine DIY-Pflege für unruhige Stunden und trockene Haut"
 date: "2026-07-20"
 category: "DIY Kosmetik"

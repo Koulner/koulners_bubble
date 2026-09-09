@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Die Macht der Fungi: Warum der heimische Birkenporling unsere magische Waldmedizin ist und wie du einen Vitalpilz-Tee braust"
 category: "Wilde Apotheke & Waldnahrung"
 level: "Deep Dive"

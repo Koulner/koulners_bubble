@@ -41,6 +41,7 @@ import { signOut } from "next-auth/react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
+import rehypeRaw from "rehype-raw";
 import { mdxComponents } from "@/components/mdx/MDXComponents";
 import HeroEditor from "@/app/studio/components/HeroEditor";
 import SoundManager from "@/app/studio/components/SoundManager";

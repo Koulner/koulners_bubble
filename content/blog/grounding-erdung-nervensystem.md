@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Grounding (Erdung): Die biophysikalische Heilkraft des Barfußlaufens für dein Nervensystem"
 category: "Philosophie"
 level: "Praxis"

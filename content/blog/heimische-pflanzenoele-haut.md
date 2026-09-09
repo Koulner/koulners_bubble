@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Heimische Pflanzenöle für die Haut: Ringelblume, Hagebutte & Hanf als alchemistische Barriere-Heiler"
 category: "DIY Kosmetik"
 level: "Praxis"

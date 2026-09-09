@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Die Upanischaden: Was Eknath Easwarans Meisterwerk über Quantenphysik, das innere Selbst (Atman) und die Illusion der Trennung lehrt"
 category: "Bücher"
 level: "Deep Dive"

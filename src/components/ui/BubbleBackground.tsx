@@ -13,8 +13,8 @@ interface BubbleData {
   delay: number;
 }
 
-export function BubbleBackground() {
-  const { isBubbleModeActive, incrementPoppedCount } = useBubbleStore();
+export function BubbleBackground({ config }: { config?: { opacity?: number; blur?: number } }) {
+  const { isBubbleModeActive, incrementPoppedCount, isVisitorEnabled } = useBubbleStore();
   const [bubbles, setBubbles] = useState<BubbleData[]>([]);
   const [mounted, setMounted] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -72,7 +72,7 @@ export function BubbleBackground() {
     });
   }, [incrementPoppedCount, generateBubble]);
 
-  if (!mounted) return null;
+  if (!mounted || !isVisitorEnabled) return null;
 
   return (
     <div className="fixed inset-0 z-40 overflow-hidden pointer-events-none">
@@ -86,6 +86,7 @@ export function BubbleBackground() {
           duration={prefersReducedMotion ? 0 : bubble.duration}
           delay={prefersReducedMotion ? 0 : bubble.delay}
           onPop={handlePop}
+          config={config}
         />
       ))}
     </div>

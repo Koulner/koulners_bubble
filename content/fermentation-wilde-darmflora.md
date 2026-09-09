@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Die Alchemie der Fermentation: Wie wilde Milchsäurebakterien unser Mikrobiom stärken und das Immunsystem trainieren"
 category: "Körper & Ernährung"
 level: "Deep Dive"

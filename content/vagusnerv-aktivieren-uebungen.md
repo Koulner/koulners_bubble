@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Der Vagusnerv als Ruhe-Anker: 3 sanfte Übungen für dein Nervensystem"
 date: "2026-07-23"
 category: "Ganzheitliche Gesundheit"

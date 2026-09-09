@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Der heilende Rhythmus des Abends: Eine sanfte ayurvedische Routine für tiefen Schlaf"
 date: "2026-07-22"
 category: "Ganzheitliche Gesundheit"

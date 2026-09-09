@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Sanfte Mobilität am Morgen: 3 natürliche Bewegungen für gelenkschmeichelnde Freiheit"
 date: "2026-07-28"
 category: "Funktionelles Training"

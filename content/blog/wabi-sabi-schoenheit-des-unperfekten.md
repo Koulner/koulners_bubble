@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Wabi-Sabi: Die befreiende Schönheit des Unperfekten und Vergänglichen"
 date: "2026-07-24"
 category: "Philosophie"

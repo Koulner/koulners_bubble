@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Das Leben in Zyklen: Warum wir in Rhythmen aufblühen und wie uns die alte Philosophie des Jahreskreises heilt"
 category: "Philosophie & Natur"
 level: "Deep Dive"

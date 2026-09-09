@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Die stille Kraft des Waldbadens: Wie Bäume unser Nervensystem heilen"
 date: "2026-07-27"
 category: "Natur"

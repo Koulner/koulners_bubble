@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "The Master Key System: Wie Charles F. Haanel vor über 100 Jahren die Neuroplastizität und die Macht der Aufmerksamkeit entschlüsselte"
 category: "Bücher"
 level: "Deep Dive"

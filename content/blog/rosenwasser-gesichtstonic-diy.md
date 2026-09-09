@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Erfrischendes Rosen-Hamamelis-Tonic: Dein DIY-Gesichtswasser für beruhigte Haut"
 date: "2026-07-21"
 category: "DIY Kosmetik"

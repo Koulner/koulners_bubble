@@ -1,6 +1,7 @@
 ---
+archived: true
 
-draft: true
+draft: false
 title: "Die stille Kraft der Fermentation: Wie lebendige Nahrung unser Bauchhirn heilt"
 date: "2026-07-19"
 category: "Ernährung"

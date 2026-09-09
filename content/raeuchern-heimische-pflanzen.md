@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Das uralte Ritual des Räucherns mit heimischen Pflanzen: Beifuß, Wacholder & Salbei statt Palo Santo"
 category: "Seele & Geist"
 level: "Praxis"

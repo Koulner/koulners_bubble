@@ -1,5 +1,5 @@
 ---
-archived: false
+archived: true
 
 draft: false
 title: "DIY Zinksalbe Rezept: Die Alchemie der Wundheilung für gereizte Haut"

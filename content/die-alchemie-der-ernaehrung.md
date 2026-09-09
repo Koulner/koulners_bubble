@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Die Alchemie der Ernährung: Nahrung als Information, Energie und Heilung für unsere Zellen"
 category: "Ernährung"
 level: "Deep Dive"

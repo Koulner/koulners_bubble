@@ -1,5 +1,5 @@
 ---
-archived: false
+archived: true
 draft: false
 title: "Shaolin Mindset: Warum die Kunst des Nicht-Kämpfens (Wu Wei) dein biologisches Schutzschild gegen Stress ist"
 category: "Bücher"

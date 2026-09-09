@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Naturkosmetik Einstieg: Die Rückkehr zur puren Pflanzenkraft und dem Skinimalismus"
 category: "DIY Kosmetik"
 level: "Deep Dive"

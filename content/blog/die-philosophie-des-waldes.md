@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Die Philosophie des Waldes: Was alte Bäume uns über das Nervensystem und Resilienz lehren"
 category: "Philosophie"
 level: "Deep Dive"

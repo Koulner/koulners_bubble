@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Darmgesundheit Basics: Warum der Darm unser zweites Gehirn ist und die Seele lenkt"
 category: "Ernährung"
 level: "Deep Dive"

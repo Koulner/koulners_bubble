@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Die heilende Harmonie von 432 Hz: Warum bestimmte Schwingungen unser Herz öffnen"
 date: "2026-07-28"
 category: "Frequenzen"

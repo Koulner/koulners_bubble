@@ -1,5 +1,6 @@
 ---
-draft: true
+archived: true
+draft: false
 title: "Growing Gourmet and Medicinal Mushrooms: Wie Paul Stamets das Myzel als »Internet der Natur« entschlüsselte und die Alchemie der Vitalpilze"
 category: "Bücher"
 level: "Deep Dive"
